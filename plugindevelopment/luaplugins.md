@@ -44,7 +44,7 @@ If the `vmq_diversity` plugin is enabled the folder `./share/lua` folder is scan
 
 ## Implementing a VerneMQ plugin
 
-A VerneMQ plugin typically consists of one or more implemented VerneMQ hooks. We tried to keep the differences between the traditional Erlang based and Lua based plugins as small as possible. Please check out the [Plugin Development Guide](guide.md) for more information about the different flows and a description of the different hooks.
+A VerneMQ plugin typically consists of one or more implemented VerneMQ hooks. We tried to keep the differences between the traditional Erlang based and Lua based plugins as small as possible. Please check out the [Plugin Development Guide](introduction.md) for more information about the different flows and a description of the different hooks.
 
 ### Your first Lua plugin
 

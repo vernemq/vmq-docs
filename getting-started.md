@@ -10,13 +10,12 @@ VerneMQ is a high-performance, distributed MQTT message broker. It scales horizo
 
 Choose your OS and follow the instructions:
 
-* [CentOS/RHEL 7](centos_and_redhat.html)
-* [Debian Stretch & Jessie](debian_and_ubuntu.html)
-* [Ubuntu Bionic, Xenial & Trusty](debian_and_ubuntu.html)
+* [CentOS/RHEL](installation/centos_and_redhat.md)
+* [Debian/Ubuntu](installation/debian_and_ubuntu.md)
 
 It is also possible to run VerneMQ using our Docker image:
 
-* [Docker](docker.html)
+* [Docker](installation/docker.md)
 
 ## Starting VerneMQ
 
@@ -55,7 +54,7 @@ vernemq ping
 The command will respond with `pong` if the broker is running or `Node <NodeName> not responding to pings` in case it’s not.
 
 {% hint style="warning" %}
-As you may have noticed, VerneMQ will warn you at startup when your system’s open files limit \(`ulimit -n`\) is too low. You’re advised to increase the OS default open files limit when running VerneMQ. Read more about why and how in the [Open Files Limit documentation](https://github.com/vernemq/vmq-docs/tree/8e76a28412d2512e71653e1356f7165aebe687f7/docs/misc/change-open-file-limits.html).
+As you may have noticed, VerneMQ will warn you at startup when your system’s open files limit \(`ulimit -n`\) is too low. You’re advised to increase the OS default open files limit when running VerneMQ. Read more about why and how in the [Open Files Limit documentation](misc/change-open-file-limits.md).
 {% endhint %}
 
 

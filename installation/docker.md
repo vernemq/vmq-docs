@@ -49,5 +49,3 @@ docker exec vernemq1 vmq-admin cluster show
 +--------------------+-------+
 ```
 
-All `vmq-admin` commands are available. See [https://vernemq.com/docs/administration/](https://vernemq.com/docs/administration/) for more information.
-

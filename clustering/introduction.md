@@ -2,16 +2,16 @@
 description: Everything you must know to properly configure and deploy a VerneMQ Cluster
 ---
 
-# Setting up a cluster
+# Introduction
 
-VerneMQ can be easily clustered. Clients can then connect to any cluster node and receive messages from any other cluster nodes. However, the MQTT specification gives certain guarantees that are hard to fulfill in a distributed environment, especially when network partitions occur. We'll discuss the way VerneMQ deals with network partitions in its [own subsection](netsplits.html)
+VerneMQ can be easily clustered. Clients can then connect to any cluster node and receive messages from any other cluster nodes. However, the MQTT specification gives certain guarantees that are hard to fulfill in a distributed environment, especially when network partitions occur. We'll discuss the way VerneMQ deals with network partitions in its [own subsection](netsplits.md)
 
 {% hint style="danger" %}
 **Set the Cookie!** All cluster nodes need to be configured to use the same Cookie value. It can be set in the `vernemq.conf` with the `distributed_cookie` setting. Set the Cookie to a private value for security reasons!
 {% endhint %}
 
 {% hint style="info" %}
-For a successful VerneMQ cluster setup, it is important to choose proper VerneMQ node names. In `vernemq.conf` change the `nodename = VerneMQ@127.0.0.1` to something appropriate. Make sure that the node names are unique within the cluster. Read the section on [VerneMQ Inter-node Communication](communication.html) if firewalls are involved.
+For a successful VerneMQ cluster setup, it is important to choose proper VerneMQ node names. In `vernemq.conf` change the `nodename = VerneMQ@127.0.0.1` to something appropriate. Make sure that the node names are unique within the cluster. Read the section on [VerneMQ Inter-node Communication](communication.md) if firewalls are involved.
 {% endhint %}
 
 ### Joining a Cluster

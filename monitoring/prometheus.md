@@ -4,7 +4,7 @@ description: Description and Configuration of the Prometheus exporter
 
 # Prometheus
 
-The Prometheus exporter is enabled by default and installs an HTTP handler on `http://localhost:8888/metrics`. To read more about configuring the HTTP listener, see [HTTP Listener Configuration](../configuring-vernemq/http-listeners.md).
+The Prometheus exporter is enabled by default and installs an HTTP handler on `http://localhost:8888/metrics`. To read more about configuring the HTTP listener, see [HTTP Listener Configuration](../configuration/http-listeners.md).
 
 ### Example Scrape Config
 

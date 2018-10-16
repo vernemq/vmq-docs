@@ -1,8 +1,4 @@
----
-description: The vmq-admin command line tool
----
-
-# vmq-admin
+# Introduction
 
 On every VerneMQ node you'll find the `vmq-admin` command line tool in the release's bin directory. It has different sub-commands that let you check for status, start and stop listeners, re-configure values and a couple of other administrative tasks.
 

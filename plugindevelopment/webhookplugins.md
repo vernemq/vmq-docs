@@ -118,7 +118,7 @@ It is also possible to override various client specific settings by returning an
 }
 ```
 
-Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](session-lifecycle.md) for more information.
+Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
 Other possible return values:
 

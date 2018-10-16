@@ -21,7 +21,7 @@ plugins.vmq_diversity = on
 ```
 
 {% hint style="info" %}
-The `vmq_diversity` plugin makes it possible to extend VerneMQ using Lua. The documentation can be found [here](/docs/plugindevelopment/luaplugins.html).
+The `vmq_diversity` plugin makes it possible to extend VerneMQ using Lua. The documentation can be found [here](../plugindevelopment/luaplugins.md).
 {% endhint %}
 
 When using database based authentication/authorization the enabled-by-default file based authentication and authorization are most likely not needed and should be disabled:

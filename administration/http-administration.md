@@ -10,7 +10,7 @@ description: >-
 This API is still in BETA and some things may change if required.
 {% endhint %}
 
-The VerneMQ HTTP API is enabled by default and installs an HTTP handler on `http://localhost:8888/api/v1`. To read more about configuring the HTTP listener, see [HTTP Listener Configuration](../configuring-vernemq/http-listeners.md). You can configure a HTTP listener, or a HTTPS listener to serve the HTTP API v1.
+The VerneMQ HTTP API is enabled by default and installs an HTTP handler on `http://localhost:8888/api/v1`. To read more about configuring the HTTP listener, see [HTTP Listener Configuration](../configuration/http-listeners.md). You can configure a HTTP listener, or a HTTPS listener to serve the HTTP API v1.
 
 ## Managing API keys
 
@@ -48,7 +48,7 @@ vmq-admin api-key delete key=JxctXkZ1OTVnlwvguSCE9KtujacMkOLF
 
 ## API usage
 
-The VerneMQ HTTP API is a wrapper over the [`vmq-admin`](vmq-admin.md) CLI tool, and anything that can be done using `vmq-admin` can be done using the HTTP API. Note that the HTTP API is therefore subject to any changes made to the `vmq-admin` tools and their flags & options structure. All requests are performed doing a HTTP GET and if no errors occurred an HTTP 200 OK code is returned with a possible non-empty JSON payload.
+The VerneMQ HTTP API is a wrapper over the [`vmq-admin`](introduction.md) CLI tool, and anything that can be done using `vmq-admin` can be done using the HTTP API. Note that the HTTP API is therefore subject to any changes made to the `vmq-admin` tools and their flags & options structure. All requests are performed doing a HTTP GET and if no errors occurred an HTTP 200 OK code is returned with a possible non-empty JSON payload.
 
 The API is using basic auth where the API key is passed as the username. An example using `curl` would look like this:
 

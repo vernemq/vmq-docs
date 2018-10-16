@@ -1,6 +1,6 @@
 # Welcome
 
-Welcome to the VerneMQ documentation! This is a reference guide for most of the available features and options of VerneMQ. The [Getting Started guide](/docs/start.html) might be a good entry point.
+Welcome to the VerneMQ documentation! This is a reference guide for most of the available features and options of VerneMQ. The [Getting Started guide](getting-started.md) might be a good entry point.
 
 
 

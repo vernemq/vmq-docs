@@ -14,7 +14,7 @@ in VerneMQ the bridge is distributed with VerneMQ as a plugin and is not enabled
 plugins.vmq_bridge = on
 ```
 
-See [Managing plugins](./plugins.html) for more information on working with plugins.
+See [Managing plugins](plugins.md) for more information on working with plugins.
 
 ### Sample MQTT Bridge
 

@@ -2,7 +2,7 @@
 description: Managing VerneMQ live config values.
 ---
 
-# Reconfiguration
+# Live reconfiguration
 
 You can dynamically re-configure most of VerneMQ's settings on a running node by using the `vmq-admin set` command.
 
@@ -72,6 +72,5 @@ vmq-admin show max_client_id_size retry_interval --all
 |VerneMQ50@192.168.1.50|        33        |      20      |
 |VerneMQ20@192.168.1.20|        28        |      20      |
 +----------------------+------------------+--------------+
-`
 ```
 

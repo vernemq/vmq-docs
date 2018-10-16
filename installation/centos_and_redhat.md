@@ -40,5 +40,5 @@ If VerneMQ has been installed successfully `vernemq` is returned.
 
 ### Next Steps
 
-Now that you've installed VerneMQ, check out [How to configure VerneMQ](/docs/configuration/).
+Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuration/introduction.md).
 
