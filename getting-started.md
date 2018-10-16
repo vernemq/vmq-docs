@@ -6,8 +6,9 @@ description: A quick and simple guide to get started with VerneMQ
 
 ## Starting VerneMQ
 
-\#\#\#\# Info::Info  
-&gt;  If you built VerneMQ from sources, you can add the `/bin` directory of your VerneMQ release to `PATH`. For example, if you compiled VerneMQ in the `/home/vernemq` directory, then add the binary directory \(`/home/vernemq/_build/default/rel/vernemq/bin`\) to your PATH, so that VerneMQ commands can be used in the same manner as with a packaged installation.
+#### Info::Info  
+> 
+> If you built VerneMQ from sources, you can add the `/bin` directory of your VerneMQ release to `PATH`. For example, if you compiled VerneMQ in the `/home/vernemq` directory, then add the binary directory \(`/home/vernemq/_build/default/rel/vernemq/bin`\) to your PATH, so that VerneMQ commands can be used in the same manner as with a packaged installation.
 
 To start a VerneMQ broker, use the vernemq start command in your Shell:
 
