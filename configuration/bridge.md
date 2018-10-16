@@ -4,7 +4,7 @@ description: VerneMQ can interface with other brokers via MQTT bridges.
 
 # MQTT Bridge
 
-Bridges are a non-standard way, although kind of a de-facto standard among MQTT broker implementations, to connect a single broker to a different broker. This allows for example that a topic tree of a remote broker gets part of the topic tree on the local broker. VerneMQ supports plain TCP connections as well as SSL connections.
+Bridges are a non-standard way, although kind of a de-facto standard among MQTT broker implementations, to connect two different MQTT brokers to eachother. This allows for example that a topic tree of a remote broker becomes part of the topic tree on the local broker. VerneMQ supports plain TCP connections as well as SSL connections.
 
 ### Enabling the bridge functionality
 
@@ -49,7 +49,7 @@ vmq_bridge.tcp.br0.restart_timeout = 10
 vmq_bridge.tcp.br0.try_private = off
 ```
 
-Define the topics the bridge should incorporate in its local topic tree, or the topics it should export to the remote broker. We share a similar configuration syntax as the Mosquitto broker:
+Define the topics the bridge should incorporate in its local topic tree (by subscribing to the remote), or the topics it should export to the remote broker (by publishing to the remote). We share a similar configuration syntax to that used by the Mosquitto broker:
 
 ```text
 topic [[[ out | in | both ] qos-level] local-prefix remote-prefix]
