@@ -29,6 +29,6 @@ The feature and the interval can be changed at runtime using the `vmq-admin` scr
 Examples:
 
 ```text
-mosquitto_sub -t \$SYS/<node-name>/\# -u <username> -P <password> -d
+mosquitto_sub -t '$SYS/<node-name>/#' -u <username> -P <password> -d
 ```
 
