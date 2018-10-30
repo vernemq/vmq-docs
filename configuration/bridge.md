@@ -16,6 +16,17 @@ plugins.vmq_bridge = on
 
 See [Managing plugins](plugins.md) for more information on working with plugins.
 
+When the plugin is enabled a simple status interface is available:
+
+```
+$ vmq-admin bridge show
++-----------------+-----------+----------+-------------------+
+|   endpoint      |buffer size|buffer max|buffer dropped msgs|
++-----------------+-----------+----------+-------------------+
+|192.168.1.10:1883|     0     |    0     |         0         |
++-----------------+-----------+----------+-------------------+
+```
+
 ### Sample MQTT Bridge
 
 Setup a bridge to a remote broker:
@@ -47,6 +58,12 @@ vmq_bridge.tcp.br0.restart_timeout = 10
 # is established by a bridge instead of a normal client.
 # This can be turned off if needed:
 vmq_bridge.tcp.br0.try_private = off
+
+# Set the maximum number of outgoing messages the bridge will buffer
+# while not connected to the remote broker. Messages published while
+# the buffer is full are dropped. A value of 0 means buffering is
+# disabled.
+vmq_bridge.tcp.br0.max_outgoing_buffered_messages = 100
 ```
 
 Define the topics the bridge should incorporate in its local topic tree (by subscribing to the remote), or the topics it should export to the remote broker (by publishing to the remote). We share a similar configuration syntax to that used by the Mosquitto broker:
