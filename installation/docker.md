@@ -33,7 +33,7 @@ This allows a newly started container to automatically join a VerneMQ cluster. A
 docker run -e "DOCKER_VERNEMQ_DISCOVERY_NODE=<IP-OF-VERNEMQ1>" --name vernemq2 -d erlio/docker-vernemq
 ```
 
-\(Note, you can find the IP of a docker container using `docker inspect | grep \"IPAddress\"`\).
+\(Note, you can find the IP of a docker container using `docker inspect <CONTAINER_NAME> | grep \"IPAddress\"`\).
 
 ## Checking cluster status
 
