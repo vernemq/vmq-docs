@@ -14,12 +14,10 @@ All the hooks that are currently exposed fall into one of three categories.
 
 ![](plugindev/flow_legend.png)
 
-1. Hooks that allow you to change the protocol flow. An example could
-
-   be to authenticate a client using the `auth_on_register` hook.
+1. Hooks that allow you to change the protocol flow. An example could be to
+   authenticate a client using the `auth_on_register` hook.
 
 2. Hooks that inform you about a certain action, that could be used for
-
    example to implement a custom logging or audit plugin.
 
 3. Hooks that are called given a certain condition
@@ -61,7 +59,7 @@ Lines 6 to 10 instruct the plugin system to ensure that those dependent applicat
 
 The environment value for `vmq_plugin_hooks` is a list of hooks. A hook is specified by `{Module, Function, Arity, Options}`.
 
-To streamline the plugin development we provide a different Erlang behaviour for every hook a plugin implements. Those behaviour are part of the `vernemq_dev` library application, which you should add as a dependency to your plugin. `vernemq_dev` also comes with a header file that contains all the type definitions used by the hooks.
+To streamline the plugin development we provide a different Erlang behaviour for every hook a plugin implements. Those behaviours are part of the `vernemq_dev` library application, which you should add as a dependency to your plugin. `vernemq_dev` also comes with a header file that contains all the type definitions used by the hooks.
 
 #### Chaining
 
