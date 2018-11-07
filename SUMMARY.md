@@ -7,40 +7,40 @@
 
 ## Installing VerneMQ
 
-* [Installing on Debian and Ubuntu](installation/debian_and_ubuntu.md)
-* [Installing on CentOS and RHEL](installation/centos_and_redhat.md)
-* [Running VerneMQ using Docker](installation/docker.md)
+* [Installing on Debian and Ubuntu](installing-vernemq/debian_and_ubuntu.md)
+* [Installing on CentOS and RHEL](installing-vernemq/centos_and_redhat.md)
+* [Running VerneMQ using Docker](installing-vernemq/docker.md)
 
 ## Configuring VerneMQ
 
-* [Introduction](configuration/introduction.md)
-* [Auth using files](configuration/file-auth.md)
-* [Auth using a database](configuration/db-auth.md)
-* [MQTT Options](configuration/options.md)
-* [MQTT Listeners](configuration/listeners.md)
-* [HTTP Listeners](configuration/http-listeners.md)
-* [Non-standard MQTT options](configuration/nonstandard.md)
-* [Websockets](configuration/websockets.md)
-* [Logging](configuration/logging.md)
-* [Consumer session balancing](configuration/balancing.md)
-* [Plugins](configuration/plugins.md)
-* [Shared subscriptions](configuration/shared_subscriptions.md)
-* [Advanced Options](configuration/advanced_options.md)
-* [Storage](configuration/storage.md)
-* [MQTT Bridge](configuration/bridge.md)
+* [Introduction](configuring-vernemq/introduction.md)
+* [Auth using files](configuring-vernemq/file-auth.md)
+* [Auth using a database](configuring-vernemq/db-auth.md)
+* [MQTT Options](configuring-vernemq/options.md)
+* [MQTT Listeners](configuring-vernemq/listeners.md)
+* [HTTP Listeners](configuring-vernemq/http-listeners.md)
+* [Non-standard MQTT options](configuring-vernemq/nonstandard.md)
+* [Websockets](configuring-vernemq/websockets.md)
+* [Logging](configuring-vernemq/logging.md)
+* [Consumer session balancing](configuring-vernemq/balancing.md)
+* [Plugins](configuring-vernemq/plugins.md)
+* [Shared subscriptions](configuring-vernemq/shared_subscriptions.md)
+* [Advanced Options](configuring-vernemq/advanced_options.md)
+* [Storage](configuring-vernemq/storage.md)
+* [MQTT Bridge](configuring-vernemq/bridge.md)
 
 ## VerneMQ Clustering
 
-* [Introduction](clustering/introduction.md)
-* [Inter-node Communication](clustering/communication.md)
-* [Dealing with Netsplits](clustering/netsplits.md)
+* [Introduction](vernemq-clustering/introduction.md)
+* [Inter-node Communication](vernemq-clustering/communication.md)
+* [Dealing with Netsplits](vernemq-clustering/netsplits.md)
 
 ## Live Administration
 
-* [Introduction](administration/introduction.md)
-* [Live reconfiguration](administration/config_values.md)
-* [Managing Listeners](administration/listeners.md)
-* [HTTP API](administration/http-administration.md)
+* [Introduction](live-administration/introduction.md)
+* [Live reconfiguration](live-administration/config_values.md)
+* [Managing Listeners](live-administration/listeners.md)
+* [HTTP API](live-administration/http-administration.md)
 
 ## Monitoring
 
@@ -51,13 +51,13 @@
 
 ## Plugin Development
 
-* [Introduction](plugindevelopment/introduction.md)
-* [Session lifecycle](plugindevelopment/sessionlifecycle.md)
-* [Subscribe Flow](plugindevelopment/subscribeflow.md)
-* [Publish Flow](plugindevelopment/publishflow.md)
-* [Erlang Boilerplate](plugindevelopment/boilerplate.md)
-* [Lua Scripting Support](plugindevelopment/luaplugins.md)
-* [Webhooks](plugindevelopment/webhookplugins.md)
+* [Introduction](plugin-development/introduction.md)
+* [Session lifecycle](plugin-development/sessionlifecycle.md)
+* [Subscribe Flow](plugin-development/subscribeflow.md)
+* [Publish Flow](plugin-development/publishflow.md)
+* [Erlang Boilerplate](plugin-development/boilerplate.md)
+* [Lua Scripting Support](plugin-development/luaplugins.md)
+* [Webhooks](plugin-development/webhookplugins.md)
 
 ## Misc
 

@@ -1,7 +1,3 @@
----
-description: VerneMQ supports multiple ways to configure one or many MQTT listeners.
----
-
 # MQTT Listeners
 
 Listeners specify on which IP address and port VerneMQ should accept new incoming connections. Depending on the chosen transport \(TCP, SSL, WebSocket\) different configuration parameters have to be provided. VerneMQ allows to write the listener configurations in a hierarchical manner, enabling very flexible setups. VerneMQ applies reasonable defaults on the top level, which can be of course overridden if needed.

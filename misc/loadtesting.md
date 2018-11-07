@@ -1,7 +1,3 @@
----
-description: Loadtesting VerneMQ with vmq_mzbench
----
-
 # Loadtesting VerneMQ
 
 You can loadtest VerneMQ with our [vmq\_mzbench tool](https://github.com/erlio/vmq_mzbench). It is based on Machinezone's very powerful [MZBench system](https://github.com/satori-com/mzbench) and lets you narrow down what hardware specs are needed to meet your performance goals. You can state your requirements for latency percentiles \(and much more\) in a formal way, and let vmq\_mzbench automatically fail, if it can't meet the requirements.

@@ -1,9 +1,3 @@
----
-description: >-
-  VerneMQ supports multiple ways to authenticate and authorize new client
-  connections.
----
-
 # Auth using a database
 
 ## Authentication and authorization using a database
@@ -21,7 +15,7 @@ plugins.vmq_diversity = on
 ```
 
 {% hint style="info" %}
-The `vmq_diversity` plugin makes it possible to extend VerneMQ using Lua. The documentation can be found [here](../plugindevelopment/luaplugins.md).
+The `vmq_diversity` plugin makes it possible to extend VerneMQ using Lua. The documentation can be found [here](../plugin-development/luaplugins.md).
 {% endhint %}
 
 When using database based authentication/authorization the enabled-by-default file based authentication and authorization are most likely not needed and should be disabled:

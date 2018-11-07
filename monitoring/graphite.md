@@ -1,7 +1,3 @@
----
-description: Description and Configuration of the Graphite exporter
----
-
 # Graphite
 
 The graphite exporter reports the broker metrics at a fixed interval \(defined in milliseconds\) to a graphite server. The necessary configuration is done inside the `vernemq.conf`.

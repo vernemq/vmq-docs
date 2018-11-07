@@ -1,7 +1,3 @@
----
-description: Configure WebSocket Listeners for VerneMQ.
----
-
 # Websockets
 
 VerneMQ supports the WebSocket protocol out of the box. To be able to open a WebSocket connection to VerneMQ, you have to configure a WebSocket listener or Secure WebSocket listener in the `vernemq.conf` file first:

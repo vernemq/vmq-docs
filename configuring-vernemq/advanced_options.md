@@ -1,7 +1,3 @@
----
-description: Configure a couple of hidden options for VerneMQ
----
-
 # Advanced Options
 
 There are a couple of hidden options you can set in the `vernemq.conf` file. Hidden means that you have to add and set the value explicitly. Hidden options still have default values. Changing them should be considered advanced, possibly with the exception of setting a `max_message_rate`.

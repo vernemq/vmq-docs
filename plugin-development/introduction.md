@@ -1,9 +1,3 @@
----
-description: >-
-  Learn how to implement VerneMQ Plugins for customizing many aspects of  how
-  VerneMQ deals with client connections, subscriptions, and message flows.
----
-
 # Introduction
 
 VerneMQ is implemented in Erlang OTP and therefore runs on top of the Erlang VM. For this reason plugins have to be developed in a programming language that runs on the Erlang VM. The most popular choice is obviously the Erlang programming language itself, but Elixir or Lisp flavoured Erlang LFE could be used too.

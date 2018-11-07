@@ -1,7 +1,3 @@
----
-description: Everything you must know to properly configure and deploy a VerneMQ Cluster
----
-
 # Introduction
 
 VerneMQ can be easily clustered. Clients can then connect to any cluster node and receive messages from any other cluster nodes. However, the MQTT specification gives certain guarantees that are hard to fulfill in a distributed environment, especially when network partitions occur. We'll discuss the way VerneMQ deals with network partitions in its [own subsection](netsplits.md)

@@ -1,7 +1,3 @@
----
-description: Managing VerneMQ tcp listeners
----
-
 # Managing Listeners
 
 You can configure as many listeners as you wish in the vernemq.conf file. In addition to this, the `vmq-admin listener` command let's you configure, start, stop and delete listeners on the fly. Those can be MQTT, WebSocket or Cluster listeners, in the command line output they will be tagged mqtt, ws or vmq accordingly.

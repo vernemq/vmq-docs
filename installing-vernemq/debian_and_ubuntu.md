@@ -1,9 +1,3 @@
----
-description: >-
-  VerneMQ can be installed on Debian or Ubuntu-based systems using the binary
-  package we provide.
----
-
 # Installing on Debian and Ubuntu
 
 ### Install VerneMQ
@@ -51,5 +45,5 @@ vernemq: /usr/sbin/vernemq /usr/lib/vernemq /etc/vernemq /usr/share/vernemq
 
 ### Next Steps
 
-Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuration/introduction.md).
+Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuring-vernemq/introduction.md).
 

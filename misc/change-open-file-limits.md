@@ -1,7 +1,3 @@
----
-description: A guide that shows how to change the open file limtits
----
-
 # Change Open File Limits
 
 VerneMQ can consume a large number of open file handles when thousands of clients are connected as every connection requires at least one file handle.

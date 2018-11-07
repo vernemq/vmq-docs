@@ -1,7 +1,3 @@
----
-description: Working with shared subscriptions
----
-
 # Shared subscriptions
 
 A shared subscription is a mechanism for distributing messages to a set of subscribers to shared subscription topic, such that each message is received by only one subscriber. This contrasts with normal subscriptions where each subscriber will receive a copy of the published message.

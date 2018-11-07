@@ -1,14 +1,10 @@
----
-description: How to implement VerneMQ plugins using a HTTP interface
----
-
 # Webhooks
 
 The VerneMQ Webhooks plugin provides an easy and flexible way to build powerful plugins for VerneMQ using web hooks. With VerneMQ Webhooks you are free to select the implementation language to match your technical requirements or the language in which you feel comfortable and productive in. You can use any modern language such as Python, Go, C\#/.Net and indeed any language in which you can build something that can handle HTTP requests.
 
 The idea of VerneMQ Webhooks very simple: you can register an HTTP endpoint with a VerneMQ plugin hook and whenever the hook \(such as `auth_on_register`\) is called, the VerneMQ Webhooks plugin dispatches a HTTP post request to the registered endpoint. The HTTP post request contains a HTTP header like `vernemq-hook: auth_on_register` and a JSON encoded payload. The endpoint then responds with code 200 on success and with a JSON encoded payload informing the VerneMQ Webhooks plugin which action to take \(if any\).
 
-### Configuring webhooks
+## Configuring webhooks
 
 To enable webhooks make sure to set:
 
@@ -51,7 +47,7 @@ Each registered hook uses by default a connection pool containing maximally 100 
 
 These options are available in VerneMQ 1.4.0.
 
-### Caching
+## Caching
 
 VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish` and `auth_on_subscribe` hooks.
 
@@ -71,7 +67,7 @@ $ vmq-admin webhooks cache show
 Cache entries are currently not actively disposed after expiry and will remain in memory.
 {% endhint %}
 
-### Webhook specs
+## Webhook specs
 
 All webhooks are called with method `POST`. All hooks need to be answered with the HTTP code `200` to be considered successful. Any hook called that does not return the `200` code will be logged as an error as will any hook with an unparseable payload.
 
@@ -79,7 +75,7 @@ All hooks are called with the header `vernemq-hook` which contains the name of t
 
 For detailed information about the hooks and when they are called, see the [Plugin Development Guide](http://vernemq.com/docs/plugindevelopment/) and the relevant subsections.
 
-#### auth\_on\_register
+### auth\_on\_register
 
 Header: `vernemq-hook: auth_on_register`
 
@@ -130,7 +126,7 @@ Other possible return values:
 "result": { "error": "some error message" }
 ```
 
-#### auth\_on\_subscribe
+### auth\_on\_subscribe
 
 Header: `vernemq-hook: auth_on_subscribe`
 
@@ -180,7 +176,7 @@ Other possible result values:
 "result": { "error": "some error message" }
 ```
 
-#### auth\_on\_publish
+### auth\_on\_publish
 
 Header: `vernemq-hook: auth_on_publish`
 
@@ -232,7 +228,7 @@ Other result values:
 "result": { "error": "some error message" }
 ```
 
-#### on\_register
+### on\_register
 
 Header: `vernemq-hook: on_register`
 
@@ -250,7 +246,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-#### on\_publish
+### on\_publish
 
 Header: `vernemq-hook: on_publish`
 
@@ -272,7 +268,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-#### on\_subscribe
+### on\_subscribe
 
 Header: `vernemq-hook: on_subscribe`
 
@@ -293,7 +289,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-#### on\_unsubscribe
+### on\_unsubscribe
 
 Header: `vernemq-hook: on_unsubscribe`
 
@@ -329,7 +325,7 @@ Other result values:
 "result": { "error": "some error message" }
 ```
 
-#### on\_deliver
+### on\_deliver
 
 Header: `vernemq-hook: on_deliver`
 
@@ -366,7 +362,7 @@ Other result values:
 "result": "next"
 ```
 
-#### on\_offline\_message
+### on\_offline\_message
 
 Header: `vernemq-hook: on_offline_message`
 
@@ -387,7 +383,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-#### on\_client\_wakeup
+### on\_client\_wakeup
 
 Header: `vernemq-hook: on_client_wakeup`
 
@@ -402,7 +398,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-#### on\_client\_offline
+### on\_client\_offline
 
 Header: `vernemq-hook: on_client_offline`
 
@@ -417,7 +413,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-#### on\_client\_gone
+### on\_client\_gone
 
 Header: `vernemq-hook: on_client_gone`
 
@@ -432,7 +428,7 @@ Webhook example payload:
 
 The response of this hook should be empty as it is ignored.
 
-### Example Webhook in Python
+## Example Webhook in Python
 
 Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for three different hooks: `auth_on_register`, `auth_on_publish` and `auth_on_subscribe`.
 

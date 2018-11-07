@@ -1,7 +1,3 @@
----
-description: How does VerneMQ deals with Network Partitions aka. Netsplits.
----
-
 # Dealing with Netsplits
 
 This section elaborates how a VerneMQ cluster deals with network partitions \(aka. netsplit or split brain situation\). A netsplit is mostly the result of a failure of one or more network devices resulting in a cluster where nodes can no longer reach each other.
