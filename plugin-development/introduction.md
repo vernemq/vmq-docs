@@ -22,6 +22,11 @@ All the hooks that are currently exposed fall into one of three categories.
 
 3. Hooks that are called given a certain condition
 
+Notice that some hooks come in two variants, for example the `auth_on_register`
+and then `auth_on_register_m5` hooks. The `_m5` postfix refers to the fact that
+this hook is only invoked in an MQTT 5.0 session context whereas the other is
+invoked in a MQTT 3.1/3.1.1 session context.
+
 Before going into the details, let's give a quick intro to the VerneMQ plugin system.
 
 ### Plugin System
