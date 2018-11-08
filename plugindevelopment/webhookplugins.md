@@ -8,7 +8,7 @@ The VerneMQ Webhooks plugin provides an easy and flexible way to build powerful 
 
 The idea of VerneMQ Webhooks very simple: you can register an HTTP endpoint with a VerneMQ plugin hook and whenever the hook \(such as `auth_on_register`\) is called, the VerneMQ Webhooks plugin dispatches a HTTP post request to the registered endpoint. The HTTP post request contains a HTTP header like `vernemq-hook: auth_on_register` and a JSON encoded payload. The endpoint then responds with code 200 on success and with a JSON encoded payload informing the VerneMQ Webhooks plugin which action to take \(if any\).
 
-### Configuring webhooks
+## Configuring webhooks
 
 To enable webhooks make sure to set:
 
@@ -45,13 +45,13 @@ $ vmq-admin webhooks deregister hook=auth_on_register endpoint="http://localhost
 We recommend placing the endpoint implementation locally on each VerneMQ node such that each request can go over localhost without being subject to network issues. Also note that currently VerneMQ Webhooks does not encrypt requests in any way or use HTTPS, so care should be taken if the endpoints are made reachable over the network.
 {% endhint %}
 
-#### Connection pool configuration
+## Connection pool configuration
 
 Each registered hook uses by default a connection pool containing maximally 100 connections. This can be changed by setting `vmq_webhooks.pool_max_connections` to a different value. Similarly the `vmq_webhooks.pool_timeout` configuration \(value is in milliseconds\) can be set to control how long an unused connection should stay in the connection pool before being closed and removed. The default value is 60000 \(60 seconds\).
 
 These options are available in VerneMQ 1.4.0.
 
-### Caching
+## Caching
 
 VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish` and `auth_on_subscribe` hooks.
 
@@ -71,15 +71,22 @@ $ vmq-admin webhooks cache show
 Cache entries are currently not actively disposed after expiry and will remain in memory.
 {% endhint %}
 
-### Webhook specs
+## Webhook specs
 
 All webhooks are called with method `POST`. All hooks need to be answered with the HTTP code `200` to be considered successful. Any hook called that does not return the `200` code will be logged as an error as will any hook with an unparseable payload.
 
 All hooks are called with the header `vernemq-hook` which contains the name of the hook in question.
 
-For detailed information about the hooks and when they are called, see the [Plugin Development Guide](http://vernemq.com/docs/plugindevelopment/) and the relevant subsections.
+For detailed information about the hooks and when they are called, see the
+sections [Session Lifecycle](sessionlifecycle.md), [Subscribe
+Flow](subscribeflow.md) and [Publish Flow](publishflow.md).
 
-#### auth\_on\_register
+{% hint style="info" %}
+Note, when overriding a mountpoint or a client-id both have to be returned by
+the webhook implementation for it to have an effect.
+{% endhint %}
+
+### auth\_on\_register
 
 Header: `vernemq-hook: auth_on_register`
 
@@ -118,19 +125,27 @@ It is also possible to override various client specific settings by returning an
 }
 ```
 
-Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
+Note, the `retry_interval` is in milli-seconds. It is possible to override many
+more settings, see the [Session Lifecycle](sessionlifecycle.md) for more
+information.
 
 Other possible return values:
 
 ```javascript
-"result": "next"
+{
+  "result": "next"
+}
 ```
 
 ```javascript
-"result": { "error": "some error message" }
+{
+  "result": {
+    "error": "not_allowed"
+  }
+}
 ```
 
-#### auth\_on\_subscribe
+### auth\_on\_subscribe
 
 Header: `vernemq-hook: auth_on_subscribe`
 
@@ -180,7 +195,7 @@ Other possible result values:
 "result": { "error": "some error message" }
 ```
 
-#### auth\_on\_publish
+### auth\_on\_publish
 
 Header: `vernemq-hook: auth_on_publish`
 
@@ -232,7 +247,7 @@ Other result values:
 "result": { "error": "some error message" }
 ```
 
-#### on\_register
+### on\_register
 
 Header: `vernemq-hook: on_register`
 
@@ -248,9 +263,9 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-#### on\_publish
+### on\_publish
 
 Header: `vernemq-hook: on_publish`
 
@@ -270,9 +285,9 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-#### on\_subscribe
+### on\_subscribe
 
 Header: `vernemq-hook: on_subscribe`
 
@@ -291,9 +306,9 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-#### on\_unsubscribe
+### on\_unsubscribe
 
 Header: `vernemq-hook: on_unsubscribe`
 
@@ -329,7 +344,7 @@ Other result values:
 "result": { "error": "some error message" }
 ```
 
-#### on\_deliver
+### on\_deliver
 
 Header: `vernemq-hook: on_deliver`
 
@@ -366,7 +381,7 @@ Other result values:
 "result": "next"
 ```
 
-#### on\_offline\_message
+### on\_offline\_message
 
 Header: `vernemq-hook: on_offline_message`
 
@@ -385,9 +400,9 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-#### on\_client\_wakeup
+### on\_client\_wakeup
 
 Header: `vernemq-hook: on_client_wakeup`
 
@@ -400,9 +415,9 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-#### on\_client\_offline
+### on\_client\_offline
 
 Header: `vernemq-hook: on_client_offline`
 
@@ -415,9 +430,9 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-#### on\_client\_gone
+### on\_client\_gone
 
 Header: `vernemq-hook: on_client_gone`
 
@@ -430,9 +445,381 @@ Webhook example payload:
 }
 ```
 
-The response of this hook should be empty as it is ignored.
+The response should be an empty json object `{}`.
 
-### Example Webhook in Python
+### auth\_on\_register_m5
+
+Header: `vernemq-hook: auth_on_register_m5`
+
+Webhook example payload:
+
+```javascript
+{
+    "peer_addr": "127.0.0.1",
+    "peer_port": 8888,
+    "mountpoint": "",
+    "client_id": "client-id",
+    "username": "username",
+    "password": "password",
+    "clean_start": true,
+    "properties": {}
+}
+```
+
+A minimal response indicating the authentication was successful looks like:
+
+```javascript
+{
+    "result": "ok"
+}
+```
+
+It is also possible to override various client specific settings by returning an array of modifiers:
+
+```javascript
+{
+    "result": "ok",
+    "modifiers": {
+        "max_message_size": 65535,
+        "max_inflight_messages": 10000
+    }
+}
+```
+
+Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
+
+Other possible return values:
+
+```javascript
+{
+    "result": "next"
+}
+```
+
+```javascript
+{
+    "result": {
+      "error": "not_allowed"
+  }
+}
+```
+
+### on\_auth\_m5
+
+Header `vernemq-hook: on_auth_m5`
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "properties": {
+      "authentication_data": "QVVUSF9EQVRBMA==",
+      "authentication_method": "AUTH_METHOD"
+    }
+}
+```
+
+Note, as the authentication data is binary data it is base64 encoded.
+
+A minimal response indicating the authentication was successful looks like:
+
+```javascript
+  "modifiers": {
+    "authentication_data": "QVVUSF9EQVRBMQ==",
+    "authentication_method": "AUTH_METHOD"
+    "reason_code": 0
+  },
+  "result": "ok"
+}
+```
+
+If authentication were to continue for another round a reason code with value 24
+(Continue Authentication) should be returned instead. See also the relevant
+[section](http://docs.oasis-open.org/mqtt/mqtt/v5.0/cs02/mqtt-v5.0-cs02.html#_Toc514345528)
+in the MQTT 5.0 specification.
+
+### auth\_on\_subscribe\_m5
+
+Header: `vernemq-hook: auth_on_subscribe_m5`
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "topics": [
+      {
+        "topic": "test/topic",
+        "qos": 1
+      }
+    ],
+    "properties": {}
+  }
+```
+
+A minimal response indicating the subscription authorization was successful
+looks like:
+
+```javascript
+{
+    "result": "ok"
+}
+```
+
+Another example where where the topics to subscribe have been rewritten looks
+like:
+
+```javascript
+{
+    "modifiers": {
+        "topics": [
+            {
+                "qos": 2,
+                "topic": "rewritten/topic"
+            },
+            {
+                "qos": 135,
+                "topic": "forbidden/topic"
+            }
+        ]
+    },
+    "result": "ok"
+}
+```
+
+Note, the `forbidden/topic` has been rejected with the `qos` value of 135 (Not
+authorized).
+
+Other possible result values:
+
+```javascript"
+{
+    "result": "next"
+}
+```
+
+```javascript
+{
+    "result": {
+        "error": "not_allowed"
+    }
+}
+```
+
+### auth\_on\_publish\_m5
+
+Header: `vernemq-hook: auth_on_publish_m5`
+
+Note, in the example below the payload is not base64 encoded which is not the default.
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "qos": 1,
+    "topic": "some/topic",
+    "payload": "message payload",
+    "retain": false,
+    "properties": {
+    }
+}
+```
+
+A minimal response indicating the publish was authorized looks like:
+
+```javascript
+{
+    "result": "ok"
+}
+```
+
+A response where the publish topic has been rewritten:
+
+```javascript
+{
+    "modifiers": {
+        "topic": "rewritten/topic"
+    },
+    "result": "ok"
+}
+```
+
+Other result values:
+
+```javascript
+{
+    "result": "next"
+}
+```
+
+```javascript
+{
+    "result": {
+        "error": "not_allowed"
+    }
+}
+```
+
+### on\_register\_m5
+
+Header: `vernemq-hook: on_register_m5`
+
+Webhook example payload:
+
+```javascript
+{
+    "peer_addr": "127.0.0.1",
+    "peer_port": 8888,
+    "mountpoint": "",
+    "client_id": "client-id",
+    "username": "username",
+    "properties": {
+    }
+}
+```
+
+The response should be an empty json object `{}`.
+
+### on\_publish\_m5
+
+Header: `vernemq-hook: on_publish_m5`
+
+Note, in the example below the payload is base64 encoded .
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "qos": 1,
+    "topic": "test/topic",
+    "payload": "message payload",
+    "retain": false,
+    "properties": {
+    }
+}
+```
+
+The response should be an empty json object `{}`.
+
+### on\_subscribe\_m5
+
+Header: `vernemq-hook: on_subscribe_m5`
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "topics": [
+        {
+            "topic": "test/topic",
+            "qos": 1
+        },
+        {
+            "topic": "test/topic",
+            "qos": 128
+        }
+    ],
+    "properties": {
+    }
+}
+```
+
+Note, the qos value of `128` (Unspecified error) means the subscription was
+rejected.
+
+The response should be an empty json object `{}`.
+
+### on\_unsubscribe\_m5
+
+Header: `vernemq-hook: on_unsubscribe_m5`
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "topics": [
+        "test/topic"
+    ],
+    "properties": {
+    }
+}
+```
+
+Example response:
+
+```javascript
+{
+    "modifiers": {
+        "topics": [
+            "rewritten/topic"
+        ]
+    },
+    "result": "ok"
+}
+```
+
+Other result values:
+
+```javascript
+{
+    "result": "next"
+}
+```
+
+### on\_deliver\_m5
+
+Header: `vernemq-hook: on_deliver_m5`
+
+Note, in the example below the payload is not base64 encoded which is not the default.
+
+Webhook example payload:
+
+```javascript
+{
+    "username": "username",
+    "mountpoint": "",
+    "client_id": "client-id",
+    "topic": "test/topic",
+    "payload": "message payload",
+    "properties": {
+    }
+}
+```
+
+Example response:
+
+```javascript
+{
+    "result": "ok"
+}
+```
+
+Other result values:
+
+```javascript
+{
+    "result": "next"
+}
+```
+
+## Example Webhook in Python
 
 Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for three different hooks: `auth_on_register`, `auth_on_publish` and `auth_on_subscribe`.
 
