@@ -1,3 +1,7 @@
+---
+description: Configure how VerneMQ handles certain aspects of MQTT
+---
+
 # MQTT Options
 
 ### Retry Interval

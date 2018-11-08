@@ -4,7 +4,7 @@ description: Configure VerneMQ Logging.
 
 # Logging
 
-## Console Logging
+### Console Logging
 
 Where should VerneMQ emit the default console log messages \(which are typically at `info` severity\):
 
@@ -26,7 +26,7 @@ The default console logging level `info` could be setting one of the following:
 log.console.level = debug | info | warning | error
 ```
 
-## Error Logging
+### Error Logging
 
 VerneMQ log error messages by default. One can change the default behaviour by setting:
 
@@ -42,7 +42,7 @@ log.error.file = /path/to/log/file
 
 This option defaults to `/var/log/vernemq/error.log` for Ubuntu, Debian, RHEL and Docker installs.
 
-## Crash Logging
+### Crash Logging
 
 VerneMQ log crash messages by default. One can change the default behaviour by setting:
 
@@ -81,7 +81,7 @@ The default number of rotated log files is 5 and can be set with the option:
 log.crash.rotation.keep = 5
 ```
 
-## SysLog
+### SysLog
 
 VerneMQ supports logging to SysLog, enable it by setting:
 
@@ -90,4 +90,3 @@ log.syslog = on
 ```
 
 Logging to SysLog is disabled by default.
-

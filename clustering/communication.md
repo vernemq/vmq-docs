@@ -1,3 +1,7 @@
+---
+description: Everything you must know to properly configure and deploy a VerneMQ Cluster
+---
+
 # Inter-node Communication
 
 VerneMQ uses the Erlang distribution mechanism for most inter-node communication. VerneMQ identifies other machines in the cluster using Erlang identifiers \(e.g. `VerneMQ@10.9.8.7`\). Erlang resolves these node identifiers to a TCP port on a given machine via the Erlang Port Mapper daemon \(epmd\) running on each cluster node.

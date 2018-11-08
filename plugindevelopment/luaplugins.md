@@ -1,3 +1,7 @@
+---
+description: Learn how to implement VerneMQ plugins using the Lua Scripting Language.
+---
+
 # Lua Scripting Support
 
 Developing VerneMQ plugins in Erlang is the most powerful way to extend the functionality of a VerneMQ broker but is a barrier developers not familiar with Erlang. For this reason we've implemented a VerneMQ extension that allows you to develop plugins using the [Lua scripting language](https://www.lua.org). This extension is called **vmq\_diversity** and is shipped as part of VerneMQ.

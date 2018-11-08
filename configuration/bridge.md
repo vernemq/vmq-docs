@@ -6,7 +6,7 @@ description: VerneMQ can interface with other brokers via MQTT bridges.
 
 Bridges are a non-standard way, although kind of a de-facto standard among MQTT broker implementations, to connect two different MQTT brokers to eachother. This allows for example that a topic tree of a remote broker becomes part of the topic tree on the local broker. VerneMQ supports plain TCP connections as well as SSL connections.
 
-## Enabling the bridge functionality
+### Enabling the bridge functionality
 
 in VerneMQ the bridge is distributed with VerneMQ as a plugin and is not enabled by default. After configuring the bridge as described below, make sure to enable the plugin by setting:
 
@@ -18,7 +18,7 @@ See [Managing plugins](plugins.md) for more information on working with plugins.
 
 When the plugin is enabled a simple status interface is available:
 
-```text
+```
 $ vmq-admin bridge show
 +-----------------+-----------+----------+-------------------+
 |   endpoint      |buffer size|buffer max|buffer dropped msgs|
@@ -27,7 +27,7 @@ $ vmq-admin bridge show
 +-----------------+-----------+----------+-------------------+
 ```
 
-## Sample MQTT Bridge
+### Sample MQTT Bridge
 
 Setup a bridge to a remote broker:
 
@@ -66,7 +66,7 @@ vmq_bridge.tcp.br0.try_private = off
 vmq_bridge.tcp.br0.max_outgoing_buffered_messages = 100
 ```
 
-Define the topics the bridge should incorporate in its local topic tree \(by subscribing to the remote\), or the topics it should export to the remote broker \(by publishing to the remote\). We share a similar configuration syntax to that used by the Mosquitto broker:
+Define the topics the bridge should incorporate in its local topic tree (by subscribing to the remote), or the topics it should export to the remote broker (by publishing to the remote). We share a similar configuration syntax to that used by the Mosquitto broker:
 
 ```text
 topic [[[ out | in | both ] qos-level] local-prefix remote-prefix]
@@ -91,7 +91,7 @@ vmq_bridge.tcp.br0.topic.1 = /demo/+ both 1
 vmq_bridge.tcp.br0.topic.2 = $SYS/* in remote
 ```
 
-## Sample MQTT Bridge that uses SSL/TLS
+### Sample MQTT Bridge that uses SSL/TLS
 
 SSL bridges support the same configuration parameters as TCP bridges, but need further instructions for handling the SSL specifics:
 

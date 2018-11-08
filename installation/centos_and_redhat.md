@@ -1,3 +1,9 @@
+---
+description: >-
+  VerneMQ can be installed on CentOS-based systems using the binary package we
+  provide.
+---
+
 # Installing on CentOS and RHEL
 
 ### Install VerneMQ
@@ -34,5 +40,5 @@ If VerneMQ has been installed successfully `vernemq` is returned.
 
 ### Next Steps
 
-Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuring-vernemq/introduction.md).
+Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuration/introduction.md).
 
