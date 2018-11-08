@@ -18,8 +18,6 @@ All the hooks that are currently exposed fall into one of three categories.
 
 ![](../.gitbook/assets/flow_legend.png)
 
-![](plugindev/flow_legend.png)
-
 1. Hooks that allow you to change the protocol flow. An example could be to
    authenticate a client using the `auth_on_register` hook.
 
