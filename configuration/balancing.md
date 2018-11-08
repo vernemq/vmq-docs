@@ -1,3 +1,7 @@
+---
+description: MQTT consumers can share and loadbalance a topic subscription.
+---
+
 # Consumer session balancing
 
 Sometimes consumers get overwhelmed by the number of messages they receive. VerneMQ can loadbalance between multiple consumer instances subscribed to the same topic with the same ClientId.

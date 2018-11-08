@@ -1,3 +1,7 @@
+---
+description: Description and Configuration of the built-in Monitoring mechanism
+---
+
 # Introduction
 
 VerneMQ can be monitored in several ways. We implemented native support for [Graphite](https://graphiteapp.org/), [MQTT $SYS tree](systree.md), and [Prometheus](http://prometheus.io).

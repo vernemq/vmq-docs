@@ -1,3 +1,7 @@
+---
+description: Configure Non-Standard MQTT Options VerneMQ Supports.
+---
+
 # Non-standard MQTT options
 
 ### Maximum Client Id Size

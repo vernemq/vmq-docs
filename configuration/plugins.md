@@ -1,3 +1,7 @@
+---
+description: Managing VerneMQ Plugins
+---
+
 # Plugins
 
 Many aspects of VerneMQ can be extended using plugins. The standard VerneMQ package comes with several official plugins. You can show the enabled & running plugins via:

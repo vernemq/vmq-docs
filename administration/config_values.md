@@ -1,3 +1,7 @@
+---
+description: Managing VerneMQ live config values.
+---
+
 # Live reconfiguration
 
 You can dynamically re-configure most of VerneMQ's settings on a running node by using the `vmq-admin set` command.

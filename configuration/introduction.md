@@ -1,3 +1,7 @@
+---
+description: Everything you must know to properly configure VerneMQ
+---
+
 # Introduction
 
 Every VerneMQ node has to be configured. Depending on the installation method and chosen platform the configuration file `vernemq.conf` resides at different locations. If VerneMQ was installed through a Linux package the default location for the configuration file is `/etc/vernemq/vernemq.conf`.
