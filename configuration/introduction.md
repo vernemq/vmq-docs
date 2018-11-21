@@ -17,5 +17,11 @@ Every VerneMQ node has to be configured. Depending on the installation method an
 You certainly want to try out VerneMQ right away. For that you need to allow anonymous clients to connect.
 
 * Set `allow_anonymous = on`
-* Do not use this setting in production \(or at least _think_ before you do\)
+
+{% hint style="info" %}
+Warning: Setting `allow_anonymous=on` completely disables authentication in the
+broker and plugin authentication hooks are never called! See more information
+about the authentication hooks
+[here](/plugindevelopment/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
+{% endhint %}
 
