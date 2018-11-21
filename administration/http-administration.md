@@ -246,13 +246,13 @@ Response:
 Request:
 
 ```text
-GET /api/v1/set?allow_anonymous=on
+GET /api/v1/set?allow_publish_during_netsplit=on
 ```
 
 Curl:
 
 ```text
-curl "http://JxctXkZ1OTVnlwvguSCE9KtujacMkOLF@localhost:8888/api/v1/set?allow_anonymous=on"
+curl "http://JxctXkZ1OTVnlwvguSCE9KtujacMkOLF@localhost:8888/api/v1/set?allow_publish_during_netsplit=on"
 ```
 
 Response:

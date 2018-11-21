@@ -25,6 +25,13 @@ This starts a new node that listens on 1883 for MQTT connections and on 8080 for
 docker run -e "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on" --name vernemq1 -d erlio/docker-vernemq
 ```
 
+{% hint style="info" %}
+Warning: Setting `allow_anonymous=on` completely disables authentication in the
+broker and plugin authentication hooks are never called! See more information
+about the authentication hooks
+[here](/plugindevelopment/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
+{% endhint %}
+
 ## Autojoining a VerneMQ cluster
 
 This allows a newly started container to automatically join a VerneMQ cluster. Assuming you started your first node like the example above you could autojoin the cluster \(which currently consists of a single container 'vernemq1'\) like the following:
