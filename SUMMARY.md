@@ -41,6 +41,7 @@
 * [Live reconfiguration](administration/config_values.md)
 * [Managing Listeners](administration/listeners.md)
 * [HTTP API](administration/http-administration.md)
+* [Tracing](administration/tracing.md)
 
 ## Monitoring
 
