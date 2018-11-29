@@ -18,7 +18,7 @@ Those values correspond to `net.ipv4.tcp_wmem` and `net.ipv4.tcp_rmem` in your O
 
 ```bash
 sudo sysctl -w net.ipv4.tcp_rmem="4096 16384 32768"
-sudo sysctl -w net.ipv4.tcp_rmem="4096 16384 32768"
+sudo sysctl -w net.ipv4.tcp_wmem="4096 16384 32768"
 
 # Nope, these values are not recommendations!
 # You really need to decide yourself.
