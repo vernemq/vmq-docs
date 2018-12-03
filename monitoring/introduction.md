@@ -12,11 +12,11 @@ The metrics are also available via the command line tool:
 vmq-admin metrics show
 ```
 
-### Exported Metrics
+## Exported Metrics
 
 VerneMQ metrics are either counters or gauges. Counters always report the total number of events since the broker start. Gauges report a point in time value.
 
-#### Available Counters
+### Available Counters
 
 ```text
 # Networking
@@ -96,7 +96,7 @@ system_exact_reductions
 system_context_switches
 ```
 
-#### Available Gauges
+### Available Gauges
 
 ```text
 # MQTT Queues

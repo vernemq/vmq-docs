@@ -22,8 +22,8 @@ systree_enabled = off
 
 {% hint style="success" %}
 The feature and the interval can be changed at runtime using the `vmq-admin` script.  
- Usage: vmq-admin set = ... \[\[--node \| -n\]  \| --all\]   
- Example: `vmq-admin set systree_interval=60000 -n VerneMQ@127.0.0.1`
+Usage: vmq-admin set = ... \[\[--node \| -n\] \| --all\]  
+Example: `vmq-admin set systree_interval=60000 -n VerneMQ@127.0.0.1`
 {% endhint %}
 
 Examples:

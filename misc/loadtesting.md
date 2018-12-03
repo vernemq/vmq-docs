@@ -8,11 +8,11 @@ You can loadtest VerneMQ with our [vmq\_mzbench tool](https://github.com/erlio/v
 
 If you have an AWS account, vmq\_mzbench can automagically provision worker nodes for you. You can also run it locally, of course.
 
-### 1. Install MZBench
+## 1. Install MZBench
 
 Please follow the [MZBench installation guide](http://satori-com.github.io/mzbench/#installation)
 
-### 2. Install vmq\_mzbench
+## 2. Install vmq\_mzbench
 
 Actually, you don't even have to install vmq\_mzbench, if you don't want to. Your scenario file will automatically fetch vmq\_mzbench for any test you do. vmq\_mzbench runs every test independently, so it has a provisioning step for any test, even if you only run it on a local worker.
 
@@ -40,7 +40,7 @@ If you'd just like the script itself fetch vmq\_mzbench, then you can direct it 
 {git, "git://github.com/erlio/vmq_mzbench.git"}]},
 ```
 
-### 3. Write vmq\_mzbench scenario files
+## 3. Write vmq\_mzbench scenario files
 
 {% hint style="info" %}
 MZBench recently switched from an Erlang-styled Scenario DSL to a more python-like DSL dubbed BDL \(Benchmark Definition Language\). Have a look at the [BDL examples](https://github.com/machinezone/mzbench/tree/master/examples.bdl) on Github.

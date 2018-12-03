@@ -33,7 +33,7 @@ graphite_prefix = vernemq
 
 {% hint style="info" %}
 The above configuration parameters can be changed at runtime using the `vmq-admin` script.  
- Usage: `vmq-admin set = ... [[--node | -n]  | --all]`   
- Example: `vmq-admin set graphite_interval=20000 graphite_port=2003 -n VerneMQ@127.0.0.1`
+Usage: `vmq-admin set = ... [[--node | -n] | --all]`  
+Example: `vmq-admin set graphite_interval=20000 graphite_port=2003 -n VerneMQ@127.0.0.1`
 {% endhint %}
 

@@ -1,10 +1,10 @@
 # Not a tuning guide
 
-### General relation to OS configuration values
+## General relation to OS configuration values
 
-You need to know about and configure a couple of Operating System and Erlang VM configs to operate VerneMQ efficiently. First, make sure you have set appropriate OS file limits according to our [guide here](change-open-file-limits.md). Second, when you run into performance problems, don't forget to check the [settings in the `vernemq.conf` file](../configuration/introduction.md). \(Can't open more than 10k connections? Well, is the listener configured to open more than 10k?\)
+You need to know about and configure a couple of Operating System and Erlang VM configs to operate VerneMQ efficiently. First, make sure you have set appropriate OS file limits according to our [guide here](change-open-file-limits.md). Second, when you run into performance problems, don't forget to check the [settings in the `vernemq.conf` file](../configuring-vernemq/introduction.md). \(Can't open more than 10k connections? Well, is the listener configured to open more than 10k?\)
 
-### TCP buffer sizes
+## TCP buffer sizes
 
 This is the number one topic to look at, if you need to keep an eye on RAM usage.
 
@@ -26,7 +26,7 @@ sudo sysctl -w net.ipv4.tcp_wmem="4096 16384 32768"
 
 This would result in a 32KB application buffer for every connection. On a multi-purpose server where you install VerneMQ as a test, you might not want to change your OS's TCP settings, of course. In that case, you can still configure the buffer sizes manually for VerneMQ by using the `advanced.config` file.
 
-### The advanced.config file
+## The advanced.config file
 
 The `advanced.config` file is a supplementary configuration file that sits in the same directory as the `vernemq.conf`. You can set additional config values for any of the OTP applications that are part of a VerneMQ release. To just configure the TCP buffer size manually, you can create an `advanced.config` file:
 
@@ -37,7 +37,7 @@ The `advanced.config` file is a supplementary configuration file that sits in th
            {recbuf, 4096}]}]}].
 ```
 
-### The vm.args file
+## The vm.args file
 
 For very advanced & custom configurations, you can add a `vm.args` file to the same directory where the `vernemq.conf` file is located. Its purpose is to configure parameters for the Erlang Virtual Machine. This will override any Erlang specific parameters your might have configured via the `vernemq.conf`. Normally, VerneMQ auto-generates a vm.args file for every boot in `/var/lib/vernemq/generated.configs/` \(Debian package example\) from `vernemq.conf` and other potential configuration sources.
 
@@ -68,7 +68,7 @@ This is how a `vm.args` might look like:
 # You really need to decide yourself, again ;)
 ```
 
-### A note on TLS
+## A note on TLS
 
 Using TLS will of course increase the CPU load during connection setup. Latencies in message delivery will be increased, and your overall message throughput per second will be lower.
 

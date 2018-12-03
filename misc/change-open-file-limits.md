@@ -14,7 +14,7 @@ ulimit -n 65536
 
 However, this only changes the limit for the _**current shell session**_. Changing the limit on a system-wide, permanent basis varies more between systems.
 
-### Linux
+## Linux
 
 On most Linux distributions, the total limit for open files is controlled by `sysctl`.
 
@@ -40,7 +40,7 @@ This file is automatically sourced from the init script, and the VerneMQ process
 
 On CentOS/RedHat systems, make sure to set a proper limit for the user you’re usually logging in with to do any kind of work on the machine, including managing VerneMQ. On CentOS, `sudo` properly inherits the values from the executing user.
 
-### Enable PAM-Based Limits for Debian & Ubuntu
+## Enable PAM-Based Limits for Debian & Ubuntu
 
 It can be helpful to enable PAM user limits so that non-root users, such as the `vernemq` user, may specify a higher value for maximum open files. For example, follow these steps to enable PAM user limits and set the soft and hard values **for all users of the system** to allow for up to 65536 open files.
 
@@ -82,7 +82,7 @@ UseLogin yes
 ulimit -a
 ```
 
-### Enable PAM-Based Limits for CentOS and Red Hat
+## Enable PAM-Based Limits for CentOS and Red Hat
 
 1. Edit `/etc/security/limits.conf` and append the following lines to
 
@@ -104,7 +104,7 @@ ulimit -a
 In the above examples, the open files limit is raised for all users of the system. If you prefer, the limit can be specified for the `vernemq` user only by substituting the two asterisks \(\*\) in the examples with `vernemq`.
 {% endhint %}
 
-### Solaris
+## Solaris
 
 In Solaris 8, there is a default limit of 1024 file descriptors per process. In Solaris 9, the default limit was raised to 65536. To increase the per-process limit on Solaris, add the following line to `/etc/system`:
 
@@ -112,9 +112,9 @@ In Solaris 8, there is a default limit of 1024 file descriptors per process. In 
 set rlim_fd_max=65536
 ```
 
-Reference: 
+Reference:
 
-### Mac OS X
+## Mac OS X
 
 To check the current limits on your Mac OS X system, run:
 
