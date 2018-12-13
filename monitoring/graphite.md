@@ -13,9 +13,6 @@ graphite_port = 2003
 graphite_interval = 20000
 graphite_api_key = YOUR-GRAPHITE-API-KEY
 graphite.interval = 15000
-graphite.host = carbon.hostedgraphite.com
-graphite.port = 2003
-graphite.api_key = YOUR-GRAPHITE-API-KEY
 ```
 
 You can further tune the connection to the Graphite server:
