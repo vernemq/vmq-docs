@@ -174,6 +174,7 @@ vmq_diversity.mysql.port = 3306
 vmq_diversity.mysql.user = vernemq
 vmq_diversity.mysql.password = vernemq
 vmq_diversity.mysql.database = vernemq_db
+vmq_diversity.mysql.password_hash_method = password
 ```
 
 The following SQL DDL must be applied:
@@ -202,6 +203,10 @@ VALUES
      '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]', 
      '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]');
 ```
+
+{% hint style="warning" %}
+Note, the `PASSWORD()` hashing method needs to be changed according to the configuration set in `vmq_diversity.mysql.password_hash_method`, it supports the options `password`, `md5`, `sha1` and `sha256`. Learn more about the MySQL equivalent for those methods on https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html. The default `password` method has been deprecated since MySQL 5.7.6 and not usable with MySQL 8.0.11+. Also, the MySQL authentication method `caching_sha2_password` is not supported. This is the default in MySQL 8.0.4 and later, so you need to add: `default_authentication_plugin=mysql_native_password` under **[mysqld]** in e.g. */etc/mysql/my.cnf*.
+{% endhint %|
 
 ### MongoDB
 
