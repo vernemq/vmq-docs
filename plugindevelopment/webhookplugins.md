@@ -124,7 +124,7 @@ It is also possible to override various client specific settings by returning an
 
 Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
-Other possible return values:
+Other possible responses:
 
 ```javascript
 {
@@ -180,14 +180,18 @@ Another example where where the topics to subscribe have been rewritten looks li
 
 Note, you can also pass a `qos` with value `128` which means it was either not possible or the client was not allowed to subscribe to that specific question.
 
-Other possible result values:
+Other possible responses:
 
 ```javascript
-"result": "next"
+{
+    "result": "next"
+}
 ```
 
 ```javascript
-"result": { "error": "some error message" }
+{
+    "result": { "error": "some error message" }
+}
 ```
 
 ### auth\_on\_publish
@@ -232,14 +236,18 @@ A more complex example where the publish topic, qos, payload and retain flag is 
 }
 ```
 
-Other result values:
+Other possible responses:
 
 ```javascript
-"result": "next"
+{
+    "result": "next"
+}
 ```
 
 ```javascript
-"result": { "error": "some error message" }
+{
+    "result": { "error": "some error message" }
+}
 ```
 
 ### on\_register
@@ -329,14 +337,18 @@ Example response:
 }
 ```
 
-Other result values:
+Other possible responses:
 
 ```javascript
-"result": "next"
+{
+    "result": "next"
+}
 ```
 
 ```javascript
-"result": { "error": "some error message" }
+{
+    "result": { "error": "some error message" }
+}
 ```
 
 ### on\_deliver
@@ -370,10 +382,12 @@ Example response:
 }
 ```
 
-Other result values:
+Other possible responses:
 
 ```javascript
-"result": "next"
+{
+    "result": "next"
+}
 ```
 
 ### on\_offline\_message
@@ -483,7 +497,7 @@ It is also possible to override various client specific settings by returning an
 
 Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
-Other possible return values:
+Other possible responses:
 
 ```javascript
 {
@@ -584,7 +598,7 @@ Another example where where the topics to subscribe have been rewritten looks li
 
 Note, the `forbidden/topic` has been rejected with the `qos` value of 135 \(Not authorized\).
 
-Other possible result values:
+Other responses
 
 ```text
 {
@@ -641,7 +655,7 @@ A response where the publish topic has been rewritten:
 }
 ```
 
-Other result values:
+Other possible responses:
 
 ```javascript
 {
@@ -763,7 +777,7 @@ Example response:
 }
 ```
 
-Other result values:
+Other possible responses:
 
 ```javascript
 {
@@ -799,7 +813,7 @@ Example response:
 }
 ```
 
-Other result values:
+Other possible responses:
 
 ```javascript
 {
