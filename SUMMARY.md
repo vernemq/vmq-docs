@@ -49,6 +49,9 @@
 * [$SYSTree](monitoring/systree.md)
 * [Graphite](monitoring/graphite.md)
 * [Prometheus](monitoring/prometheus.md)
+* [Health Checker](monitoring/health-check.md)
+* [Status Page](monitoring/status.md)
+
 
 ## Plugin Development
 
