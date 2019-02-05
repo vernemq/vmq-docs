@@ -38,6 +38,7 @@
 ## Live Administration
 
 * [Introduction](administration/introduction.md)
+* [Inspecting and managing sessions](administration/managing-sessions.md)
 * [Live reconfiguration](administration/config_values.md)
 * [Managing Listeners](administration/listeners.md)
 * [HTTP API](administration/http-administration.md)
@@ -51,7 +52,6 @@
 * [Prometheus](monitoring/prometheus.md)
 * [Health Checker](monitoring/health-check.md)
 * [Status Page](monitoring/status.md)
-
 
 ## Plugin Development
 
@@ -69,4 +69,3 @@
 * [Loadtesting VerneMQ](misc/loadtesting.md)
 * [Not a tuning guide](misc/not-a-tuning-guide.md)
 * [Change Open File Limits](misc/change-open-file-limits.md)
-
