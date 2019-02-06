@@ -3,7 +3,6 @@ description: Inspecting the retained message store
 ---
 
 # Inspecting retained messages
-
 To list the retained messages simply invoke `vmq-admin retain show`:
 
 ```shell
