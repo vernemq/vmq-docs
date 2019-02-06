@@ -39,6 +39,7 @@
 
 * [Introduction](administration/introduction.md)
 * [Inspecting and managing sessions](administration/managing-sessions.md)
+* [Retained messages](administration/retained-store.md)
 * [Live reconfiguration](administration/config_values.md)
 * [Managing Listeners](administration/listeners.md)
 * [HTTP API](administration/http-administration.md)
