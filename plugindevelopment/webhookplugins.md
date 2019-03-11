@@ -525,8 +525,8 @@ Webhook example payload:
     "mountpoint": "",
     "client_id": "client-id",
     "properties": {
-      "authentication_data": "QVVUSF9EQVRBMA==",
-      "authentication_method": "AUTH_METHOD"
+      "p_authentication_data": "QVVUSF9EQVRBMA==",
+      "p_authentication_method": "AUTH_METHOD"
     }
 }
 ```
@@ -537,8 +537,10 @@ A minimal response indicating the authentication was successful looks like:
 
 ```javascript
   "modifiers": {
-    "authentication_data": "QVVUSF9EQVRBMQ==",
-    "authentication_method": "AUTH_METHOD"
+    "properties": {
+      "p_authentication_data": "QVVUSF9EQVRBMQ==",
+      "p_authentication_method": "AUTH_METHOD"
+    }
     "reason_code": 0
   },
   "result": "ok"
