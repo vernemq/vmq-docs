@@ -62,7 +62,7 @@ vmq-passwd -U passwordfile
 
 `-U`
 
-> This option can be used to upgrade/convert a password file with plain text passwords into one using hashed passwords. It will modify the specified file. It does not detect whether passwords are already hashed, so using it on a password file that already contains hashed passwords will generate new hashes based on the old hashes and render the password file unusable.
+> This option can be used to upgrade/convert a password file with plain text passwords into one using hashed passwords. It will modify the specified file. It does not detect whether passwords are already hashed, so using it on a password file that already contains hashed passwords will generate new hashes based on the old hashes and render the password file unusable. Note, with this option neither usernames or passwords may contain `":"`.
 
 `passwordfile`
 
