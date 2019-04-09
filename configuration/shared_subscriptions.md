@@ -26,11 +26,8 @@ When a messages is being delivered to subscribers of a shared subscription, the 
 
 **Subscriptions**
 *Note: When subscribing to a shared topic, make sure to escape the `$`*
-```bash
-mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t $share/group/topicname
-mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t $share/group/topicname/#
-```
-So, for dash on ubuntu bionic
+
+So, for dash or bash shells 
 ```bash
 mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname
 mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname/#
