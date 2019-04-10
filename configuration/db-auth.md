@@ -4,9 +4,7 @@ description: >-
   connections.
 ---
 
-# Auth using a database
-
-## Authentication and authorization using a database
+# Authentication and authorization using a database
 
 VerneMQ supports authentication and authorization using a number of popular databases and the below sections describe how to configure the different databases.
 
@@ -106,7 +104,7 @@ Like the publish ACL, the subscribe ACL makes it possible to change the current 
 }
 ```
 
-### PostgreSQL
+## PostgreSQL
 
 To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
 
@@ -159,7 +157,7 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
     FROM x;
 ```
 
-### MySQL
+## MySQL
 
 For MySQL authentication and authorization configure the following in `vernemq.conf`:
 
@@ -206,7 +204,7 @@ Note, the `PASSWORD()` hashing method needs to be changed according to the confi
 The default `password` method has been deprecated since MySQL 5.7.6 and not usable with MySQL 8.0.11+. Also, the MySQL authentication method `caching_sha2_password` is not supported. This is the default in MySQL 8.0.4 and later, so you need to add: `default_authentication_plugin=mysql_native_password` under **[mysqld]** in e.g. */etc/mysql/my.cnf*.
 {% endhint %}
 
-### MongoDB
+## MongoDB
 
 For MongoDB authentication and authorization configure the following in `vernemq.conf`:
 
@@ -237,7 +235,7 @@ db.vmq_acl_auth.insert({
 })
 ```
 
-### Redis
+## Redis
 
 For Redis authentication and authorization configure the following in `vernemq.conf`:
 
