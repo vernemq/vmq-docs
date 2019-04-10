@@ -22,3 +22,20 @@ shared_subscription_policy = prefer_local
 
 When a messages is being delivered to subscribers of a shared subscription, the message will be delivered to an online subscriber if possible, otherwise the message will be delivered to an offline subscriber.
 
+## Examples
+
+**Subscriptions**
+*Note: When subscribing to a shared topic, make sure to escape the `$`*
+
+So, for dash or bash shells 
+```bash
+mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname
+mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname/#
+```
+
+**Publishing**
+*Note: When publishing to a shared topic, do not include the prefix `$share/group/` as part of the publish topic name*
+```bash
+mosquito_pub -h mqtt.example.io -p 1883 -t topicname -m "This is a test message"
+mosquito_pub -h mqtt.example.io -p 1883 -t topicname/group1 -m "This is a test message"
+```
