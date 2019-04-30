@@ -6,6 +6,8 @@ description: >-
 
 # Authentication and authorization using a database
 
+## Introduction and general setup
+
 VerneMQ supports authentication and authorization using a number of popular databases and the below sections describe how to configure the different databases.
 
 The database drivers are handled using the `vmq_diversity` plugin and it therefore needs to be enabled:
@@ -104,6 +106,30 @@ Like the publish ACL, the subscribe ACL makes it possible to change the current 
 }
 ```
 
+### Password verification and hashing methods
+
+When deciding on which database to use one has to consider which kind of
+password hashing and key derivation functions are available and
+required. Different databases provide different mechanisms, for example
+PostgreSQL provides the `pgcrypto` module which supports verifying hashed and
+salted passwords, while Redis has no such features. VerneMQ therefore also
+provides client-side password verification mechanisms such as `bcrypt`.
+
+There is a trade-off between verifying passwords on the client-side versus on
+the server-side. Verifying passwords client-side of course means doing the
+computations on the VerneMQ broker and this takes away resources from other
+tasks such as routing messages. With hashing functions such as `bcrypt` which
+are designed specifically to be slow (proportional to the number of rounds) in
+order to make brute-force attacks infeasible, this can become a problem. For
+example, if verifying a password with `bcrypt` takes 0.5 seconds then on a
+single threaded core 2 verifications/second are possible and using 4 single
+threaded cores 8 verifications/second. So, the number of rounds/security
+paramenters have a direct impact on the max number of verifications/second and
+hence also the maximum arrival rate of new clients per second.
+
+For each database it is specified which password verification mechanisms are
+available and if they are client-side or server-side.
+
 ## PostgreSQL
 
 To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
@@ -115,9 +141,18 @@ vmq_diversity.postgres.port = 5432
 vmq_diversity.postgres.user = vernemq
 vmq_diversity.postgres.password = vernemq
 vmq_diversity.postgres.database = vernemq_db
+vmq_diversity.cockroachdb.password_hash_method = crypt
 ```
 
-The following SQL DDL must be applied, the `pgcrypto` extension is required:
+PostgreSQL hashing methods:
+
+| method | client-side | server-side |
+|:-------|:-----------:|:-----------:|
+| bcrypt | ✓           |             |
+| crypt  |             | ✓           |
+
+The following SQL DDL must be applied, the `pgcrypto` extension is required if
+using the server-side `crypt` hashing method:
 
 ```sql
 CREATE EXTENSION pgcrypto;
@@ -177,6 +212,13 @@ Notice that if the CockroachDB installation is secure, then TLS is required. If
 using an insecure installation without TLS, then `vmq_diversity.cockroachdb.ssl`
 can be set to `off`.
 
+CockroachDB hashing methods:
+
+| method | client-side | server-side |
+|:-------|:-----------:|:-----------:|
+| bcrypt | ✓           |             |
+| sha256 |             | ✓           |
+
 The following SQL DDL must be applied:
 
 ```sql
@@ -230,6 +272,20 @@ vmq_diversity.mysql.database = vernemq_db
 vmq_diversity.mysql.password_hash_method = password
 ```
 
+MySQL hashing methods:
+
+| method   | client-side | server-side |
+|:---------|:-----------:|:-----------:|
+| sha256   |             | ✓           |
+| md5*     |             | ✓           |
+| sha1*    |             | ✓           |
+| password |             | ✓           |
+
+It should be noted that all the above options stores unsalted passwords which
+are vulnerable to rainbow table attacks, so the threat-model should be
+considered carefully when using these. Also note the methods marked with `*` are
+no longer considered secure hashes.
+
 The following SQL DDL must be applied:
 
 ```sql
@@ -245,7 +301,8 @@ CREATE TABLE vmq_auth_acl
 )
 ```
 
-To enter new ACL entries use a query similar to the following:
+To enter new ACL entries use a query similar to the following, the example uses
+`PASSWWORD` to for password hashing:
 
 ```sql
 INSERT INTO vmq_auth_acl 
@@ -276,6 +333,12 @@ vmq_diversity.mongodb.port = 27017
 # vmq_diversity.mongodb.database =
 ```
 
+MongoDB hashing methods:
+
+| method | client-side | server-side |
+|:-------|:-----------:|:-----------:|
+| bcrypt | ✓           |             |
+
 Insert the ACL using the `mongo` shell or any software library. The `passhash` property contains the bcrypt hash of the clients password.
 
 ```javascript
@@ -305,6 +368,12 @@ vmq_diversity.redis.port = 6379
 # vmq_diversity.redis.password = 
 # vmq_divserity.redis.database = 0
 ```
+
+Redis hashing methods:
+
+| method | client-side | server-side |
+|:-------|:-----------:|:-----------:|
+| bcrypt | ✓           |             |
 
 Insert the ACL using the `redis-cli` shell or any software library. The `passhash` property contains the bcrypt hash of the clients password. The key is an encoded JSON array containing the mountpoint, username, and client id. Note that no spaces are allowed between the array items.
 
