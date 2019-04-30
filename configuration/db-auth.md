@@ -157,6 +157,65 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
     FROM x;
 ```
 
+## CockroachDB
+
+To enable PostgreSQL authentication and authorization the following need to be
+configured in the `vernemq.conf` file:
+
+```text
+vmq_diversity.auth_cockroachdb.enabled = on
+vmq_diversity.cockroachdb.host = 127.0.0.1
+vmq_diversity.cockroachdb.port = 26257
+vmq_diversity.cockroachdb.user = vernemq
+vmq_diversity.cockroachdb.password = vernemq
+vmq_diversity.cockroachdb.database = vernemq_db
+vmq_diversity.cockroachdb.ssl = on
+vmq_diversity.cockroachdb.password_hash_method = bcrypt
+```
+
+Notice that if the CockroachDB installation is secure, then TLS is required. If
+using an insecure installation without TLS, then `vmq_diversity.cockroachdb.ssl`
+can be set to `off`.
+
+The following SQL DDL must be applied:
+
+```sql
+CREATE TABLE vmq_auth_acl
+ (
+   mountpoint character varying(10) NOT NULL,
+   client_id character varying(128) NOT NULL,
+   username character varying(128) NOT NULL,
+   password character varying(128),
+   publish_acl json,
+   subscribe_acl json,
+   CONSTRAINT vmq_auth_acl_primary_key PRIMARY KEY (mountpoint, client_id, username)
+ );
+```
+
+To enter new ACL entries use a query similar to the following, the example is
+for the `bcrypt` hashing method:
+
+```sql
+WITH x AS (
+    SELECT
+        ''::text AS mountpoint,
+           'test-client1'::text AS client_id,
+           'test-user1'::text AS username,
+           '$2a$12$97PlnSsouvCV7HaxDPV80.EXfsKM4Fg7DAwWhSbGJ6O5CpNep20n2'::text AS hash,
+           '[{"pattern": "a/b/c"}, {"pattern": "c/b/#"}]'::json AS publish_acl,
+           '[{"pattern": "a/b/c"}, {"pattern": "c/b/#"}]'::json AS subscribe_acl
+    )
+INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl, subscribe_acl)
+    SELECT
+        x.mountpoint,
+        x.client_id,
+        x.username,
+        x.hash,
+        publish_acl,
+        subscribe_acl
+    FROM x;
+```
+
 ## MySQL
 
 For MySQL authentication and authorization configure the following in `vernemq.conf`:
