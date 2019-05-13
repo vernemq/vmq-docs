@@ -8,10 +8,6 @@ description: >-
 
 ## Authentication and authorization using a database
 
-{% hint style="info" %}
-This functionality is still in BETA and some things may change if required.
-{% endhint %}
-
 VerneMQ supports authentication and authorization using a number of popular databases and the below sections describe how to configure the different databases.
 
 The database drivers are handled using the `vmq_diversity` plugin and it therefore needs to be enabled:
