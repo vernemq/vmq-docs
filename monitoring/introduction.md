@@ -48,4 +48,17 @@ mqtt_connack_accepted_sent
 
 Are no longer used (always 0) and will be removed in the future. They were
 replaced with `mqtt_connack_sent` using the `return_code` label. For MQTT 5.0
-the `reason_code` label is used instead.
+the `reason_code` label is used instead. 
+
+The output on the command line are aggregated by default, but details for a
+label can be shown as well, for example all metrics with the `not_authorized` label:
+
+```text
+vmq-admin metrics show --return_code=not_authorized
+counter.mqtt_connack_sent = 0
+```
+
+All available labels can be show using `vmq-admin metrics show --help`.
+
+
+
