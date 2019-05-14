@@ -41,10 +41,10 @@ The mountpoints can be configured on the protocol level or configurred or
 overridden on the specific listener level.
 
 ```
-listener.ssl.mountpoint = "ssl-mountpoint"
+listener.ssl.mountpoint = ssl-mountpoint
 
-listener.tcp.listener1.mountpoint = "tcp-listener1"
-listener.tcp.listener2.mountpoint = "tcp-listener2"
+listener.tcp.listener1.mountpoint = tcp-listener1
+listener.tcp.listener2.mountpoint = tcp-listener2
 ```
 
 ## Allowed protocol versions
