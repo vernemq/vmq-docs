@@ -27,16 +27,25 @@ These global defaults can be overridden for a specific transport protocol `liste
 
 ## Mountpoints
 
-As mentioned above a mountpoint is used to isolate clients from each
-other. Normally, a VerneMQ broker hosts one single topic tree. This means that
-all topics are accessible to all publishers and subscribers (limited by the
-ACL's you configured, of course).  Mountpoints are a way to host multiple topic
-trees in a single broker. They are completely separated. Clients from different
-topic trees cannot talk to each other in that case. This could be useful if you
-provide MQTT services to multiple separated use cases/verticals or clients, with
-a single broker.  Note that separated mountpoints are configured via different
-listeners. As a consequence, the MQTT clients will have to connect to a specific
-port to connect to a specific topic space (mountpoint).
+Normally, an MQTT broker hosts one single topic tree. This means that all topics
+are accessible to all publishers and subscribers (limited by the ACLs you
+configured, of course).  Mountpoints are a way to host multiple topic trees in a
+single broker. They are completely separated and clients with different topic
+trees cannot publish messages to each other. This could be useful if you provide
+MQTT services to multiple separated use cases/verticals or clients, with a
+single broker.  Note that mountpoints are configured via different listeners. As
+a consequence, the MQTT clients will have to connect to a specific port to
+connect to a specific topic space (mountpoint).
+
+The mountpoints can be configured on the protocol level or configurred or
+overridden on the specific listener level.
+
+```
+listener.ssl.mountpoint = "ssl-mountpoint"
+
+listener.tcp.listener1.mountpoint = "tcp-listener1"
+listener.tcp.listener2.mountpoint = "tcp-listener2"
+```
 
 ## Allowed protocol versions
 
