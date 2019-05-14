@@ -25,6 +25,19 @@ These are the only default parameters that are applied for all transports, and t
 
 These global defaults can be overridden for a specific transport protocol `listener.tcp.CONFIG = VAL`, or even for a specific listener `listener.tcp.LISTENER.CONFIG = VAL`. The placeholder `LISTENER` is freely chosen and is only used as a reference for further configuring this particular listener.
 
+## Mountpoints
+
+As mentioned above a mountpoint is used to isolate clients from each
+other. Normally, a VerneMQ broker hosts one single topic tree. This means that
+all topics are accessible to all publishers and subscribers (limited by the
+ACL's you configured, of course).  Mountpoints are a way to host multiple topic
+trees in a single broker. They are completely separated. Clients from different
+topic trees cannot talk to each other in that case. This could be useful if you
+provide MQTT services to multiple separated use cases/verticals or clients, with
+a single broker.  Note that separated mountpoints are configured via different
+listeners. As a consequence, the MQTT clients will have to connect to a specific
+port to connect to a specific topic space (mountpoint).
+
 ## Allowed protocol versions
 
 Since VerneMQ 1.5.0 it is possible to configure which MQTT protocol versions as listener will accept.
