@@ -10,12 +10,12 @@ VerneMQ is a high-performance, distributed MQTT message broker. It scales horizo
 
 Choose your OS and follow the instructions:
 
-* [CentOS/RHEL](installing-vernemq/centos_and_redhat.md)
-* [Debian/Ubuntu](installing-vernemq/debian_and_ubuntu.md)
+* [CentOS/RHEL](installation/centos_and_redhat.md)
+* [Debian/Ubuntu](installation/debian_and_ubuntu.md)
 
 It is also possible to run VerneMQ using our Docker image:
 
-* [Docker](installing-vernemq/docker.md)
+* [Docker](installation/docker.md)
 
 ## Starting VerneMQ
 

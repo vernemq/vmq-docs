@@ -15,7 +15,7 @@ allow_anonymous = on
 ```
 
 {% hint style="info" %}
-Warning: Setting `allow_anonymous=on` completely disables authentication in the broker and plugin authentication hooks are never called! See more information about the authentication hooks [here](../plugin-development/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
+Warning: Setting `allow_anonymous=on` completely disables authentication in the broker and plugin authentication hooks are never called! See more information about the authentication hooks [here](../plugindevelopment/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
 {% endhint %}
 
 In a production setup we recommend to use the provided password based authentication mechanism or implement your own authentication plugins.

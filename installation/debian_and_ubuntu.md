@@ -51,5 +51,5 @@ vernemq: /usr/sbin/vernemq /usr/lib/vernemq /etc/vernemq /usr/share/vernemq
 
 ## Next Steps
 
-Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuring-vernemq/introduction.md).
+Now that you've installed VerneMQ, check out [How to configure VerneMQ](../configuration/introduction.md).
 
