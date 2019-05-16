@@ -24,18 +24,19 @@ When a messages is being delivered to subscribers of a shared subscription, the 
 
 ## Examples
 
-**Subscriptions**
-*Note: When subscribing to a shared topic, make sure to escape the `$`*
+**Subscriptions** _Note: When subscribing to a shared topic, make sure to escape the_ `$`
 
-So, for dash or bash shells 
+So, for dash or bash shells
+
 ```bash
 mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname
 mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname/#
 ```
 
-**Publishing**
-*Note: When publishing to a shared topic, do not include the prefix `$share/group/` as part of the publish topic name*
+**Publishing** _Note: When publishing to a shared topic, do not include the prefix_ `$share/group/` _as part of the publish topic name_
+
 ```bash
 mosquito_pub -h mqtt.example.io -p 1883 -t topicname -m "This is a test message"
 mosquito_pub -h mqtt.example.io -p 1883 -t topicname/group1 -m "This is a test message"
 ```
+

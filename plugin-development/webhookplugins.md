@@ -547,7 +547,6 @@ A minimal response indicating the authentication was successful looks like:
 }
 ```
 
-
 If authentication were to continue for another round a reason code with value 24 \(Continue Authentication\) should be returned instead. See also the relevant [section](http://docs.oasis-open.org/mqtt/mqtt/v5.0/cs02/mqtt-v5.0-cs02.html#_Toc514345528) in the MQTT 5.0 specification.
 
 ### auth\_on\_subscribe\_m5
