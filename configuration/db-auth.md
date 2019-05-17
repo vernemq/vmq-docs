@@ -4,7 +4,7 @@ description: >-
   connections.
 ---
 
-# Authentication and authorization using a database
+# Auth using a database
 
 ## Introduction and general setup
 
@@ -108,27 +108,11 @@ Like the publish ACL, the subscribe ACL makes it possible to change the current 
 
 ### Password verification and hashing methods
 
-When deciding on which database to use one has to consider which kind of
-password hashing and key derivation functions are available and
-required. Different databases provide different mechanisms, for example
-PostgreSQL provides the `pgcrypto` module which supports verifying hashed and
-salted passwords, while Redis has no such features. VerneMQ therefore also
-provides client-side password verification mechanisms such as `bcrypt`.
+When deciding on which database to use one has to consider which kind of password hashing and key derivation functions are available and required. Different databases provide different mechanisms, for example PostgreSQL provides the `pgcrypto` module which supports verifying hashed and salted passwords, while Redis has no such features. VerneMQ therefore also provides client-side password verification mechanisms such as `bcrypt`.
 
-There is a trade-off between verifying passwords on the client-side versus on
-the server-side. Verifying passwords client-side of course means doing the
-computations on the VerneMQ broker and this takes away resources from other
-tasks such as routing messages. With hashing functions such as `bcrypt` which
-are designed specifically to be slow (proportional to the number of rounds) in
-order to make brute-force attacks infeasible, this can become a problem. For
-example, if verifying a password with `bcrypt` takes 0.5 seconds then on a
-single threaded core 2 verifications/second are possible and using 4 single
-threaded cores 8 verifications/second. So, the number of rounds/security
-paramenters have a direct impact on the max number of verifications/second and
-hence also the maximum arrival rate of new clients per second.
+There is a trade-off between verifying passwords on the client-side versus on the server-side. Verifying passwords client-side of course means doing the computations on the VerneMQ broker and this takes away resources from other tasks such as routing messages. With hashing functions such as `bcrypt` which are designed specifically to be slow \(proportional to the number of rounds\) in order to make brute-force attacks infeasible, this can become a problem. For example, if verifying a password with `bcrypt` takes 0.5 seconds then on a single threaded core 2 verifications/second are possible and using 4 single threaded cores 8 verifications/second. So, the number of rounds/security paramenters have a direct impact on the max number of verifications/second and hence also the maximum arrival rate of new clients per second.
 
-For each database it is specified which password verification mechanisms are
-available and if they are client-side or server-side.
+For each database it is specified which password verification mechanisms are available and if they are client-side or server-side.
 
 ## PostgreSQL
 
@@ -147,12 +131,11 @@ vmq_diversity.cockroachdb.password_hash_method = crypt
 PostgreSQL hashing methods:
 
 | method | client-side | server-side |
-|:-------|:-----------:|:-----------:|
-| bcrypt | ✓           |             |
-| crypt  |             | ✓           |
+| :--- | :---: | :---: |
+| bcrypt | ✓ |  |
+| crypt |  | ✓ |
 
-The following SQL DDL must be applied, the `pgcrypto` extension is required if
-using the server-side `crypt` hashing method:
+The following SQL DDL must be applied, the `pgcrypto` extension is required if using the server-side `crypt` hashing method:
 
 ```sql
 CREATE EXTENSION pgcrypto;
@@ -194,8 +177,7 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
 
 ## CockroachDB
 
-To enable PostgreSQL authentication and authorization the following need to be
-configured in the `vernemq.conf` file:
+To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
 
 ```text
 vmq_diversity.auth_cockroachdb.enabled = on
@@ -208,16 +190,14 @@ vmq_diversity.cockroachdb.ssl = on
 vmq_diversity.cockroachdb.password_hash_method = bcrypt
 ```
 
-Notice that if the CockroachDB installation is secure, then TLS is required. If
-using an insecure installation without TLS, then `vmq_diversity.cockroachdb.ssl`
-can be set to `off`.
+Notice that if the CockroachDB installation is secure, then TLS is required. If using an insecure installation without TLS, then `vmq_diversity.cockroachdb.ssl` can be set to `off`.
 
 CockroachDB hashing methods:
 
 | method | client-side | server-side |
-|:-------|:-----------:|:-----------:|
-| bcrypt | ✓           |             |
-| sha256 |             | ✓           |
+| :--- | :---: | :---: |
+| bcrypt | ✓ |  |
+| sha256 |  | ✓ |
 
 The following SQL DDL must be applied:
 
@@ -234,8 +214,7 @@ CREATE TABLE vmq_auth_acl
  );
 ```
 
-To enter new ACL entries use a query similar to the following, the example is
-for the `bcrypt` hashing method:
+To enter new ACL entries use a query similar to the following, the example is for the `bcrypt` hashing method:
 
 ```sql
 WITH x AS (
@@ -274,17 +253,14 @@ vmq_diversity.mysql.password_hash_method = password
 
 MySQL hashing methods:
 
-| method   | client-side | server-side |
-|:---------|:-----------:|:-----------:|
-| sha256   |             | ✓           |
-| md5*     |             | ✓           |
-| sha1*    |             | ✓           |
-| password |             | ✓           |
+| method | client-side | server-side |
+| :--- | :---: | :---: |
+| sha256 |  | ✓ |
+| md5\* |  | ✓ |
+| sha1\* |  | ✓ |
+| password |  | ✓ |
 
-It should be noted that all the above options stores unsalted passwords which
-are vulnerable to rainbow table attacks, so the threat-model should be
-considered carefully when using these. Also note the methods marked with `*` are
-no longer considered secure hashes.
+It should be noted that all the above options stores unsalted passwords which are vulnerable to rainbow table attacks, so the threat-model should be considered carefully when using these. Also note the methods marked with `*` are no longer considered secure hashes.
 
 The following SQL DDL must be applied:
 
@@ -301,8 +277,7 @@ CREATE TABLE vmq_auth_acl
 )
 ```
 
-To enter new ACL entries use a query similar to the following, the example uses
-`PASSWWORD` to for password hashing:
+To enter new ACL entries use a query similar to the following, the example uses `PASSWWORD` to for password hashing:
 
 ```sql
 INSERT INTO vmq_auth_acl 
@@ -315,9 +290,9 @@ VALUES
 ```
 
 {% hint style="warning" %}
-Note, the `PASSWORD()` hashing method needs to be changed according to the configuration set in `vmq_diversity.mysql.password_hash_method`, it supports the options `password`, `md5`, `sha1` and  `sha256`. Learn more about the MySQL equivalent for those methods on https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html.
+Note, the `PASSWORD()` hashing method needs to be changed according to the configuration set in `vmq_diversity.mysql.password_hash_method`, it supports the options `password`, `md5`, `sha1` and `sha256`. Learn more about the MySQL equivalent for those methods on [https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html).
 
-The default `password` method has been deprecated since MySQL 5.7.6 and not usable with MySQL 8.0.11+. Also, the MySQL authentication method `caching_sha2_password` is not supported. This is the default in MySQL 8.0.4 and later, so you need to add: `default_authentication_plugin=mysql_native_password` under **[mysqld]** in e.g. */etc/mysql/my.cnf*.
+The default `password` method has been deprecated since MySQL 5.7.6 and not usable with MySQL 8.0.11+. Also, the MySQL authentication method `caching_sha2_password` is not supported. This is the default in MySQL 8.0.4 and later, so you need to add: `default_authentication_plugin=mysql_native_password` under **\[mysqld\]** in e.g. _/etc/mysql/my.cnf_.
 {% endhint %}
 
 ## MongoDB
@@ -336,8 +311,8 @@ vmq_diversity.mongodb.port = 27017
 MongoDB hashing methods:
 
 | method | client-side | server-side |
-|:-------|:-----------:|:-----------:|
-| bcrypt | ✓           |             |
+| :--- | :---: | :---: |
+| bcrypt | ✓ |  |
 
 Insert the ACL using the `mongo` shell or any software library. The `passhash` property contains the bcrypt hash of the clients password.
 
@@ -372,8 +347,8 @@ vmq_diversity.redis.port = 6379
 Redis hashing methods:
 
 | method | client-side | server-side |
-|:-------|:-----------:|:-----------:|
-| bcrypt | ✓           |             |
+| :--- | :---: | :---: |
+| bcrypt | ✓ |  |
 
 Insert the ACL using the `redis-cli` shell or any software library. The `passhash` property contains the bcrypt hash of the clients password. The key is an encoded JSON array containing the mountpoint, username, and client id. Note that no spaces are allowed between the array items.
 
