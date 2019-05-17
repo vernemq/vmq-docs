@@ -1,7 +1,7 @@
 ---
 description: >-
   VerneMQ supports multiple ways to authenticate and authorize new client
-  connections.
+  connections using a database.
 ---
 
 # Auth using a database
