@@ -6,6 +6,48 @@ description: Managing VerneMQ live config values.
 
 You can dynamically re-configure most of VerneMQ's settings on a running node by using the `vmq-admin set` command.
 
+The following config values can be handled dynamically:
+
+```text
+allow_anonymous
+topic_alias_max_broker
+receive_max_broker
+vmq_acl.acl_file
+graphite_host
+vmq_acl.acl_reload_interval
+graphite_enabled
+queue_type
+suppress_lwt_on_session_takeover
+max_message_size
+vmq_passwd.password_file
+graphite_port
+max_client_id_size
+upgrade_outgoing_qos
+max_message_rate
+graphite_interval
+allow_multiple_sessions
+systree_enabled
+max_last_will_delay
+retry_interval
+receive_max_client
+max_offline_messages
+max_online_messages
+max_inflight_messages
+allow_register_during_netsplit
+vmq_passwd.password_reload_interval
+topic_alias_max_client
+systree_interval
+allow_publish_during_netsplit
+coordinate_registrations
+remote_enqueue_timeout
+persistent_client_expiration
+allow_unsubscribe_during_netsplit
+graphite_include_labels
+shared_subscription_policy
+queue_deliver_mode
+allow_subscribe_during_netsplit
+```
+
 {% hint style="warning" %}
 Settings dynamically configured with the `vmq-admin set` command will be reset by vernemq.conf upon broker restart.
 {% endhint %}
