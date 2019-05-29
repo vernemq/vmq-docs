@@ -70,4 +70,5 @@
 * [Loadtesting VerneMQ](misc/loadtesting.md)
 * [Not a tuning guide](misc/not-a-tuning-guide.md)
 * [Change Open File Limits](misc/change-open-file-limits.md)
+* [Clustering during development](misc/clustering-during-development.md)
 
