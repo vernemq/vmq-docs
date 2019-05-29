@@ -1,5 +1,5 @@
 ---
-description: This describes a quick way to create a VerneMQ cluster on developer machine's
+description: This describes a quick way to create a VerneMQ cluster on developer's machines
 ---
 
 # Clustering during development
@@ -22,7 +22,7 @@ You can then start the respective broker instances in 3 terminal windows, by usi
 
 `➜ (_build/dev2/rel/vernemq/bin) ✗ vernemq console`
 
-The MQTT listeners will of course be configured differently for each node \(the default 1883 port is not used, so that you can still run a default MQTT broker besides your dev nodes\). The MQTT ports are automically configured in increasing steps of 50: \(if in doubt, consult the respective `vernemq.conf` files\)
+The MQTT listeners will of course be configured differently for each node \(the default 1883 port is not used, so that you can still run a default MQTT broker besides your dev nodes\). A couple of other ports are also adapted \(HTTP status page, cluster communication\). The MQTT ports are automically configured in increasing steps of 50: \(if in doubt, consult the respective `vernemq.conf` files\)
 
 | Node | MQTT listener port |
 | :--- | :--- |
@@ -36,6 +36,6 @@ Note that the dev nodes are not automatically clustered. You still need to manua
 `➜ (_build/dev2/rel/vernemq/bin) ✗ vmq-admin cluster join discovery-node=dev1@127.0.0.1`
 
 {% hint style="info" %}
-In case this wasn't clear so far: You can configure an arbitrary number of cluster nodes...not just 3
+In case this wasn't clear so far: You can configure an arbitrary number of cluster nodes, from dev1 to devn.
 {% endhint %}
 
