@@ -67,7 +67,7 @@
 
 ## Guides
 
-* [A typical VerneMQ deployment](misc/untitled.md)
+* [A typical VerneMQ deployment](misc/typical-vernemq-deployment.md)
 * [VerneMQ on Kubernetes](misc/vernemq-on-kubernetes.md)
 * [Loadtesting VerneMQ](misc/loadtesting.md)
 * [Clustering during development](misc/clustering-during-development.md)
