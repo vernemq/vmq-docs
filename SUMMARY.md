@@ -65,10 +65,12 @@
 * [Lua Scripting Support](plugindevelopment/luaplugins.md)
 * [Webhooks](plugindevelopment/webhookplugins.md)
 
-## Misc
+## Guides
 
+* [A typical VerneMQ deployment](misc/untitled.md)
+* [VerneMQ on Kubernetes](misc/vernemq-on-kubernetes.md)
 * [Loadtesting VerneMQ](misc/loadtesting.md)
+* [Clustering during development](misc/clustering-during-development.md)
 * [Not a tuning guide](misc/not-a-tuning-guide.md)
 * [Change Open File Limits](misc/change-open-file-limits.md)
-* [Clustering during development](misc/clustering-during-development.md)
 
