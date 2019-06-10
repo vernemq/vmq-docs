@@ -46,7 +46,7 @@ mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname/#
 **Publishing** _Note: When publishing to a shared topic, do not include the prefix_ `$share/group/` _as part of the publish topic name_
 
 ```bash
-mosquito_pub -h mqtt.example.io -p 1883 -t topicname -m "This is a test message"
-mosquito_pub -h mqtt.example.io -p 1883 -t topicname/group1 -m "This is a test message"
+mosquitto_pub -h mqtt.example.io -p 1883 -t topicname -m "This is a test message"
+mosquitto_pub -h mqtt.example.io -p 1883 -t topicname/group1 -m "This is a test message"
 ```
 
