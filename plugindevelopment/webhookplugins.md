@@ -80,7 +80,7 @@ All hooks are called with the header `vernemq-hook` which contains the name of t
 For detailed information about the hooks and when they are called, see the sections [Session Lifecycle](sessionlifecycle.md), [Subscribe Flow](subscribeflow.md) and [Publish Flow](publishflow.md).
 
 {% hint style="info" %}
-Note, when overriding a mountpoint or a client-id both have to be returned by the webhook implementation for it to have an effect.
+Note, when overriding a **mountpoint** or a **client-id** both have to be returned by the webhook implementation for it to have an effect.
 {% endhint %}
 
 ### auth\_on\_register
