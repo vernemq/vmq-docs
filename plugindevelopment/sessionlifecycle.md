@@ -2,7 +2,7 @@
 
 VerneMQ provides multiple hooks throughout the lifetime of a session. The most important ones are the `auth_on_register` and `auth_on_register_m5` hooks which act as an application level firewall granting or rejecting new clients.
 
-![](../.gitbook/assets/session_lifecycle.svg)
+![](../.gitbook/assets/session-lifecycle.png)
 
 ## auth\_on\_register and auth\_on\_register\_m5
 
@@ -24,9 +24,9 @@ Once a new client was successfully authenticated and the above described hooks h
 
 ## on\_client\_offline
 
-This hook is called if a client using `clean_session=false` closes the connection or gets disconnected by a duplicate client. The hook is specified in the Erlang behaviour [on\_client\_offline\_hook](https://github.com/vernemq/vernemq_dev/blob/master/src/on_client_offline_hook.erl) available in the [vernemq\_dev](https://github.com/vernemq/vernemq_dev) repo.
+This hook is called if an MQTT 3.1/3.1.1 client using `clean_session=false` or an MQTT 5.0 client with a non-zero `session_expiry_interval` closes the connection or gets disconnected by a duplicate client. The hook is specified in the Erlang behaviour [on\_client\_offline\_hook](https://github.com/vernemq/vernemq_dev/blob/master/src/on_client_offline_hook.erl) available in the [vernemq\_dev](https://github.com/vernemq/vernemq_dev) repo.
 
 ## on\_client\_gone
 
-This hook is called if a client using `clean_session=true` closes the connection or gets disconnected by a duplicate client. The hook is specified in the Erlang behaviour [on\_client\_gone\_hook](https://github.com/vernemq/vernemq_dev/blob/master/src/on_client_gone_hook.erl) available in the [vernemq\_dev](https://github.com/vernemq/vernemq_dev) repo.
+This hook is called if an MQTT 3.1/3.1.1 client using `clean_session=true` or an MQTT 5.0 client with the `session_expiry_interval` set to zero closes the connection or gets disconnected by a duplicate client. The hook is specified in the Erlang behaviour [on\_client\_gone\_hook](https://github.com/vernemq/vernemq_dev/blob/master/src/on_client_gone_hook.erl) available in the [vernemq\_dev](https://github.com/vernemq/vernemq_dev) repo.
 
