@@ -14,6 +14,20 @@ VerneMQ can be easily clustered. Clients can then connect to any cluster node an
 For a successful VerneMQ cluster setup, it is important to choose proper VerneMQ node names. In `vernemq.conf` change the `nodename = VerneMQ@127.0.0.1` to something appropriate. Make sure that the node names are unique within the cluster. Read the section on [VerneMQ Inter-node Communication](communication.md) if firewalls are involved.
 {% endhint %}
 
+#### A note on statefulness
+
+Before you go ahead and experience the full power of clustering VerneMQ, be aware of its stateful character. An MQTT broker is a stateful application and a VerneMQ cluster is a stateful cluster.
+
+What does this mean in detail? It means that clustered VerneMQ nodes will share information about connected clients and sessions but also meta-information about the cluster itself.
+
+For instance, if you stop a cluster node, the VerneMQ cluster will not just forget about it. It will know that there's a node missing and it will keep looking for it. It will know there's a netsplit situation and it will heal the partition when the node comes back up. But if the missing nodes never comes back there's an eternal netsplit. \(still resolvable by making the missing nodes explicitly leave\).
+
+This doesn't mean that a VerneMQ cluster cannot dynamically grow and shrink. But it means you have to tell the cluster what you intend to do, by using join and leave commands.
+
+If you want a cluster node to leave the cluster, well... use the `vmq-admin cluster leave` command. If you want a node to join a cluster, well... use the `vmq-admin cluster join` command.
+
+Makes sense? Go ahead and create your first VerneMQ cluster!
+
 ## Joining a Cluster
 
 ```text
@@ -55,7 +69,9 @@ After this timeout VerneMQ will forcefully migrate the remaining offline queues 
 {% endhint %}
 
 {% hint style="info" %}
-**Note 2:** If you like to re-join the cluster or restart the node as a single node, you might want to backup & rename/delete the whole VerneMQ `data` directory and start with a new directory. \(It will be created automatically by VerneMQ\).
+**Note 2:** A node that has left the cluster is considered dead. If you want to reuse that node as a single node broker, you have to \(backup & rename &\) delete the whole VerneMQ`data` directory and start with a new directory. \(It will be created automatically by VerneMQ at boot\).
+
+Otherwise that node will start looking for its old cluster peers when you restart it.
 {% endhint %}
 
 ## Detailed Cluster Leave, Case B: Make a stopped node leave

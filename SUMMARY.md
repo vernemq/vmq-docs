@@ -5,13 +5,13 @@
 * [Downloads](https://vernemq.com/downloads)
 * [VerneMQ / MQTT Introduction](https://vernemq.com/intro)
 
-## Installing VerneMQ
+## Installing VerneMQ <a id="installation"></a>
 
 * [Installing on Debian and Ubuntu](installation/debian_and_ubuntu.md)
 * [Installing on CentOS and RHEL](installation/centos_and_redhat.md)
 * [Running VerneMQ using Docker](installation/docker.md)
 
-## Configuring VerneMQ
+## Configuring VerneMQ <a id="configuration"></a>
 
 * [Introduction](configuration/introduction.md)
 * [Auth using files](configuration/file-auth.md)
@@ -29,13 +29,13 @@
 * [Storage](configuration/storage.md)
 * [MQTT Bridge](configuration/bridge.md)
 
-## VerneMQ Clustering
+## VerneMQ Clustering <a id="clustering"></a>
 
 * [Introduction](clustering/introduction.md)
 * [Inter-node Communication](clustering/communication.md)
 * [Dealing with Netsplits](clustering/netsplits.md)
 
-## Live Administration
+## Live Administration <a id="administration"></a>
 
 * [Introduction](administration/introduction.md)
 * [Inspecting and managing sessions](administration/managing-sessions.md)
@@ -54,7 +54,7 @@
 * [Health Checker](monitoring/health-check.md)
 * [Status Page](monitoring/status.md)
 
-## Plugin Development
+## Plugin Development <a id="plugindevelopment"></a>
 
 * [Introduction](plugindevelopment/introduction.md)
 * [Session lifecycle](plugindevelopment/sessionlifecycle.md)
