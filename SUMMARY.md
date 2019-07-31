@@ -2,6 +2,15 @@
 
 * [Welcome](README.md)
 * [Getting Started](getting-started.md)
+
+## Monitoring
+
+* [Introduction](monitoring/introduction.md)
+* [$SYSTree](monitoring/systree.md)
+* [Graphite](monitoring/graphite.md)
+* [Prometheus](monitoring/prometheus.md)
+* [Health Checker](monitoring/health-check.md)
+* [Status Page](monitoring/status.md)
 * [Downloads](https://vernemq.com/downloads)
 * [VerneMQ / MQTT Introduction](https://vernemq.com/intro)
 
@@ -44,15 +53,6 @@
 * [Managing Listeners](administration/listeners.md)
 * [HTTP API](administration/http-administration.md)
 * [Tracing](administration/tracing.md)
-
-## Monitoring
-
-* [Introduction](monitoring/introduction.md)
-* [$SYSTree](monitoring/systree.md)
-* [Graphite](monitoring/graphite.md)
-* [Prometheus](monitoring/prometheus.md)
-* [Health Checker](monitoring/health-check.md)
-* [Status Page](monitoring/status.md)
 
 ## Plugindevelopment
 
