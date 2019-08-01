@@ -11,7 +11,7 @@ description: >-
 Once you have downloaded the binary package, execute the following command to install VerneMQ:
 
 ```text
-sudo dpkg -i vernemq_<%= latest_version() %>-1_amd64.deb
+sudo dpkg -i vernemq-<VERSION>.bionic.x86_64.deb
 ```
 
 ## Verify your installation

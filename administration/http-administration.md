@@ -6,10 +6,6 @@ description: >-
 
 # HTTP API
 
-{% hint style="warning" %}
-This API is still in BETA and some things may change if required.
-{% endhint %}
-
 The VerneMQ HTTP API is enabled by default and installs an HTTP handler on `http://localhost:8888/api/v1`. To read more about configuring the HTTP listener, see [HTTP Listener Configuration](../configuration/http-listeners.md). You can configure a HTTP listener, or a HTTPS listener to serve the HTTP API v1.
 
 ## Managing API keys

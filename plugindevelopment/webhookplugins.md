@@ -23,19 +23,11 @@ vmq_webhooks.mywebhook1.hook = auth_on_register
 vmq_webhooks.mywebhook1.endpoint = http://127.0.0.1/myendpoints
 ```
 
-It is possible to have the webhooks plugin omit sending the payload for the [auth\_on\_publish](webhookplugins.md#auth_on_publish) and [auth\_on\_publish\_m5](webhookplugins.md#auth_on_publish_m5) webhooks by setting the `no_payload` config:
-
-```text
-vmq_webhooks.mywebhook1.no_payload = true
-```
-
 It is also possible to dynamically register webhooks at run-time:
 
 ```text
 $ vmq-admin webhooks register hook=auth_on_register endpoint="http://localhost"
 ```
-
-For more information about the available flags see `vmq-admin webhooks register --help`. 
 
 See which endpoints are registered:
 
@@ -88,7 +80,7 @@ All hooks are called with the header `vernemq-hook` which contains the name of t
 For detailed information about the hooks and when they are called, see the sections [Session Lifecycle](sessionlifecycle.md), [Subscribe Flow](subscribeflow.md) and [Publish Flow](publishflow.md).
 
 {% hint style="info" %}
-Note, when overriding a mountpoint or a client-id both have to be returned by the webhook implementation for it to have an effect.
+Note, when overriding a **mountpoint** or a **client-id** both have to be returned by the webhook implementation for it to have an effect.
 {% endhint %}
 
 ### auth\_on\_register

@@ -22,6 +22,16 @@ shared_subscription_policy = prefer_local
 
 When a messages is being delivered to subscribers of a shared subscription, the message will be delivered to an online subscriber if possible, otherwise the message will be delivered to an offline subscriber.
 
+![Random Message Routing for Shared Subscribers](../.gitbook/assets/random.svg)
+
+![Local Only Message Routing for Shared Subscribers](../.gitbook/assets/local_only.svg)
+
+![Prefer\_local Message Routing for Shared Subscribers](../.gitbook/assets/prefer_local.svg)
+
+{% hint style="info" %}
+Note that Shared Subscriptions still fully operate under the MQTT specification \(be it MQTT 5.0 or backported to older protocol versions\). Be aware of this, especially regarding QoS and clean\_session configurations.
+{% endhint %}
+
 ## Examples
 
 **Subscriptions** _Note: When subscribing to a shared topic, make sure to escape the_ `$`
@@ -36,7 +46,7 @@ mosquitto_sub -h mqtt.example.io -p 1883 -q 2 -t \$share/group/topicname/#
 **Publishing** _Note: When publishing to a shared topic, do not include the prefix_ `$share/group/` _as part of the publish topic name_
 
 ```bash
-mosquito_pub -h mqtt.example.io -p 1883 -t topicname -m "This is a test message"
-mosquito_pub -h mqtt.example.io -p 1883 -t topicname/group1 -m "This is a test message"
+mosquitto_pub -h mqtt.example.io -p 1883 -t topicname -m "This is a test message"
+mosquitto_pub -h mqtt.example.io -p 1883 -t topicname/group1 -m "This is a test message"
 ```
 

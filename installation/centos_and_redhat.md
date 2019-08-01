@@ -11,13 +11,13 @@ description: >-
 Once you have downloaded the binary package, execute the following command to install VerneMQ:
 
 ```text
-sudo yum install vernemq-<%= latest_version() %>-1.el7.centos.x86_64.rpm
+sudo yum install vernemq-<VERSION>.centos7.x86_64.rpm
 ```
 
 or:
 
 ```text
-sudo rpm -Uvh vernemq-<%= latest_version() %>-1.el7.centos.x86_64.rpm
+sudo rpm -Uvh vernemq-<VERSION>.centos7.x86_64.rpm
 ```
 
 ## Activate VerneMQ node

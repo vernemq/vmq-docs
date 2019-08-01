@@ -2,16 +2,25 @@
 
 * [Welcome](README.md)
 * [Getting Started](getting-started.md)
+
+## Monitoring
+
+* [Introduction](monitoring/introduction.md)
+* [$SYSTree](monitoring/systree.md)
+* [Graphite](monitoring/graphite.md)
+* [Prometheus](monitoring/prometheus.md)
+* [Health Checker](monitoring/health-check.md)
+* [Status Page](monitoring/status.md)
 * [Downloads](https://vernemq.com/downloads)
 * [VerneMQ / MQTT Introduction](https://vernemq.com/intro)
 
-## Installing VerneMQ <a id="installation"></a>
+## Installation
 
 * [Installing on Debian and Ubuntu](installation/debian_and_ubuntu.md)
 * [Installing on CentOS and RHEL](installation/centos_and_redhat.md)
 * [Running VerneMQ using Docker](installation/docker.md)
 
-## Configuring VerneMQ <a id="configuration"></a>
+## Configuration
 
 * [Introduction](configuration/introduction.md)
 * [Auth using files](configuration/file-auth.md)
@@ -29,13 +38,13 @@
 * [Storage](configuration/storage.md)
 * [MQTT Bridge](configuration/bridge.md)
 
-## VerneMQ Clustering <a id="clustering"></a>
+## Clustering
 
 * [Introduction](clustering/introduction.md)
 * [Inter-node Communication](clustering/communication.md)
 * [Dealing with Netsplits](clustering/netsplits.md)
 
-## Live Administration <a id="administration"></a>
+## Administration
 
 * [Introduction](administration/introduction.md)
 * [Inspecting and managing sessions](administration/managing-sessions.md)
@@ -45,16 +54,7 @@
 * [HTTP API](administration/http-administration.md)
 * [Tracing](administration/tracing.md)
 
-## Monitoring
-
-* [Introduction](monitoring/introduction.md)
-* [$SYSTree](monitoring/systree.md)
-* [Graphite](monitoring/graphite.md)
-* [Prometheus](monitoring/prometheus.md)
-* [Health Checker](monitoring/health-check.md)
-* [Status Page](monitoring/status.md)
-
-## Plugin Development <a id="plugindevelopment"></a>
+## Plugindevelopment
 
 * [Introduction](plugindevelopment/introduction.md)
 * [Session lifecycle](plugindevelopment/sessionlifecycle.md)
@@ -65,9 +65,12 @@
 * [Lua Scripting Support](plugindevelopment/luaplugins.md)
 * [Webhooks](plugindevelopment/webhookplugins.md)
 
-## Misc
+## Guides
 
-* [Loadtesting VerneMQ](misc/loadtesting.md)
-* [Not a tuning guide](misc/not-a-tuning-guide.md)
-* [Change Open File Limits](misc/change-open-file-limits.md)
+* [A typical VerneMQ deployment](guides/typical-vernemq-deployment.md)
+* [VerneMQ on Kubernetes](guides/vernemq-on-kubernetes.md)
+* [Loadtesting VerneMQ](guides/loadtesting.md)
+* [Clustering during development](guides/clustering-during-development.md)
+* [Not a tuning guide](guides/not-a-tuning-guide.md)
+* [Change Open File Limits](guides/change-open-file-limits.md)
 
