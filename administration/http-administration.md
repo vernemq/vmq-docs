@@ -206,7 +206,7 @@ Response:
 Request:
 
 ```text
-GET /api/v2/plugin/show
+GET /api/v1/plugin/show
 ```
 
 Curl:
