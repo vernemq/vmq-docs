@@ -136,21 +136,24 @@ Response:
    "type" : "table",
    "table" : [
       {
-         "user" : null,
-         "client_id" : "mosqsub/11690-algol",
-         "peer_host" : "localhost",
-         "pid" : "<0.551.0>",
-         "peer_port" : 50964
+         "user" : "client1",
+         "peer_port" : 50402,
+         "is_online" : true,
+         "mountpoint" : "",
+         "client_id" : "mosq/qJpvoqe1PA4lBN1e4E",
+         "peer_host" : "127.0.0.1"
       },
       {
-         "peer_host" : "localhost",
-         "pid" : "<0.557.0>",
-         "peer_port" : 50996,
-         "user" : null,
-         "client_id" : "mosqsub/11767-algol"
+         "user" : "client2",
+         "is_online" : true,
+         "peer_port" : 50406,
+         "peer_host" : "127.0.0.1",
+         "client_id" : "mosq/tikkXdlM28PaznBv2T",
+         "mountpoint" : ""
       }
    ]
 }
+
 ```
 
 ### List all installed listeners
