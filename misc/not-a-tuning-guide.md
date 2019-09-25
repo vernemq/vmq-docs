@@ -2,7 +2,7 @@
 
 ## General relation to OS configuration values
 
-You need to know about and configure a couple of Operating System and Erlang VM configs to operate VerneMQ efficiently. First, make sure you have set appropriate OS file limits according to our [guide here](change-open-file-limits.md). Second, when you run into performance problems, don't forget to check the [settings in the `vernemq.conf` file](../configuration/introduction.md). \(Can't open more than 10k connections? Well, is the listener configured to open more than 10k?\)
+You need to know about and configure a couple of Operating System and Erlang VM configs to operate VerneMQ efficiently. First, make sure you have set appropriate OS file limits according to our [guide here](change-open-file-limits.md). Second, when you run into performance problems, don't forget to check the [settings in the `vernemq.conf` file](../configuring-vernemq/introduction.md). \(Can't open more than 10k connections? Well, is the listener configured to open more than 10k?\)
 
 ## TCP buffer sizes
 
