@@ -20,7 +20,7 @@ Currently three message distribution policies for shared subscriptions are suppo
 shared_subscription_policy = prefer_local
 ```
 
-When a messages is being delivered to subscribers of a shared subscription, the message will be delivered to an online subscriber if possible, otherwise the message will be delivered to an offline subscriber.
+When a messages is being delivered to subscribers of a shared subscription, the message will be delivered to an online subscriber if possible, otherwise the message will be delivered to an offline subscriber. Notice that the shared subscription policy is applied before considering online or offline status of clients.
 
 ![Prefer local policy](../.gitbook/assets/prefer_local.png)
 
