@@ -148,7 +148,7 @@ The first set of topics are applied to all anonymous clients \(assuming `allow_a
 user <username>
 ```
 
-It is also possible to define ACLs based on pattern substitution within the the topic. The form is the same as for the topic keyword, but using pattern as the keyword.
+It is also possible to define ACLs based on pattern substitution within the topic. The form is the same as for the topic keyword, but using pattern as the keyword.
 
 ```text
 pattern [read|write] <topic>
