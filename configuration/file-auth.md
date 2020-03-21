@@ -140,7 +140,7 @@ topic [read|write] <topic>
 Only one space should be put between the topic and the preceeding keyword. Extra spaces will be interpreted as part of the topic! Also note that the ACL parser doesn't accept empty lines between entries.
 {% endhint %}
 
-The access type is controlled using `read` or `write`. If not provided then read an write access is granted for the `topic`. The `topic` can use the MQTT subscription wildcards `+` or `#`.
+The access type is controlled using `read` or `write`. If not provided then read and write access is granted for the `topic`. The `topic` can use the MQTT subscription wildcards `+` or `#`.
 
 The first set of topics are applied to all anonymous clients \(assuming `allow_anonymous = on`\). User specific ACLs are added after a user line as follows \(this is the username not the client id\):
 
