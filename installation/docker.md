@@ -14,19 +14,19 @@ To use the provided docker images the VerneMQ EULA must be accepted. See [Accept
 {% endhint %}
 
 ```text
-docker run --name vernemq1 -d erlio/docker-vernemq
+docker run --name vernemq1 -d vernemq/docker-vernemq
 ```
 
 Sometimes you need to configure a forwarding for ports \(on a Mac for example\):
 
 ```text
-docker run -p 1883:1883 --name vernemq1 -d erlio/docker-vernemq
+docker run -p 1883:1883 --name vernemq1 -d vernemq/docker-vernemq
 ```
 
 This starts a new node that listens on 1883 for MQTT connections and on 8080 for MQTT over websocket connections. However, at this moment the broker won't be able to authenticate the connecting clients. To allow anonymous clients use the `DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on` environment variable.
 
 ```text
-docker run -e "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on" --name vernemq1 -d erlio/docker-vernemq
+docker run -e "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on" --name vernemq1 -d vernemq/docker-vernemq
 ```
 
 {% hint style="info" %}
@@ -38,7 +38,7 @@ Warning: Setting `allow_anonymous=on` completely disables authentication in the 
 This allows a newly started container to automatically join a VerneMQ cluster. Assuming you started your first node like the example above you could autojoin the cluster \(which currently consists of a single container 'vernemq1'\) like the following:
 
 ```text
-docker run -e "DOCKER_VERNEMQ_DISCOVERY_NODE=<IP-OF-VERNEMQ1>" --name vernemq2 -d erlio/docker-vernemq
+docker run -e "DOCKER_VERNEMQ_DISCOVERY_NODE=<IP-OF-VERNEMQ1>" --name vernemq2 -d vernemq/docker-vernemq
 ```
 
 \(Note, you can find the IP of a docker container using `docker inspect <CONTAINER_NAME> | grep \"IPAddress\"`\).
