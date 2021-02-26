@@ -174,6 +174,11 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
         subscribe_acl
     FROM x;
 ```
+Sometimes, your Postgresql database requires SSL mode. To connect to it, enable this option : 
+
+```text 
+vmq_diversity.postgres.enabled = on
+```
 
 ## CockroachDB
 
