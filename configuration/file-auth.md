@@ -177,25 +177,25 @@ VerneMQ currently doesn't cancel active subscriptions in case the ACL file revok
 # ACL for anonymous clients
 topic bar
 topic write foo
-topic read all
+topic read open_to_all
 
 
 # ACL for user 'john'
 user john
 topic foo
 topic read baz
-topic write all
+topic write open_to_all
 ```
 
 Anonymous users are allowed to
 
 * publish & subscribe to topic bar.
 * publish to topic foo.
-* subscribe to topic all.
+* subscribe to topic open_to_all.
 
 User john is allowed to
 
 * publish & subscribe to topic foo.
 * subscribe to topic baz.
-* publish to topic all.
+* publish to topic open_to_all.
 
