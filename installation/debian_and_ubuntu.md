@@ -14,6 +14,8 @@ Once you have downloaded the binary package, execute the following command to in
 sudo dpkg -i vernemq-<VERSION>.bionic.x86_64.deb
 ```
 
+_Note_: Replace bionic with appropriate OS version such as focal/trusty/xenial.
+
 ## Verify your installation
 
 You can verify that VerneMQ is successfully installed by running:
