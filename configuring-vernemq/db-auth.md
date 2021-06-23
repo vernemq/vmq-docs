@@ -163,9 +163,9 @@ WITH x AS (
            gen_salt('bf')::text AS salt,
            '[{"pattern": "a/b/c"}, {"pattern": "c/b/#"}]'::json AS publish_acl,
            '[{"pattern": "a/b/c"}, {"pattern": "c/b/#"}]'::json AS subscribe_acl
-    ) 
+    )
 INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl, subscribe_acl)
-    SELECT 
+    SELECT
         x.mountpoint,
         x.client_id,
         x.username,
@@ -280,12 +280,12 @@ CREATE TABLE vmq_auth_acl
 To enter new ACL entries use a query similar to the following, the example uses `PASSWWORD` to for password hashing:
 
 ```sql
-INSERT INTO vmq_auth_acl 
-    (mountpoint, client_id, username, 
+INSERT INTO vmq_auth_acl
+    (mountpoint, client_id, username,
      password, publish_acl, subscribe_acl)
-VALUES 
-    ('', 'test-client', 'test-user', PASSWORD('123'), 
-     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]', 
+VALUES
+    ('', 'test-client', 'test-user', PASSWORD('123'),
+     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]',
      '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]');
 ```
 
@@ -304,9 +304,25 @@ vmq_diversity.auth_mongodb.enabled = on
 vmq_diversity.mongodb.host = 127.0.0.1
 vmq_diversity.mongodb.port = 27017
 # vmq_diversity.mongodb.login =
-# vmq_diversity.mongodb.password = 
+# vmq_diversity.mongodb.password =
 # vmq_diversity.mongodb.database =
 ```
+
+VerneMQ supports MongoDB's DNS SRV record lookup to fetch a seed list. Specify the hostname of hosted database
+as a `srv` option instead of `host` and `port`. VerneMQ will randomly choose a host/port combination from the seed
+list returned in the DNS SRV record. MongoDB SRV connections use TLS by default. You will need to configure TLS
+support for MongoDB for most SRV connections.
+
+```text
+vmq_diversity.auth_mongodb.enabled = on
+vmq_diversity.mongodb.srv = vmqtest.08t1b.mongodb.net
+vmq_diversity.mongodb.login = username
+vmq_diversity.mongodb.password = secretpass
+# vmq_diversity.mongodb.database =
+```
+
+MongoDB supports a number of node types in replica sets. The built-in MongoDB support simply connects to the
+host and port specified. It does not differentiate between primary or secondary nodes in MongoDB replica sets.
 
 MongoDB hashing methods:
 
@@ -318,14 +334,14 @@ Insert the ACL using the `mongo` shell or any software library. The `passhash` p
 
 ```javascript
 db.vmq_acl_auth.insert({
-    mountpoint: '', 
-    client_id: 'test-client', 
-    username: 'test-user', 
-    passhash: '$2a$12$WDzmynWSMRVzfszQkB2MsOWYQK9qGtfjVpO8iBdimTOjCK/u6CzJK', 
+    mountpoint: '',
+    client_id: 'test-client',
+    username: 'test-user',
+    passhash: '$2a$12$WDzmynWSMRVzfszQkB2MsOWYQK9qGtfjVpO8iBdimTOjCK/u6CzJK',
     publish_acl: [
-        {pattern: 'a/b/c'}, 
+        {pattern: 'a/b/c'},
         {pattern: 'a/+/d'}
-    ], 
+    ],
     subscribe_acl: [
         {pattern: 'a/#'}
     ]
@@ -340,7 +356,7 @@ For Redis authentication and authorization configure the following in `vernemq.c
 vmq_diversity.auth_redis.enabled = on
 vmq_diversity.redis.host = 127.0.0.1
 vmq_diversity.redis.port = 6379
-# vmq_diversity.redis.password = 
+# vmq_diversity.redis.password =
 # vmq_divserity.redis.database = 0
 ```
 
