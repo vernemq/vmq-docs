@@ -51,6 +51,16 @@ Each registered hook uses by default a connection pool containing maximally 100 
 
 These options are available in VerneMQ 1.4.0.
 
+## HTTPS
+
+Webhooks support HTTPS endpoints out of the box with a default set of Certificate Authorities (CAs) curated by the Mozilla project. To explicitly set a trusted CA for HTTPS webhook endpoints, set `vmq_webhooks.cafile` to a PEM-encoded CA file. For client certificate authentication, also known as 2-way SSL, use the `vmq_webhooks.certfile` and `vmq_webhooks.keyfile` options for PEM-encoded certificates.
+
+```text
+vmq_webhooks.cafile = /etc/ssl/my_ca.pem
+vmq_webhooks.certfile = /etc/ssl/client.pem
+vmq_webhooks.keyfile = /etc/ssl/key.pem
+```
+
 ## Caching
 
 VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish` and `auth_on_subscribe` hooks.
