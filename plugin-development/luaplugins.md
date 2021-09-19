@@ -115,7 +115,7 @@ hooks = {
 ```
 
 {% hint style="info" %}
-It is also possible to try the next plugin in the chain (see: [Chaining](introduction.md#chaining)) by returning `next` instead of `false`.
+It is also possible to try the next plugin in the chain \(see: [Chaining](introduction.md#chaining)\) by returning `next` instead of `false`.
 {% endhint %}
 
 ## Data Providers

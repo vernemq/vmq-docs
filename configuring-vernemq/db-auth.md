@@ -308,10 +308,7 @@ vmq_diversity.mongodb.port = 27017
 # vmq_diversity.mongodb.database =
 ```
 
-VerneMQ supports MongoDB's DNS SRV record lookup to fetch a seed list. Specify the hostname of hosted database
-as a `srv` option instead of `host` and `port`. VerneMQ will randomly choose a host/port combination from the seed
-list returned in the DNS SRV record. MongoDB SRV connections use TLS by default. You will need to configure TLS
-support for MongoDB for most SRV connections.
+VerneMQ supports MongoDB's DNS SRV record lookup to fetch a seed list. Specify the hostname of hosted database as a `srv` option instead of `host` and `port`. VerneMQ will randomly choose a host/port combination from the seed list returned in the DNS SRV record. MongoDB SRV connections use TLS by default. You will need to configure TLS support for MongoDB for most SRV connections.
 
 ```text
 vmq_diversity.auth_mongodb.enabled = on
@@ -321,8 +318,7 @@ vmq_diversity.mongodb.password = secretpass
 # vmq_diversity.mongodb.database =
 ```
 
-MongoDB supports a number of node types in replica sets. The built-in MongoDB support simply connects to the
-host and port specified. It does not differentiate between primary or secondary nodes in MongoDB replica sets.
+MongoDB supports a number of node types in replica sets. The built-in MongoDB support simply connects to the host and port specified. It does not differentiate between primary or secondary nodes in MongoDB replica sets.
 
 MongoDB hashing methods:
 
