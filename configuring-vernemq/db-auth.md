@@ -125,7 +125,7 @@ vmq_diversity.postgres.port = 5432
 vmq_diversity.postgres.user = vernemq
 vmq_diversity.postgres.password = vernemq
 vmq_diversity.postgres.database = vernemq_db
-vmq_diversity.cockroachdb.password_hash_method = crypt
+vmq_diversity.postgres.password_hash_method = crypt
 ```
 
 PostgreSQL hashing methods:
