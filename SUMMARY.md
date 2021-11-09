@@ -38,13 +38,13 @@
 
 ## Live Administration
 
-* [Introduction](live-administration/introduction.md)
-* [Inspecting and managing sessions](live-administration/managing-sessions.md)
-* [Retained messages](live-administration/retained-store.md)
-* [Live reconfiguration](live-administration/config_values.md)
-* [Managing Listeners](live-administration/listeners.md)
-* [HTTP API](live-administration/http-administration.md)
-* [Tracing](live-administration/tracing.md)
+* [Introduction](administration/introduction.md)
+* [Inspecting and managing sessions](administration/managing-sessions.md)
+* [Retained messages](administration/retained-store.md)
+* [Live reconfiguration](administration/config_values.md)
+* [Managing Listeners](administration/listeners.md)
+* [HTTP API](administration/http-administration.md)
+* [Tracing](administration/tracing.md)
 
 ## Monitoring
 
