@@ -47,5 +47,22 @@ $ vmq-admin retain show --payload a-message --topic
 +-------------+
 ```
 
-See the full set of options and documentation by invoking `vmq-admin retain show --help`.
+See the full set of options and documentation by invoking `vmq-admin retain show --help`:
 
+```text
+$ sudo vmq-admin retain --help
+Usage: vmq-admin retain show
+
+  Show and filter MQTT retained messages.
+
+Default options:
+  --payload --topic
+
+Options
+
+  --limit=<NumberOfResults>
+      Limit the number of results returned. Defaults is 100.
+  --payload
+  --topic
+  --mountpoint
+```
