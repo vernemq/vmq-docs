@@ -114,10 +114,6 @@ hooks = {
 }
 ```
 
-{% hint style="info" %}
-It is also possible to try the next plugin in the chain \(see: [Chaining](introduction.md#chaining)\) by returning `next` instead of `false`.
-{% endhint %}
-
 ## Data Providers
 
 This subsection describes the data providers currently available to a Lua script. Every data provider is backed by a connection pool that has to be configured by your script.

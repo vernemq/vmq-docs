@@ -14,6 +14,7 @@
 ## Configuring VerneMQ
 
 * [Introduction](configuring-vernemq/introduction.md)
+* [The VerneMQ conf file](configuring-vernemq/the-vernemq-conf-file.md)
 * [Auth using files](configuring-vernemq/file-auth.md)
 * [Auth using a database](configuring-vernemq/db-auth.md)
 * [MQTT Options](configuring-vernemq/options.md)
