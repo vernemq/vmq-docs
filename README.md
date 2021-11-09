@@ -6,4 +6,3 @@ For a more general overview on VerneMQ and MQTT, you might want to start with th
 
 For downloading VerneMQ see [Downloads](https://vernemq.com/downloads/index.html).
 
-Gitbook test edit
