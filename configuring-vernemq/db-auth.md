@@ -114,6 +114,9 @@ There is a trade-off between verifying passwords on the client-side versus on th
 
 For each database it is specified which password verification mechanisms are available and if they are client-side or server-side.
 
+Note, currently bcrypt version `2a` (prefix `$2a$`) is supported.
+
+
 ## PostgreSQL
 
 To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
@@ -367,6 +370,3 @@ Insert the ACL using the `redis-cli` shell or any software library. The `passhas
 ```text
 SET "[\"\",\"test-client\",\"test-user\"]" "{\"passhash\":\"$2a$12$WDzmynWSMRVzfszQkB2MsOWYQK9qGtfjVpO8iBdimTOjCK/u6CzJK\",\"subscribe_acl\":[{\"pattern\":\"a/+/c\"}]}"
 ```
-
-Note, currently bcrypt version `2a` \(prefix `$2a$`\) is supported.
-
