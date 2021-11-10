@@ -175,9 +175,15 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
     FROM x;
 ```
 
+Sometimes, your Postgresql database requires SSL mode. To connect to it, enable this option :
+ 
+```text
+vmq_diversity.postgres.ssl = on
+```
+
 ## CockroachDB
 
-To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
+To enable CockroachDB authentication and authorization the following need to be configured in the `vernemq.conf` file:
 
 ```text
 vmq_diversity.auth_cockroachdb.enabled = on
