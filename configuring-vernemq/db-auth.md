@@ -114,7 +114,7 @@ There is a trade-off between verifying passwords on the client-side versus on th
 
 For each database it is specified which password verification mechanisms are available and if they are client-side or server-side.
 
-Note, currently bcrypt version `2a` (prefix `$2a$`) is supported.
+{% hint style="info" %} Note that currently bcrypt version `2a` (prefix `$2a$`) is supported.{% endhint %}
 
 
 ## PostgreSQL
@@ -130,6 +130,92 @@ vmq_diversity.postgres.password = vernemq
 vmq_diversity.postgres.database = vernemq_db
 vmq_diversity.cockroachdb.password_hash_method = crypt
 ```
+Consult the `vernemq.conf` file for more info about additional options like configuring SSL:
+
+```text
+## 
+## Default: off
+## 
+## Acceptable values:
+##   - on or off
+vmq_diversity.auth_postgres.enabled = off
+
+## 
+## Default: localhost
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.host = localhost
+
+## 
+## Default: 5432
+## 
+## Acceptable values:
+##   - an integer
+## vmq_diversity.postgres.port = 5432
+
+## 
+## Default: root
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.user = root
+
+## 
+## Default: password
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.password = password
+
+## 
+## Default: vernemq_db
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.database = vernemq_db
+
+## Specify if the postgresql driver should use TLS or not.
+## 
+## Default: off
+## 
+## Acceptable values:
+##   - on or off
+vmq_diversity.postgres.ssl = off
+
+## The cafile is used to define the path to a file containing
+## the PEM encoded CA certificates that are trusted.
+## 
+## Default: 
+## 
+## Acceptable values:
+##   - the path to a file
+## vmq_diversity.postgres.cafile = ./etc/cafile.pem
+
+## Set the path to the PEM encoded server certificate.
+## 
+## Default: 
+## 
+## Acceptable values:
+##   - the path to a file
+## vmq_diversity.postgres.certfile = ./etc/cert.pem
+
+## Set the path to the PEM encoded key file.
+## 
+## Default: 
+## 
+## Acceptable values:
+##   - the path to a file
+## vmq_diversity.postgres.keyfile = ./etc/keyfile.pem
+
+## The password hashing method to use in PostgreSQL:
+## 
+## Default: crypt
+## 
+## Acceptable values:
+##   - one of: crypt, bcrypt
+vmq_diversity.postgres.password_hash_method = crypt
+```
 
 PostgreSQL hashing methods:
 
@@ -137,6 +223,8 @@ PostgreSQL hashing methods:
 | :--- | :---: | :---: |
 | bcrypt | ✓ |  |
 | crypt |  | ✓ |
+
+### Creating the Postgres tables
 
 The following SQL DDL must be applied, the `pgcrypto` extension is required if using the server-side `crypt` hashing method:
 
@@ -202,6 +290,8 @@ CockroachDB hashing methods:
 | bcrypt | ✓ |  |
 | sha256 |  | ✓ |
 
+### Creating the CockroachDB tables
+
 The following SQL DDL must be applied:
 
 ```sql
@@ -264,6 +354,8 @@ MySQL hashing methods:
 | password |  | ✓ |
 
 It should be noted that all the above options stores unsalted passwords which are vulnerable to rainbow table attacks, so the threat-model should be considered carefully when using these. Also note the methods marked with `*` are no longer considered secure hashes.
+
+### Creating the MySQL tables
 
 The following SQL DDL must be applied:
 
