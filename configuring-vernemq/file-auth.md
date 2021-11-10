@@ -199,3 +199,8 @@ User john is allowed to
 * subscribe to topic baz.
 * publish to topic open_to_all.
 
+Note that the ACL file parser is picky on a couple of things. If you doubt wether your ACLs are fully applied, check for the following.
+
+* Whitespaces at the end of topic names are part of the topic
+* Avoid empty lines in the ACL file.
+* But add a newline at the end of the ACL file.
