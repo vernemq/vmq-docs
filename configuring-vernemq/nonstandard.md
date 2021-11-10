@@ -45,7 +45,7 @@ This option defaults to `never`.
 Limit the maximum publish payload size in bytes that VerneMQ allows. Messages that exceed this size won't be accepted.
 
 ```text
-message_size_limit = 0
+max_message_size = 0
 ```
 
 Defaults to `0`, which means that all valid messages are accepted. MQTT specification imposes a maximum payload size of 268435455 bytes.
