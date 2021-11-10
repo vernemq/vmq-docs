@@ -4,6 +4,12 @@ description: MQTT consumers can share and loadbalance a topic subscription.
 
 # Consumer session balancing
 
+{% hint style="warning" %}
+Consumer session balancing has been deprecated and will be removed in VerneMQ 2.0. Use Shared Subscriptions instead.
+{% endhint %}
+
+
+
 Sometimes consumers get overwhelmed by the number of messages they receive. VerneMQ can loadbalance between multiple consumer instances subscribed to the same topic with the same ClientId.
 
 ## Enabling Session Balancing
