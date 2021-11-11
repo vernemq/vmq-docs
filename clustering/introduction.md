@@ -20,11 +20,11 @@ Before you go ahead and experience the full power of clustering VerneMQ, be awar
 
 What does this mean in detail? It means that clustered VerneMQ nodes will share information about connected clients and sessions but also meta-information about the cluster itself.
 
-For instance, if you stop a cluster node, the VerneMQ cluster will not just forget about it. It will know that there's a node missing and it will keep looking for it. It will know there's a netsplit situation and it will heal the partition when the node comes back up. But if the missing nodes never comes back there's an eternal netsplit. \(still resolvable by making the missing nodes explicitly leave\).
+For instance, if you stop a cluster node, the VerneMQ cluster will not just forget about it. It will know that there's a node missing and it will keep looking for it. It will know there's a netsplit situation and it will heal the partition when the node comes back up. But if the missing node never comes back there's an eternal netsplit. \(still resolvable by making the missing node explicitly leave\).
 
 This doesn't mean that a VerneMQ cluster cannot dynamically grow and shrink. But it means you have to tell the cluster what you intend to do, by using join and leave commands.
 
-If you want a cluster node to leave the cluster, well... use the `vmq-admin cluster leave` command. If you want a node to join a cluster, well... use the `vmq-admin cluster join` command.
+If you want a cluster node to leave the cluster, well... use the `vmq-admin cluster leave` command. If you want a node to join a cluster use the `vmq-admin cluster join` command.
 
 Makes sense? Go ahead and create your first VerneMQ cluster!
 

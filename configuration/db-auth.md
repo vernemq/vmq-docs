@@ -17,7 +17,7 @@ plugins.vmq_diversity = on
 ```
 
 {% hint style="info" %}
-The `vmq_diversity` plugin makes it possible to extend VerneMQ using Lua. The documentation can be found [here](../plugindevelopment/luaplugins.md).
+The `vmq_diversity` plugin makes it possible to extend VerneMQ using Lua. The documentation can be found [here](../plugin-development/luaplugins.md).
 {% endhint %}
 
 When using database based authentication/authorization the enabled-by-default file based authentication and authorization are most likely not needed and should be disabled:
@@ -114,6 +114,9 @@ There is a trade-off between verifying passwords on the client-side versus on th
 
 For each database it is specified which password verification mechanisms are available and if they are client-side or server-side.
 
+{% hint style="info" %} Note that currently bcrypt version `2a` (prefix `$2a$`) is supported.{% endhint %}
+
+
 ## PostgreSQL
 
 To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
@@ -125,6 +128,92 @@ vmq_diversity.postgres.port = 5432
 vmq_diversity.postgres.user = vernemq
 vmq_diversity.postgres.password = vernemq
 vmq_diversity.postgres.database = vernemq_db
+vmq_diversity.cockroachdb.password_hash_method = crypt
+```
+Consult the `vernemq.conf` file for more info about additional options like configuring SSL:
+
+```text
+## 
+## Default: off
+## 
+## Acceptable values:
+##   - on or off
+vmq_diversity.auth_postgres.enabled = off
+
+## 
+## Default: localhost
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.host = localhost
+
+## 
+## Default: 5432
+## 
+## Acceptable values:
+##   - an integer
+## vmq_diversity.postgres.port = 5432
+
+## 
+## Default: root
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.user = root
+
+## 
+## Default: password
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.password = password
+
+## 
+## Default: vernemq_db
+## 
+## Acceptable values:
+##   - text
+## vmq_diversity.postgres.database = vernemq_db
+
+## Specify if the postgresql driver should use TLS or not.
+## 
+## Default: off
+## 
+## Acceptable values:
+##   - on or off
+vmq_diversity.postgres.ssl = off
+
+## The cafile is used to define the path to a file containing
+## the PEM encoded CA certificates that are trusted.
+## 
+## Default: 
+## 
+## Acceptable values:
+##   - the path to a file
+## vmq_diversity.postgres.cafile = ./etc/cafile.pem
+
+## Set the path to the PEM encoded server certificate.
+## 
+## Default: 
+## 
+## Acceptable values:
+##   - the path to a file
+## vmq_diversity.postgres.certfile = ./etc/cert.pem
+
+## Set the path to the PEM encoded key file.
+## 
+## Default: 
+## 
+## Acceptable values:
+##   - the path to a file
+## vmq_diversity.postgres.keyfile = ./etc/keyfile.pem
+
+## The password hashing method to use in PostgreSQL:
+## 
+## Default: crypt
+## 
+## Acceptable values:
+##   - one of: crypt, bcrypt
 vmq_diversity.postgres.password_hash_method = crypt
 ```
 
@@ -134,6 +223,8 @@ PostgreSQL hashing methods:
 | :--- | :---: | :---: |
 | bcrypt | ✓ |  |
 | crypt |  | ✓ |
+
+### Creating the Postgres tables
 
 The following SQL DDL must be applied, the `pgcrypto` extension is required if using the server-side `crypt` hashing method:
 
@@ -163,9 +254,9 @@ WITH x AS (
            gen_salt('bf')::text AS salt,
            '[{"pattern": "a/b/c"}, {"pattern": "c/b/#"}]'::json AS publish_acl,
            '[{"pattern": "a/b/c"}, {"pattern": "c/b/#"}]'::json AS subscribe_acl
-    ) 
+    )
 INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl, subscribe_acl)
-    SELECT 
+    SELECT
         x.mountpoint,
         x.client_id,
         x.username,
@@ -175,15 +266,9 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
     FROM x;
 ```
 
-Sometimes, your Postgresql database requires SSL mode. To connect to it, enable this option :
-
-```text
-vmq_diversity.postgres.enabled = on
-```
-
 ## CockroachDB
 
-To enable CockroachDB authentication and authorization the following need to be configured in the `vernemq.conf` file:
+To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
 
 ```text
 vmq_diversity.auth_cockroachdb.enabled = on
@@ -204,6 +289,8 @@ CockroachDB hashing methods:
 | :--- | :---: | :---: |
 | bcrypt | ✓ |  |
 | sha256 |  | ✓ |
+
+### Creating the CockroachDB tables
 
 The following SQL DDL must be applied:
 
@@ -268,6 +355,8 @@ MySQL hashing methods:
 
 It should be noted that all the above options stores unsalted passwords which are vulnerable to rainbow table attacks, so the threat-model should be considered carefully when using these. Also note the methods marked with `*` are no longer considered secure hashes.
 
+### Creating the MySQL tables
+
 The following SQL DDL must be applied:
 
 ```sql
@@ -286,12 +375,12 @@ CREATE TABLE vmq_auth_acl
 To enter new ACL entries use a query similar to the following, the example uses `PASSWWORD` to for password hashing:
 
 ```sql
-INSERT INTO vmq_auth_acl 
-    (mountpoint, client_id, username, 
+INSERT INTO vmq_auth_acl
+    (mountpoint, client_id, username,
      password, publish_acl, subscribe_acl)
-VALUES 
-    ('', 'test-client', 'test-user', PASSWORD('123'), 
-     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]', 
+VALUES
+    ('', 'test-client', 'test-user', PASSWORD('123'),
+     '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]',
      '[{"pattern":"a/b/c"},{"pattern":"c/b/#"}]');
 ```
 
@@ -310,9 +399,21 @@ vmq_diversity.auth_mongodb.enabled = on
 vmq_diversity.mongodb.host = 127.0.0.1
 vmq_diversity.mongodb.port = 27017
 # vmq_diversity.mongodb.login =
-# vmq_diversity.mongodb.password = 
+# vmq_diversity.mongodb.password =
 # vmq_diversity.mongodb.database =
 ```
+
+VerneMQ supports MongoDB's DNS SRV record lookup to fetch a seed list. Specify the hostname of hosted database as a `srv` option instead of `host` and `port`. VerneMQ will randomly choose a host/port combination from the seed list returned in the DNS SRV record. MongoDB SRV connections use TLS by default. You will need to configure TLS support for MongoDB for most SRV connections.
+
+```text
+vmq_diversity.auth_mongodb.enabled = on
+vmq_diversity.mongodb.srv = vmqtest.08t1b.mongodb.net
+vmq_diversity.mongodb.login = username
+vmq_diversity.mongodb.password = secretpass
+# vmq_diversity.mongodb.database =
+```
+
+MongoDB supports a number of node types in replica sets. The built-in MongoDB support simply connects to the host and port specified. It does not differentiate between primary or secondary nodes in MongoDB replica sets.
 
 MongoDB hashing methods:
 
@@ -324,14 +425,14 @@ Insert the ACL using the `mongo` shell or any software library. The `passhash` p
 
 ```javascript
 db.vmq_acl_auth.insert({
-    mountpoint: '', 
-    client_id: 'test-client', 
-    username: 'test-user', 
-    passhash: '$2a$12$WDzmynWSMRVzfszQkB2MsOWYQK9qGtfjVpO8iBdimTOjCK/u6CzJK', 
+    mountpoint: '',
+    client_id: 'test-client',
+    username: 'test-user',
+    passhash: '$2a$12$WDzmynWSMRVzfszQkB2MsOWYQK9qGtfjVpO8iBdimTOjCK/u6CzJK',
     publish_acl: [
-        {pattern: 'a/b/c'}, 
+        {pattern: 'a/b/c'},
         {pattern: 'a/+/d'}
-    ], 
+    ],
     subscribe_acl: [
         {pattern: 'a/#'}
     ]
@@ -346,7 +447,7 @@ For Redis authentication and authorization configure the following in `vernemq.c
 vmq_diversity.auth_redis.enabled = on
 vmq_diversity.redis.host = 127.0.0.1
 vmq_diversity.redis.port = 6379
-# vmq_diversity.redis.password = 
+# vmq_diversity.redis.password =
 # vmq_divserity.redis.database = 0
 ```
 
@@ -361,6 +462,3 @@ Insert the ACL using the `redis-cli` shell or any software library. The `passhas
 ```text
 SET "[\"\",\"test-client\",\"test-user\"]" "{\"passhash\":\"$2a$12$WDzmynWSMRVzfszQkB2MsOWYQK9qGtfjVpO8iBdimTOjCK/u6CzJK\",\"subscribe_acl\":[{\"pattern\":\"a/+/c\"}]}"
 ```
-
-Note, currently bcrypt version `2a` \(prefix `$2a$`\) is supported.
-

@@ -114,3 +114,13 @@ vmq_bridge.ssl.br0.insecure = off
 vmq_bridge.ssl.br0.tls_version = tlsv1.2
 ```
 
+## Restarting MQTT Bridges
+
+MQTT Bridges that are initiated from the source broker (push bridges) are started when VerneMQ boots and finds a bridge configuration in the `vernemq.conf` file.
+Sometimes it's useful to restart MQTT bridges without restarting a broker. This can be done by disabling, then enabling the `vmq_bridge` plugin and manually calling the `bridge start` command:
+
+```text
+$ sudo vmq-admin plugin disable --name vmq_bridge
+$ sudo vmq-admin plugin enable --name vmq_bridge
+$ sudo vmq-admin bridge start
+```

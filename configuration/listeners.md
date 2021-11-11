@@ -72,7 +72,8 @@ VerneMQ listeners can be configured to accept connections from a proxy server th
 
 To enable the PROXY protocol for tcp listeners use `listener.tcp.proxy_protocol = on` or for a specific listener use `listener.tcp.LISTENER.proxy_protocol = on`.
 
-If client certificates are used you can set `listener.tcp.proxy_protocol_use_cn_as_username = on` which will overwrite the MQTT username set by the client with the common name from the client certificate before authentication and authorization is performed.
+If client certificates are used you can set `listener.tcp.proxy_protocol_use_cn_as_username = on` which will overwrite the MQTT username set by the client with the common name from the client certificate before authentication and authorization is performed. 
+
 
 ## Sample SSL Config
 

@@ -2,7 +2,7 @@
 
 VerneMQ provides multiple hooks throughout the lifetime of a session. The most important ones are the `auth_on_register` and `auth_on_register_m5` hooks which act as an application level firewall granting or rejecting new clients.
 
-![](../.gitbook/assets/session-lifecycle.png)
+![](../.gitbook/assets/session_lifecycle.svg)
 
 ## auth\_on\_register and auth\_on\_register\_m5
 

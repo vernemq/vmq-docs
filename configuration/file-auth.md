@@ -15,7 +15,7 @@ allow_anonymous = on
 ```
 
 {% hint style="info" %}
-Warning: Setting `allow_anonymous=on` completely disables authentication in the broker and plugin authentication hooks are never called! See more information about the authentication hooks [here](../plugindevelopment/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
+Warning: Setting `allow_anonymous=on` completely disables authentication in the broker and plugin authentication hooks are never called! See more information about the authentication hooks [here](../plugin-development/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
 {% endhint %}
 
 In a production setup we recommend to use the provided password based authentication mechanism or implement your own authentication plugins.
@@ -140,7 +140,7 @@ topic [read|write] <topic>
 Only one space should be put between the topic and the preceeding keyword. Extra spaces will be interpreted as part of the topic! Also note that the ACL parser doesn't accept empty lines between entries.
 {% endhint %}
 
-The access type is controlled using `read` or `write`. If not provided then read and write access is granted for the `topic`. The `topic` can use the MQTT subscription wildcards `+` or `#`.
+The access type is controlled using `read` or `write`. If not provided then read an write access is granted for the `topic`. The `topic` can use the MQTT subscription wildcards `+` or `#`.
 
 The first set of topics are applied to all anonymous clients \(assuming `allow_anonymous = on`\). User specific ACLs are added after a user line as follows \(this is the username not the client id\):
 
@@ -148,7 +148,7 @@ The first set of topics are applied to all anonymous clients \(assuming `allow_a
 user <username>
 ```
 
-It is also possible to define ACLs based on pattern substitution within the topic. The form is the same as for the topic keyword, but using pattern as the keyword.
+It is also possible to define ACLs based on pattern substitution within the the topic. The form is the same as for the topic keyword, but using pattern as the keyword.
 
 ```text
 pattern [read|write] <topic>
@@ -191,11 +191,16 @@ Anonymous users are allowed to
 
 * publish & subscribe to topic bar.
 * publish to topic foo.
-* subscribe to topic open\_to\_all.
+* subscribe to topic open_to_all.
 
 User john is allowed to
 
 * publish & subscribe to topic foo.
 * subscribe to topic baz.
-* publish to topic open\_to\_all.
+* publish to topic open_to_all.
 
+Note that the ACL file parser is picky on a couple of things. If you doubt wether your ACLs are fully applied, check for the following.
+
+* Whitespaces at the end of topic names are part of the topic
+* Avoid empty lines in the ACL file.
+* But add a newline at the end of the ACL file.
