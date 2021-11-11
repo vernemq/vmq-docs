@@ -7,9 +7,9 @@
 
 ## Installing VerneMQ
 
-* [Installing on Debian and Ubuntu](installing-vernemq/debian_and_ubuntu.md)
-* [Installing on CentOS and RHEL](installing-vernemq/centos_and_redhat.md)
-* [Running VerneMQ using Docker](installing-vernemq/docker.md)
+* [Installing on Debian and Ubuntu](installation/debian_and_ubuntu.md)
+* [Installing on CentOS and RHEL](installation/centos_and_redhat.md)
+* [Running VerneMQ using Docker](installation/docker.md)
 
 ## Configuring VerneMQ
 
