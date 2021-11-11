@@ -32,9 +32,9 @@
 
 ## VerneMQ Clustering
 
-* [Introduction](vernemq-clustering/introduction.md)
-* [Inter-node Communication](vernemq-clustering/communication.md)
-* [Dealing with Netsplits](vernemq-clustering/netsplits.md)
+* [Introduction](clustering/introduction.md)
+* [Inter-node Communication](clustering/communication.md)
+* [Dealing with Netsplits](clustering/netsplits.md)
 
 ## Live Administration
 
