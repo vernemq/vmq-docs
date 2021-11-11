@@ -57,14 +57,14 @@
 
 ## Plugin Development
 
-* [Introduction](plugin-development/introduction.md)
-* [Session lifecycle](plugin-development/sessionlifecycle.md)
-* [Subscribe Flow](plugin-development/subscribeflow.md)
-* [Publish Flow](plugin-development/publishflow.md)
-* [Enhanced Auth Flow](plugin-development/enhancedauthflow.md)
-* [Erlang Boilerplate](plugin-development/boilerplate.md)
-* [Lua Scripting Support](plugin-development/luaplugins.md)
-* [Webhooks](plugin-development/webhookplugins.md)
+* [Introduction](plugindevelopment/introduction.md)
+* [Session lifecycle](plugindevelopment/sessionlifecycle.md)
+* [Subscribe Flow](plugindevelopment/subscribeflow.md)
+* [Publish Flow](plugindevelopment/publishflow.md)
+* [Enhanced Auth Flow](plugindevelopment/enhancedauthflow.md)
+* [Erlang Boilerplate](plugindevelopment/boilerplate.md)
+* [Lua Scripting Support](plugindevelopment/luaplugins.md)
+* [Webhooks](plugindevelopment/webhookplugins.md)
 
 ## Misc
 
