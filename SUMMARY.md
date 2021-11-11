@@ -13,22 +13,22 @@
 
 ## Configuring VerneMQ
 
-* [Introduction](configuring-vernemq/introduction.md)
-* [The VerneMQ conf file](configuring-vernemq/the-vernemq-conf-file.md)
-* [Auth using files](configuring-vernemq/file-auth.md)
-* [Auth using a database](configuring-vernemq/db-auth.md)
-* [MQTT Options](configuring-vernemq/options.md)
-* [MQTT Listeners](configuring-vernemq/listeners.md)
-* [HTTP Listeners](configuring-vernemq/http-listeners.md)
-* [Non-standard MQTT options](configuring-vernemq/nonstandard.md)
-* [Websockets](configuring-vernemq/websockets.md)
-* [Logging](configuring-vernemq/logging.md)
-* [Consumer session balancing](configuring-vernemq/balancing.md)
-* [Plugins](configuring-vernemq/plugins.md)
-* [Shared subscriptions](configuring-vernemq/shared_subscriptions.md)
-* [Advanced Options](configuring-vernemq/advanced_options.md)
-* [Storage](configuring-vernemq/storage.md)
-* [MQTT Bridge](configuring-vernemq/bridge.md)
+* [Introduction](configuration/introduction.md)
+* [The VerneMQ conf file](configation/the-vernemq-conf-file.md)
+* [Auth using files](configuration/file-auth.md)
+* [Auth using a database](configuration/db-auth.md)
+* [MQTT Options](configuration/options.md)
+* [MQTT Listeners](configuration/listeners.md)
+* [HTTP Listeners](configuration/http-listeners.md)
+* [Non-standard MQTT options](configuration/nonstandard.md)
+* [Websockets](configuration/websockets.md)
+* [Logging](configuration/logging.md)
+* [Consumer session balancing](configuration/balancing.md)
+* [Plugins](configuration/plugins.md)
+* [Shared subscriptions](configuration/shared_subscriptions.md)
+* [Advanced Options](configuration/advanced_options.md)
+* [Storage](configuration/storage.md)
+* [MQTT Bridge](configuration/bridge.md)
 
 ## VerneMQ Clustering
 
