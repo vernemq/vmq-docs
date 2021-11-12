@@ -4,7 +4,7 @@ description: Learn how to implement VerneMQ plugins using the Lua Scripting Lang
 
 # Lua Scripting Support
 
-Developing VerneMQ plugins in Erlang is the most powerful way to extend the functionality of a VerneMQ broker but is a barrier developers not familiar with Erlang. For this reason we've implemented a VerneMQ extension that allows you to develop plugins using the [Lua scripting language](https://www.lua.org). This extension is called **vmq\_diversity** and is shipped as part of VerneMQ.
+Developing VerneMQ plugins in Erlang is the most powerful way to extend the functionality of a VerneMQ broker but might be a barrier for developers not familiar with Erlang. For this reason, we've implemented a VerneMQ extension that allows you to develop plugins using the [Lua scripting language](https://www.lua.org). This extension is called **vmq\_diversity** and is shipped as part of VerneMQ.
 
 {% hint style="info" %}
 vmq\_diversity uses the [Luerl Project](https://github.com/rvirding/luerl), which is an implementation of Lua 5.2 in pure Erlang instead of the official Lua interpreter.
@@ -471,10 +471,6 @@ http.body(client_ref)
 Fetches the response body given a client ref obtained via the response Lua table.
 
 This call returns `false` in case of an error or the response body.
-
-{% hint style="info" %}
-Before VerneMQ 1.5.0 it was imperative to call `http.body(client_ref)` after doing a http request as otherwise the underlying connection would not be released back into the connection pool, leading to connection pool exhaustion. This problem would manifest itself as connection timeout errors. This is no longer necessary, the connection will be released automatically back to the connection pool.
-{% endhint %}
 
 ### JSON
 
