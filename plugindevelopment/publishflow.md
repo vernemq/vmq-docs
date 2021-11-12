@@ -2,7 +2,7 @@
 
 In this section the publish flow is described. VerneMQ provides multiple hooks throughout the flow of a message. The most important ones are the `auth_on_publish` and `auth_on_publish_m5` hooks which acts as an application level firewall granting or rejecting a publish message.
 
-![](../.gitbook/assets/publish_flow.svg)
+![](../.gitbook/assets/publish_flow5.svg)
 
 ## auth\_on\_publish and auth\_on\_publish\_m5
 
