@@ -2,7 +2,7 @@
 
 In this section the subscription flow is described. VerneMQ provides several hooks to intercept the subscription flow. The most important ones are the `auth_on_subscribe` and `auth_on_subscribe_m5` hooks which act as an application level firewall granting or rejecting subscribe requests.
 
-![](../.gitbook/assets/subscription_flow.svg)
+![](../.gitbook/assets/subscription_flow5.svg)
 
 ## auth\_on\_subscribe and auth\_on\_subscribe\_m5
 
