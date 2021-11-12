@@ -1,14 +1,16 @@
 ---
-description: VerneMQ can interface with other brokers via MQTT bridges.
+description: VerneMQ can interface with other brokers (and itself) via MQTT bridges.
 ---
 
 # MQTT Bridge
 
-Bridges are a non-standard way, although kind of a de-facto standard among MQTT broker implementations, to connect two different MQTT brokers to eachother. This allows for example that a topic tree of a remote broker becomes part of the topic tree on the local broker. VerneMQ supports plain TCP connections as well as SSL connections.
+Bridges are a non-standard way (but de-facto standard) among MQTT broker implementations to connect two different MQTT brokers. Over a bridge, the topic tree of a remote broker becomes part of the topic tree on the local broker. VerneMQ bridges support plain TCP connections as well as SSL connections.
+
+A bridge will be a point-to-point connection between 2 brokers, but can still forward all the messages from all cluster nodes to another cluster.
 
 ## Enabling the bridge functionality
 
-in VerneMQ the bridge is distributed with VerneMQ as a plugin and is not enabled by default. After configuring the bridge as described below, make sure to enable the plugin by setting:
+The MQTT bridge plugin (`vmq_bridge`) is distributed with VerneMQ as an integrated plugin but is not enabled by default. After configuring the bridge as described below, make sure to enable the plugin by setting (`vernemq.conf`):
 
 ```text
 plugins.vmq_bridge = on
@@ -16,7 +18,7 @@ plugins.vmq_bridge = on
 
 See [Managing plugins](plugins.md) for more information on working with plugins.
 
-When the plugin is enabled a simple status interface is available:
+Basic information on the configured bridges can be displayed on the admin CLI:
 
 ```text
 $ vmq-admin bridge show
@@ -26,8 +28,14 @@ $ vmq-admin bridge show
 |192.168.1.10:1883|     0     |    0     |         0         |
 +-----------------+-----------+----------+-------------------+
 ```
+{% hint style="info" %}
+The `vmq-admin bridge` command is only available when the bridge plugin is running.
+{% endhint %}
 
 ## Sample MQTT Bridge
+
+To configure `vmq_bridge` you need to edit the bridge section of the `vernemq.conf` file to set endpoints and
+mapping topics. A brigde can push or pull messages, as defined in the topic pattern list.
 
 Setup a bridge to a remote broker:
 
