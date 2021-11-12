@@ -4,22 +4,22 @@ description: Loadtesting VerneMQ with vmq_mzbench
 
 # Loadtesting VerneMQ
 
-You can loadtest VerneMQ with our [vmq\_mzbench tool](https://github.com/erlio/vmq_mzbench). It is based on Machinezone's very powerful [MZBench system](https://github.com/satori-com/mzbench) and lets you narrow down what hardware specs are needed to meet your performance goals. You can state your requirements for latency percentiles \(and much more\) in a formal way, and let vmq\_mzbench automatically fail, if it can't meet the requirements.
+You can loadtest VerneMQ with our [vmq\_mzbench tool](https://github.com/vernemq/vmq_mzbench). It is based on Machinezone's very powerful [MZBench system](https://github.com/mzbench/mzbench) and lets you narrow down what hardware specs are needed to meet your performance goals. You can state your requirements for latency percentiles \(and much more\) in a formal way, and let vmq\_mzbench automatically fail, if it can't meet the requirements.
 
 If you have an AWS account, vmq\_mzbench can automagically provision worker nodes for you. You can also run it locally, of course.
 
 ## 1. Install MZBench
 
-Please follow the [MZBench installation guide](http://satori-com.github.io/mzbench/#installation)
+Please follow the [MZBench installation guide](https://mzbench.github.io/mzbench/#installation)
 
 ## 2. Install vmq\_mzbench
 
 Actually, you don't even have to install vmq\_mzbench, if you don't want to. Your scenario file will automatically fetch vmq\_mzbench for any test you do. vmq\_mzbench runs every test independently, so it has a provisioning step for any test, even if you only run it on a local worker.
 
-To install vmq\_mzbench on your computer, go through the following steps:
+In case you still want to have `vmq\_mzbench on your local machine, go through the following steps:
 
 ```text
-git clone git://github.com/erlio/vmq_mzbench.git
+git clone git://github.com/vernemq/vmq_mzbench.git
 cd vmq_mzbench
 ./rebar get-deps
 ./rebar compile
@@ -37,20 +37,20 @@ If you'd just like the script itself fetch vmq\_mzbench, then you can direct it 
 
 ```erlang
 {make_install, [
-{git, "git://github.com/erlio/vmq_mzbench.git"}]},
+{git, "git://github.com/vernemq/vmq_mzbench.git"}]},
 ```
 
 ## 3. Write vmq\_mzbench scenario files
 
 {% hint style="info" %}
-MZBench recently switched from an Erlang-styled Scenario DSL to a more python-like DSL dubbed BDL \(Benchmark Definition Language\). Have a look at the [BDL examples](https://github.com/machinezone/mzbench/tree/master/examples.bdl) on Github.
+MZBench recently switched from an Erlang-styled Scenario DSL to a more python-like DSL dubbed BDL \(Benchmark Definition Language\). Have a look at the [BDL examples](https://github.com/mzbench/mzbench/tree/master/examples.bdl) on Github.
 {% endhint %}
 
-You can familiarize yourself quickly with [MZBench's guide](http://satori-com.github.io/mzbench/scenarios/spec/) on writing loadtest scenarios.
+You can familiarize yourself quickly with [MZBench's guide](https://mzbench.github.io/mzbench/scenarios/spec/) on writing loadtest scenarios.
 
 There's not much to learn, just make sure you understand how pools and loops work. Then you can add the vmq\_mzbench statement functions to the mix and define actual loadtest scenarios.
 
-Currently vmq\_mzbench exposes the following statement functions for use in MQTT scenario files:
+Here's a list of the most important vmq\_mzbench statement functions you can use in MQTT scenario files:
 
 * `random_client_id(State, Meta, I)`: Create a random client Id of length I
 * `fixed_client_id(State, Meta, Name, Id)`: Create a deterministic client Id with schema Name ++ "-" ++ Id
@@ -59,9 +59,12 @@ Currently vmq\_mzbench exposes the following statement functions for use in MQTT
 * `connect(State, Meta, ConnectOpts)`: Connect to the broker with the options given in ConnectOpts
 * `disconnect(State, Meta)`: Disconnect normally
 * `subscribe(State, Meta, Topic, QoS)`: Subscribe to Topic with Quality of Service QoS
+* `subscribe_to_self(State, _Meta, TopicPrefix, Qos)`: Subscribe to an exclusive topic, for 1:1 testing
 * `unsubscribe(State, Meta, Topic)`: Unubscribe from Topic
 * `publish(State, Meta, Topic, Payload, QoS)`: Publish a message with binary Payload to Topic with QoS
 * `publish(State, Meta, Topic, Payload, QoS, RetainFlag)`: Publish a message with binary Payload to Topic with QoS and RetainFlag
+* `publish_to_self(State, Meta, TopicPrefix, Payload, Qos)`: -> Publish a payload to an exclusive topic, for 1:1 testing
 
-It's easy to add more statement functions to the MQTT worker if needed, get in touch with us.
+
+It's easy to add more statement functions to the MQTT worker if needed. For a full list of the exported statement functions, we encourage you to have a look at the [MQTT worker](https://github.com/vernemq/vmq_mzbench/blob/master/src/mqtt_worker.erl) code directly.
 
