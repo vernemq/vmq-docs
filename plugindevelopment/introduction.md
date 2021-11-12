@@ -6,7 +6,8 @@ description: >-
 
 # Introduction
 
-VerneMQ is implemented in Erlang OTP and therefore runs on top of the Erlang VM. For this reason plugins have to be developed in a programming language that runs on the Erlang VM. The most popular choice is obviously the Erlang programming language itself, but Elixir or Lisp flavoured Erlang LFE could be used too.
+VerneMQ is implemented in [Erlang OTP](https://www.erlang.org/) and therefore runs on top of the Erlang VM. For this reason *native* plugins have to be developed in a programming language that runs on the Erlang VM. The most popular choice is obviously the Erlang programming language itself, but Elixir or Lisp flavoured Erlang LFE could be used too.
+That said, all the plugin hooks are also exposed over (a subset of) Lua, and over WebHooks. This allows you to implement a VerneMQ plugin, by simply implementing a WebHook endpoint, using any programming language you like. You can also implement a VerneMQ plugin as a Lua script.
 
 {% hint style="danger" %}
 Be aware that in VerneMQ a plugin does NOT run in a sandboxed environment and misbehaviour could seriously harm the system \(e.g. performance degradation, reduced availability as well as consistency, and message loss\). Get in touch with us in case you require a review of your plugin.
