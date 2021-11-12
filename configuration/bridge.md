@@ -8,6 +8,10 @@ Bridges are a non-standard way (but de-facto standard) among MQTT broker impleme
 
 A bridge will be a point-to-point connection between 2 brokers, but can still forward all the messages from all cluster nodes to another cluster.
 
+{% hint style="info" %} The VerneMQ bridge plugin currently forwards messages using MQTT protocol version 3.1.1. MQTT v5 messages will still be forwarded but be aware that metadata like user-defined properties will be dropped.{% endhint %}
+
+
+
 ## Enabling the bridge functionality
 
 The MQTT bridge plugin (`vmq_bridge`) is distributed with VerneMQ as an integrated plugin but is not enabled by default. After configuring the bridge as described below, make sure to enable the plugin by setting (`vernemq.conf`):
