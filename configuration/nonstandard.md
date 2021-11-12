@@ -14,7 +14,7 @@ max_client_id_size = 23
 
 This option default to `23`.
 
-## Maximum topic depth
+## Maximum Topic Depth
 
 Usually, you'll configure permissions on your topic structures using ACLs. In addition to that, `topic_max_depth` sets a global maximum value for topic levels. This protects the broker from clients subscribing to arbitrary deep topic levels. 
 
