@@ -6,7 +6,7 @@ For a more general overview on VerneMQ and MQTT, you might want to start with th
 
 For downloading the subscription-based binary VerneMQ packages and/or a quick description on how to compile VerneMQ from sources, see [Downloads](https://vernemq.com/downloads/index.html).
 
-## How to help
+## How to help improve this documentation
 
 The [VerneMQ Documentation project](https://github.com/vernemq/vmq-docs) is an open-source effort, and your contributions are very welcome and appreciated. 
 You can contribute on all levels:
