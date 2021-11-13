@@ -44,6 +44,8 @@ Notice the `auth_on_register` call between `CONNECT` and `CONNACK` which is the 
 Likewise notice the `auth_on_subscribe` call between the `SUBSCRIBE` and `SUBACK` frames which is plugin hook used to authorize if this particular subscription should be allowed or not. In this case the subscription was authorized.
 
 {% hint style="info" %}
-A convenient tool is the `ts` \(timestamp\) tool which is available on many systems. If the trace output is piped to this command each line is prefixed with a timestamp.
+A convenient tool is the `ts` \(timestamp\) tool which is available on many systems. If the trace output is piped to this command each line is prefixed with a timestamp:
+
+`ts | sudo vmq-admin trace client client-id=tester`
 {% endhint %}
 
