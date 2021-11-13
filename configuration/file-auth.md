@@ -15,10 +15,10 @@ allow_anonymous = on
 ```
 
 {% hint style="info" %}
-Warning: Setting `allow_anonymous=on` completely disables authentication in the broker and plugin authentication hooks are never called! See more information about the authentication hooks [here](../plugin-development/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
+Warning: Setting `allow_anonymous=on` completely disables authentication in the broker and plugin authentication hooks are never called! Find more information on the authentication hooks [here](../plugin-development/sessionlifecycle.md#auth_on_register-and-auth_on_register_m5).
 {% endhint %}
 
-In a production setup we recommend to use the provided password based authentication mechanism or implement your own authentication plugins.
+In a production setup you can use the provided password based authentication mechanism, one of the provided authentication Database plugins, or implement your own authentication plugins.
 
 VerneMQ periodically checks the specified password file.
 
@@ -36,6 +36,10 @@ Setting the `password_reload_interval = 0` disables automatic reloading.
 
 {% hint style="info" %}
 Both configuration parameters can also be changed at runtime using the `vmq-admin` script.
+
+Example: to dynamically set the reload interval to 60 seconds on all your cluster node, issue the following command on one of the nodes:
+
+`sudo vmq-admin set vmq_passwd.password_reload_interval=60 --all`
 {% endhint %}
 
 ### Manage Password Files for VerneMQ
