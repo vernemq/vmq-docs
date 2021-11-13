@@ -37,7 +37,7 @@ Setting the `password_reload_interval = 0` disables automatic reloading.
 {% hint style="info" %}
 Both configuration parameters can also be changed at runtime using the `vmq-admin` script.
 
-Example: to dynamically set the reload interval to 60 seconds on all your cluster node, issue the following command on one of the nodes:
+Example: to dynamically set the reload interval to 60 seconds on all your cluster nodes, issue the following command on one of the nodes:
 
 `sudo vmq-admin set vmq_passwd.password_reload_interval=60 --all`
 {% endhint %}
