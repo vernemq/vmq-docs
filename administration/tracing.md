@@ -43,9 +43,34 @@ Notice the `auth_on_register` call between `CONNECT` and `CONNACK` which is the 
 
 Likewise notice the `auth_on_subscribe` call between the `SUBSCRIBE` and `SUBACK` frames which is plugin hook used to authorize if this particular subscription should be allowed or not. In this case the subscription was authorized.
 
+### Trace options
+
+The client trace command has additional options as shown by `vmq-admin trace client --help`. Those are hopefully self-explaining:
+
+```text
+Options
+
+  --mountpoint=<Mountpoint>
+      the mountpoint for the client to trace.
+      Defaults to "" which is the default mountpoint.
+  --rate-max=<RateMaxMessages>
+      the maximum number of messages for the given interval,
+      defaults to 10.
+  --rate-interval=<RateIntervalMS>
+      the interval in milliseconds over which the max number of messages
+      is allowed. Defaults to 100.
+  --trunc-payload=<SizeInBytes>
+      control when the payload should be truncated for display.
+      Defaults to 200.
+```
+
 {% hint style="info" %}
 A convenient tool is the `ts` \(timestamp\) tool which is available on many systems. If the trace output is piped to this command each line is prefixed with a timestamp:
 
 `ts | sudo vmq-admin trace client client-id=tester`
+{% endhint %}
+
+{% hint style="info" %}
+It is currently not possible to start multiple traces from multiple shells, or trace multiple ClientIDs.
 {% endhint %}
 
