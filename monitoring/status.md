@@ -14,7 +14,8 @@ The Status Page has the following sections:
 - Cluster Overview
 - Node Status
 
-
+The Status Page will automatically refresh itself every 10 seconds, and try to calculate rates in Javascript, based on that reload window. Therefore, the displayed rates might be slightly inaccurate.
+The Status Page should not be considered a replacement for a metrics system. Running in production, you certainly want to hook up VerneMQ to a metrics system like Prometheus.
 
 ![](../.gitbook/assets/vernemq_status_page.png)
 
