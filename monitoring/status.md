@@ -1,12 +1,12 @@
 ---
-description: The VerneMQ status page
+description: The VerneMQ Status Page
 ---
 
 # Status Page
 
-VerneMQ comes with a built-in status page that is enabled by default and is available on `http://localhost:8888/status`, see [HTTP listeners](../configuring-vernemq/http-listeners.md).
+VerneMQ comes with a built-in Status Page that is enabled by default and is available on `http://localhost:8888/status`, see [HTTP listeners](../configuring-vernemq/http-listeners.md).
 
-The status page is a simple overview of the cluster and the individual nodes in the cluster as seen below. Note that while the Status Page is running on each node of the cluster, it's enough to look at one of them to get a quick status of your cluster.
+The Status Page is a simple overview of the cluster and the individual nodes in the cluster as seen below. Note that while the Status Page is running on each node of the cluster, it's enough to look at one of them to get a quick status of your cluster.
 
 The Status Page has the following sections:
 
