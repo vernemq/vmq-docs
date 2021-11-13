@@ -130,7 +130,14 @@ vmq_diversity.postgres.password = vernemq
 vmq_diversity.postgres.database = vernemq_db
 vmq_diversity.cockroachdb.password_hash_method = crypt
 ```
-Consult the `vernemq.conf` file for more info about additional options like configuring SSL:
+
+In case your Postgresql database requires SSL, you'll have to tell the plugin: 
+
+```text 
+vmq_diversity.ssl.enabled = on
+```
+
+Consult the `vernemq.conf` file for more info about additional options: 
 
 ```text
 ## 
