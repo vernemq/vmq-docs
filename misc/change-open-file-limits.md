@@ -22,15 +22,23 @@ On most Linux distributions, the total limit for open files is controlled by `sy
 sysctl fs.file-max
 fs.file-max = 262144
 ```
+An alternative way to read the `file-max` settings is:
 
-This might be high enough for your VerneMQ deployment, or not - we cannot know that. You will need at least 1 file descriptor per TCP connection, and VerneMQ needs additional file descriptors for file access etc. Also, if you have other components running on the system, you might want to consult the [sysctl manpage](http://linux.die.net/man/8/sysctl) manpage for how to change that setting. However, what needs to be changed in most cases is the per-user open files limit. This requires editing `/etc/security/limits.conf`, for which you'll need superuser access. If you installed VerneMQ from a binary package, add lines for the `vernemq` user like so, substituting your desired hard and soft limits:
+```text
+cat /proc/sys/fs/file-max
+```
+
+This might be high enough for your VerneMQ deployment, or not - we cannot know that. You will need at least 1 file descriptor per TCP connection, and VerneMQ needs additional file descriptors for file access etc. Also, if you have other components running on the system, you might want to consult the [sysctl manpage](http://linux.die.net/man/8/sysctl) manpage for how to change that setting. The `fs.file-max` setting represents the global maximum of file handlers a Linux kernel will allocate. Make sure this is high enough for your system.
+
+Once you're good regarding `file-max`, you still need to configure the per-process open files limit. You'll set the number of file descriptors a single process or application like VerneMQ is allowed to grab. As every process belongs to a user, you need to bind the setting to a Linux user (here, the `vernemq` user).
+To do this, edit `/etc/security/limits.conf`, for which you'll need superuser access. If you installed VerneMQ from a binary package, add lines for the `vernemq` user, substituting your desired hard and soft limits:
 
 ```text
 vernemq soft nofile 65536
 vernemq hard nofile 262144
 ```
 
-On Ubuntu, if you’re always relying on the init scripts to start VerneMQ, you can create the file /etc/default/vernemq and specify a manual limit like so:
+On Ubuntu, if you’re always relying on the init scripts to start VerneMQ, you can create the file /etc/default/vernemq and specify a manual limit:
 
 ```text
 ulimit -n 262144
