@@ -10,13 +10,15 @@ There are a couple of hidden options you can set in the `vernemq.conf` file. Hid
 
 Specify how the queue should deliver messages when multiple sessions are allowed. In case of `fanout` all the attached sessions will receive the message, in case of `balance` an attached session is choosen randomly.
 
+{% hint style="info" %} The feature to enable multiple sessions will be deprecated in VerneMQ 2.0.{% endhint %}
+
 ```text
 queue_deliver_mode = balance
 ```
 
 ## Queue Type
 
-Specify how queues should process messages, either the `fifo` or `lifo` way. Default is `fifo`.
+Specify how queues should process messages, either the `fifo` or `lifo` way, with a default setting of `fifo`. The setting will apply globally, that is, for every spawned queue in a VerneMQ broker. (You can override the `queue_type` setting in plugins in the `auth_on_register` hook).
 
 ```text
 queue_type = fifo
@@ -32,7 +34,7 @@ max_message_rate = 2
 
 ## Max Drain Time
 
-Due to the eventual consistent nature of the subscriber store it is possible that during queue migration messages still arrive on the old cluster node. This parameter enables to compensate this by keeping the queue around for some time \(in seconds\) after it was migrated to the other cluster node.
+Due to the eventually consistent nature of the subscriber store it is possible that during queue migration messages still arrive on the old cluster node. This parameter enables compensation for that fact by keeping the queue around for some configured time \(in seconds\) after it was migrated to the other cluster node.
 
 ```text
 max_drain_time = 20
