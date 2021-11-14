@@ -21,9 +21,18 @@ The command above displays all the enabled plugins together with the hooks they 
 |           |           |auth_on_subscribe| vmq_acl:auth_on_subscribe/3 |
 +-----------+-----------+-----------------+-----------------------------+
 ```
-The table will show the name of the plugin, its type (application or single module), all the hooks implemented in the plugin, and the exact module and function names in the `M:F/A` column. As an example on how to read the table: the `vmq_passwd:auth_on_register/5` function is the actual implementation of the `auth_on_register` hook in the `vmq_passwd` application plugin.
+The table will show the following information:
 
-You can also display information on internal plugins. The table below shows you that the generic metadata application and the generic message store are actually internal plugins.
+- name of the plugin
+- type (application or single module)
+- all the hooks implemented in the plugin
+- the exact module and function names in the `M:F/A` implementing those hooks. 
+ 
+As an example on how to read the table: the `vmq_passwd:auth_on_register/5` function is the actual implementation of the `auth_on_register` hook in the `vmq_passwd` application plugin.
+
+In addition, you can conclude that the plugin is currently running, as it shows up in the table.
+
+To display information on internal plugins, add the `--internal` flag. The table below shows you that the generic metadata application and the generic message store are actually internal plugins. 
 
 ```text
 $ sudo vmq-admin plugin show --internal
