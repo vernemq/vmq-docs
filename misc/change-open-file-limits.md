@@ -14,6 +14,11 @@ ulimit -n 262144
 
 However, this only changes the limit for the _**current shell session**_. Changing the limit on a system-wide, permanent basis varies more between systems.
 
+What will actually happen when VerneMQ runs out of OS-side file descriptors? 
+
+In short, VerneMQ will be unable to function properly, because it can't open database files or accept incoming connections. 
+In case you see exceptions with `{error,emfile}` in the VerneMQ log files, you now know what to do, though: increase the OS settings as described below.
+
 ## Linux
 
 On most Linux distributions, the total limit for open files is controlled by `sysctl`.
