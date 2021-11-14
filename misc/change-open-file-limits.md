@@ -48,6 +48,14 @@ This file is automatically sourced from the init script, and the VerneMQ process
 
 On CentOS/RedHat systems, make sure to set a proper limit for the user you’re usually logging in with to do any kind of work on the machine, including managing VerneMQ. On CentOS, `sudo` properly inherits the values from the executing user.
 
+### Linux and Systemd service files
+
+Newer VerneMQ packages use a systemd service file. You can adapt the `LimitNOFILE` setting in the `vernemq.service` file to the value you need. It is set to `infinity` by default already, so you only need to adapt it in case you want a lower value. The reason we need to enforce the setting is that systemd doesn't automatically take over the `nofile` settings from the OS.
+
+```text
+LimitNOFILE=infinity
+```
+
 ## Enable PAM-Based Limits for Debian & Ubuntu
 
 It can be helpful to enable PAM user limits so that non-root users, such as the `vernemq` user, may specify a higher value for maximum open files. For example, follow these steps to enable PAM user limits and set the soft and hard values **for all users of the system** to allow for up to 65536 open files.
