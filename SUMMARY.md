@@ -51,6 +51,7 @@
 * [Introduction](monitoring/introduction.md)
 * [$SYSTree](monitoring/systree.md)
 * [Graphite](monitoring/graphite.md)
+* [Netdata](monitoring/netdata.md)
 * [Prometheus](monitoring/prometheus.md)
 * [Health Checker](monitoring/health-check.md)
 * [Status Page](monitoring/status.md)
@@ -71,4 +72,12 @@
 * [Loadtesting VerneMQ](misc/loadtesting.md)
 * [Not a tuning guide](misc/not-a-tuning-guide.md)
 * [Change Open File Limits](misc/change-open-file-limits.md)
+## Guides
+
+* [A typical VerneMQ deployment](guides/typical-vernemq-deployment.md)
+* [VerneMQ on Kubernetes](guides/vernemq-on-kubernetes.md)
+* [Loadtesting VerneMQ](guides/loadtesting.md)
+* [Clustering during development](guides/clustering-during-development.md)
+* [Not a tuning guide](guides/not-a-tuning-guide.md)
+* [Change Open File Limits](guides/change-open-file-limits.md)
 
