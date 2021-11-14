@@ -33,4 +33,3 @@ To check for the global cluster state in case the local VerneMQ node is down, yo
 `vmq-admin` is a live re-configuration utility. Please note that all dynamically configured values will be reset by vernemq.conf upon broker restart.   
  As a consequence, it's good practice to keep track of the applied changes when re-configuring a broker with `vmq-admin`. If needed, you can then persist changes by adding them to the vernemq.conf file.
 {% endhint %}
-

@@ -24,10 +24,15 @@ shared_subscription_policy = prefer_local
 
 When a messages is being delivered to subscribers of a shared subscription, the message will be delivered to an online subscriber if possible, otherwise the message will be delivered to an offline subscriber.
 
+![Random Message Routing for Shared Subscribers](../.gitbook/assets/random.svg)
+
+![Local Only Message Routing for Shared Subscribers](../.gitbook/assets/local_only.svg)
+
+![Prefer\_local Message Routing for Shared Subscribers](../.gitbook/assets/prefer_local.svg)
+
 {% hint style="info" %}
 Note that Shared Subscriptions still fully operate under the MQTT specification \(be it MQTT 5.0 or backported to older protocol versions\). Be aware of this, especially regarding QoS and clean\_session configurations.
-{% endhint %} 
-
+{% endhint %}
 
 ## Examples
 
