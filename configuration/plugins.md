@@ -26,7 +26,7 @@ The table will show the following information:
 - name of the plugin
 - type (application or single module)
 - all the hooks implemented in the plugin
-- the exact module and function names in the `M:F/A` implementing those hooks. 
+- the exact module and function names (`M:F/A`) implementing those hooks. 
  
 As an example on how to read the table: the `vmq_passwd:auth_on_register/5` function is the actual implementation of the `auth_on_register` hook in the `vmq_passwd` application plugin.
 
