@@ -65,8 +65,8 @@ vmq_webhooks.use_crls
 vmq_webhooks.keyfile
 vmq_webhooks.keyfile_password
 ```
-Check the WebHooks Schema file for quick documentation on those options or to look up their configured defaults:
-https://github.com/vernemq/vernemq/blob/eb1a262035af47e90d9edf07f36c1b1503557c1f/apps/vmq_webhooks/priv/vmq_webhooks.schema
+Check the [WebHooks Schema](https://github.com/vernemq/vernemq/blob/eb1a262035af47e90d9edf07f36c1b1503557c1f/apps/vmq_webhooks/priv/vmq_webhooks.schema) file for quick documentation on those options or to look up their configured defaults.
+
 
 
 ## Connection pool configuration
