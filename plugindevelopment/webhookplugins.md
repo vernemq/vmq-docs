@@ -851,6 +851,19 @@ Below is a very simple example of an endpoint implemented in Python. It uses the
 
 The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default policy is `deny`.
 
+To enable the WebHooks for this example, add the following lines to the `vernemq.conf` file:
+
+```
+plugins.vmq_webhooks = on
+vmq_webhooks.register.hook = auth_on_register
+vmq_webhooks.publish.hook = auth_on_publish
+vmq_webhooks.subscribe.hook = auth_on_subscribe
+
+vmq_webhooks.register.endpoint = http://127.0.0.1:8080/myendpoints
+vmq_webhooks.publish.endpoint = http://127.0.0.1:8080/myendpoints
+vmq_webhooks.subscribe.endpoint = http://127.0.0.1:8080/myendpoints
+```
+
 ```python
 import web
 import json
