@@ -85,7 +85,7 @@ VerneMQ supports the following the TLS-flavours:
 - TLS-PSK
 - Mutal TLS (mTLS)
 
-In server-side TLS, the client initiates a TLS handshake with the broker, and the broker responds by sending its certificate. The client verifies the certificate and generates a symmetric key, which is used to encrypt and decrypt data exchanged between the client and broker. The broker does no further authentication or authorization of the client.  
+In server-side TLS, the client initiates a TLS handshake with the broker, and the broker responds by sending its certificate. The client verifies the certificate and generates a symmetric key, which is used to encrypt and decrypt data exchanged between the client and broker. Server-side TLS does no further authentication or authorization of the client. The broker later on authenticates and authorizes clients through MQTT.    
 
 TLS-PSK (Pre-Shared Key) secures communication between MQTT client and broker using pre-shared keys for authentication. Unlike Service-Side or mutal TLS, which use certificates to authenticate the server and client, TLS-PSK uses a pre-shared secret (a key) to authenticate the endpoints. Clients that support TLS-PSK can use the specified pre-shared keys to authenticate themselves to the broker, providing a lightweight alternative to certificate-based authentication. The key has to be securly stored on the MQTT device.
 
