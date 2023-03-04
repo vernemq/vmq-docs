@@ -2,7 +2,7 @@
 
 VerneMQ provides a HTTP REST pub plugin for publishing messages using HTTP/REST. The http_pub plugin accepts HTTP POST requests containing message payloads, and then forwards those messages to the appropriate MQTT subscribers.
 
-The HTTP REST plugin can be used to publish messages from a wider range of devices and platforms, that may not support MQTT natively. 
+The HTTP REST plugin can be used to publish messages from a wider range of devices and platforms, that may not support MQTT natively. Please note, while the plugin can handle a decent amount of request the primary protocol of VerneMQ is MQTT. Whenever possible, it is recommended to use MQTT natively to communicate with VerneMQ. 
 
 ## Enabling the plugin
 
