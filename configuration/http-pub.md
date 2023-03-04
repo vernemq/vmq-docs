@@ -60,10 +60,11 @@ Which one to choose is depends on your application.
 	"password": "test123",
 	"qos": 1,
 	"retain": false,
-	"payload": "asddsadsadas22dasasdsad",
+	"payload": "this is a payload string",
 	"user_properties": [{"a":"b"}]
 }
 ```
+In order to allow more complex payload to be encoded as part of the json, the payload itself can be also be base64 encoded. The query string "" has to be used to indicate that the payload is base64 encoded.
 
 ### Header parameters
 Topic, user, password, qos, retain and user_properties can also be part of the HTTP header. The HTTP body is used for the actual message payload.
@@ -81,4 +82,5 @@ The plugin exposes three metrics:
 
 ## Misc Notes
 * The plugin allows the authentication and authorization flows to override mountpoint, qos and topic.  
+* Currently, the regular (non m5) authentication and authorization flow is used.
 * The query string payload does not allow to set user parameters.
