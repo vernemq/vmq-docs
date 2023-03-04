@@ -9,38 +9,76 @@ description: >-
 The VerneMQ HTTP API is enabled by default and installs an HTTP handler on `http://localhost:8888/api/v1`. To read more about configuring the HTTP listener, see [HTTP Listener Configuration](../configuration/http-listeners.md). You can configure a HTTP listener, or a HTTPS listener to serve the HTTP API v1.
 
 ## Managing API keys
+The VerneMQ HTTP API uses basic authentication where an API key is passed as the username and the password is left empty, as an alternative the x-api-key header option can be used. API keys have a scope and (optional) can have an expiry date. So the first step to us the HTTP API is to create an API key.
 
-The VerneMQ HTTP API uses basic authentication where an API key is passed as the username and the password is left empty. So the first step to us the HTTP API is to create an API key:
+### Scopes
+Each HTTP Module can be protected by an API key. An API key can be limited to a certain http module or further restrict some functionality within the http module. The scope used by the management API is "mgmt". Currently, the following scopes are supported "status", "mgmt", "metrics", "health".
 
+### Create API key
 ```text
 $ vmq-admin api-key create
 JxctXkZ1OTVnlwvguSCE9KtujacMkOLF
 ```
+or with scope and an expiry date (in local time)
 
-The key is persisted and available on all cluster nodes.
+```text
+$ vmq-admin api-key create scope=mgmt expires=2023-04-04T12:00:00
+q85i5HbFCDdAVLNJuOj48QktDbchvOMS
+```
 
+The keys are persisted and available on all cluster nodes.
+
+### List API keys
 To list existing keys do:
 
 ```text
 $ vmq-admin api-key show
-+--------------------------------+
-|              Key               |
-+--------------------------------+
-|JxctXkZ1OTVnlwvguSCE9KtujacMkOLF|
-+--------------------------------+
++----------------------------------+-------+---------------------+-------------+
+| Key                              | Scope | Expires (UTC)       | has expired |
++----------------------------------+-------+---------------------+-------------+
+| q85i5HbFCDdAVLNJuOj48QktDbchvOMS | mgmt  | 2023-04-04 10:00:00 | false       |
++----------------------------------+-------+---------------------+-------------+
+| JxctXkZ1OTVnlwvguSCE9KtujacMkOLF | mgmt  | never               | false       |
++----------------------------------+-------+---------------------+-------------+
 ```
 
+### Add API key 
 To add an API key of your own choosing, do:
 
 ```text
 vmq-admin api-key add key=mykey
 ```
 
+### Delete API key
 To delete an API key do:
 
 ```text
 vmq-admin api-key delete key=JxctXkZ1OTVnlwvguSCE9KtujacMkOLF
 ```
+
+### Advanced Settings (key rotation, key complexity)
+You can specifiy the minimal length of an API key (default: 0) in vernemq.conf
+```text
+min_apikey_length = 30
+```
+
+or a set a max duration of an API key before it expires (default: undefined) 
+```text
+max_apikey_expiry_days = 180
+```
+
+Please note that changing those settings after some api keys have already been created has no influence on already created keys.
+
+You can enable or disable API key authentication per module, or per module per listener. 
+
+```text
+http_module.$module.auth.mode 
+listener.http.$name.http_module.$module.auth.mode
+listener.https.$name.http_module.$module.auth.mode
+```
+
+Possible modules are vmq_metrics_http,vmq_http_mgmt_api, vmq_status_http, vmq_health_http. Possible values for auth.mode are noauth or apikey.
+
 
 ## API usage
 
