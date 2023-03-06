@@ -74,6 +74,38 @@ Topic, user, password, qos and retain flag can also be uurlencoded as part of th
 
 ## Examples
 
+```text
+curl --request POST \
+  --url https://mqtt.myhost.example:3001/restmqtt/api/v1/publish \
+  --header 'Authorization: Basic Og==' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"topic": "T1",
+	"user": "myuser",
+	"password": "test123",
+	"client_id": "myclient",
+	"qos": 1,
+	"retain": false,
+	"payload": "asddsadsadas22dasasdsad",
+	"user_properties": [{"a":"b"}]
+}'
+```
+
+```text
+curl --request POST \
+  --url https://mqtt.myhost.example:3001/restmqtt/api/v1/publish \
+  --header 'Authorization: Basic Og==' \
+  --header 'Content-Type: application/json' \
+  --header 'QoS: 1' \
+  --header 'clientid: myclient' \
+  --header 'password: test123' \
+  --header 'retain: false' \
+  --header 'topic: T1' \
+  --header 'user: myuser' \
+  --header 'user_properties: [{"a":"b2"}]' \
+  --data '{"hallo": "welt"}'
+```
+  
 ## Metrics
 The plugin exposes three metrics:
 * The number of messages sent through the REST Publish API
