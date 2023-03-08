@@ -2,7 +2,7 @@
 
 VerneMQ provides a HTTP REST pub plugin for publishing messages using HTTP/REST. The http_pub plugin accepts HTTP POST requests containing message payloads, and then forwards those messages to the appropriate MQTT subscribers.
 
-The HTTP REST plugin can be used to publish messages from a wider range of devices and platforms, that may not support MQTT natively. Please note, while the plugin can handle a decent amount of request the primary protocol of VerneMQ is MQTT. Whenever possible, it is recommended to use MQTT natively to communicate with VerneMQ. 
+The HTTP REST plugin can be used to publish messages from a wider range of devices and platforms, that may not support MQTT natively. Please note, while the plugin can handle a decent amount of requests, the primary protocol of VerneMQ is MQTT. Whenever possible, it is recommended to use MQTT natively to communicate with VerneMQ. 
 
 ## Enabling the plugin
 
@@ -64,10 +64,22 @@ Which one to choose is depends on your application.
 	"user_properties": [{"a":"b"}]
 }
 ```
-In order to allow more complex payload to be encoded as part of the json, the payload itself can be also be base64 encoded. The query string "" has to be used to indicate that the payload is base64 encoded.
+In order to allow more complex payload to be encoded as part of the json, the payload itself can be also be base64 encoded. The query string "encoding=base64" has to be used to indicate that the payload is base64 encoded. The encoding query string paramater can either be "base64" or "plain". Plain is the default.
 
 ### Header parameters
-Topic, user, password, qos, retain and user_properties can also be part of the HTTP header. The HTTP body is used for the actual message payload.
+Topic, user, password, qos, retain and user_properties can also be part of the HTTP header. The HTTP body is used for the actual message payload. The payload then does not need to be base64 encoded.
+
+The following header options are supported:
+| Header | Description |
+:-: | -----------:
+Content-Type | application/json or application/octet-stream
+user | User (on-behalf-authorization)
+password | Password (on-behalf-authorization)
+client_id | Client ID (on-behalf-authorization)
+topic | Topic as string
+qos | QoS (0,1,2)
+retain | Boolean, true or false
+user_properties | Json-style array
 
 ### Query String
 Topic, user, password, qos and retain flag can also be uurlencoded as part of the query string. The HTTP body is used for the actual message payload.
