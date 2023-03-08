@@ -85,11 +85,12 @@ user_properties | Json-style array
 Topic, user, password, qos and retain flag can also be uurlencoded as part of the query string. The HTTP body is used for the actual message payload.
 
 ## Examples
+### All required information encoded in the payload 
 
 ```text
 curl --request POST \
   --url https://mqtt.myhost.example:3001/restmqtt/api/v1/publish \
-  --header 'Authorization: Basic Og==' \
+  --header 'Authorization: Basic ...' \
   --header 'Content-Type: application/json' \
   --data '{
 	"topic": "T1",
@@ -103,10 +104,16 @@ curl --request POST \
 }'
 ```
 
+### All required information encoded in the payload (base64payload)
+```text
+curl --request POST \
+```
+
+### MQTT information encoded in header parameters
 ```text
 curl --request POST \
   --url https://mqtt.myhost.example:3001/restmqtt/api/v1/publish \
-  --header 'Authorization: Basic Og==' \
+  --header 'Authorization: Basic ...' \
   --header 'Content-Type: application/json' \
   --header 'QoS: 1' \
   --header 'clientid: myclient' \
@@ -117,7 +124,12 @@ curl --request POST \
   --header 'user_properties: [{"a":"b2"}]' \
   --data '{"hallo": "welt"}'
 ```
-  
+### MQTT information encoded in query string
+```text
+curl --request POST \
+```
+
+
 ## Metrics
 The plugin exposes three metrics:
 * The number of messages sent through the REST Publish API
@@ -128,3 +140,4 @@ The plugin exposes three metrics:
 * The plugin allows the authentication and authorization flows to override mountpoint, qos and topic.  
 * Currently, the regular (non m5) authentication and authorization flow is used.
 * The query string payload does not allow to set user parameters.
+* The verbs "put" and "post" are supported. There is no difference in functionality.
