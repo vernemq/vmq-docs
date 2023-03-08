@@ -6,7 +6,7 @@ The HTTP REST plugin can be used to publish messages from a wider range of devic
 
 ## Enabling the plugin
 
-The MQTT bridge plugin (`vmq_http_pub`) is distributed with VerneMQ as an integrated plugin but is not enabled by default. After configuring the bridge as described below, make sure to enable the plugin by setting (`vernemq.conf`):
+The MQTTplugin (`vmq_http_pub`) is distributed with VerneMQ as an integrated plugin, but is not enabled by default. After configuring the plugin as described below, make sure to enable the plugin by setting (`vernemq.conf`):
 
 ```text
 plugins.vmq_http_pub = on
@@ -122,7 +122,7 @@ curl --request POST \
   --header 'topic: T1' \
   --header 'user: myuser' \
   --header 'user_properties: [{"a":"b2"}]' \
-  --data '{"hallo": "welt"}'
+  --data '{"hello": "world"}'
 ```
 ### MQTT information encoded in query string
 ```text
