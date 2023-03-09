@@ -82,7 +82,7 @@ retain | Boolean, true or false
 user_properties | Json-style array
 
 ### Query String
-Topic, user, password, qos and retain flag can also be uurlencoded as part of the query string. The HTTP body is used for the actual message payload.
+Topic, user, password, qos and retain flag can also be uurlencoded as part of the query string. The HTTP body is used for the actual message payload. There is no need to specify the encoding in the query string. Query String currently does not support user_properties.
 
 ## Examples
 ### All required information encoded in the payload 
