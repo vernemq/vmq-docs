@@ -71,7 +71,7 @@ Topic, user, password, qos, retain and user_properties can also be part of the H
 
 The following header options are supported:
 | Header | Description |
-:-: | -----------:
+- | -----------
 Content-Type | application/json or application/octet-stream
 user | User (on-behalf-authorization)
 password | Password (on-behalf-authorization)
