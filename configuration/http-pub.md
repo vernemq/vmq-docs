@@ -119,7 +119,8 @@ curl --request POST \
 	"retain": false,
 	"payload": "aGFsbG8gd2VsdA==",
 	"user_properties": [{"a":"b"}]
-}'```
+}'
+```
 
 ### MQTT information encoded in header parameters
 ```text
