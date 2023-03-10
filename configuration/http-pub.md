@@ -40,7 +40,7 @@ For predefined, please use a configuration similar to:
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth = predefined
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.user = restUser
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.password = restPasswd
-listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.client-id = restClient
+listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.client_id = restClient
 ```
 
 
@@ -107,7 +107,19 @@ curl --request POST \
 ### All required information encoded in the payload (base64payload)
 ```text
 curl --request POST \
-```
+  --url 'https://mqtt.myhost.example:3001/restmqtt/api/v1/publish?encoding=base64' \
+  --header 'Authorization: Basic ...' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"topic": "a/b/c",
+	"user": "myuser",
+	"password": "test123",
+	"client_id": "myclient",
+	"qos": 1,
+	"retain": false,
+	"payload": "aGFsbG8gd2VsdA==",
+	"user_properties": [{"a":"b"}]
+}'```
 
 ### MQTT information encoded in header parameters
 ```text
