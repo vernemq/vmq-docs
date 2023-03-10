@@ -11,7 +11,8 @@ The VerneMQ HTTP listener is used to serve various VerneMQ subsystems such as:
 * [management API](../live-administration/http-administration.md)
 * [Health check](../monitoring/health-check.md)
 * [HTTP Publish](http_pub.md)
-By default it runs on port `8888`. To disable the HTTP listener, use a HTTPS listener instead or change the port, adapt the configuration in `vernemq.conf`:
+
+By default listener runs on port `8888`. To disable the HTTP listener, use a HTTPS listener instead or change the port, adapt the configuration in `vernemq.conf`:
 
 ```text
 listener.http.default = 127.0.0.1:8888
