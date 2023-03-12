@@ -153,4 +153,6 @@ The plugin exposes three metrics:
 * The plugin allows the authentication and authorization flows to override mountpoint, qos and topic.  
 * Currently, the regular (non m5) authentication and authorization flow is used.
 * The query string payload does not allow to set user parameters.
+* The plugin currently does not check the maximum payload size.
+* The plugin always expect MQTT-based authentication.
 * The verbs "put" and "post" are supported. There is no difference in functionality.
