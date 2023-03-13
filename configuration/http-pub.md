@@ -43,6 +43,7 @@ listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.password = restPassw
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.client_id = restClient
 ```
 
+If you configure a listener with "predefined" authorization, but provide authorization information (username, password, client_id) those will be ignored.
 
 ## MQTT Payload
 The plugin currently supports three different payload encodings: 
@@ -86,7 +87,6 @@ Topic, user, password, qos and retain flag can also be uurlencoded as part of th
 
 ## Examples
 ### All required information encoded in the payload 
-
 ```text
 curl --request POST \
   --url https://mqtt.myhost.example:3001/restmqtt/api/v1/publish \
@@ -157,6 +157,6 @@ The plugin exposes three metrics:
 * The plugin allows the authentication and authorization flows to override mountpoint, max_message_size, qos and topic.  
 * Currently, the regular (non m5) authentication and authorization flow is used.
 * The query string payload does not allow to set user parameters.
-* The plugin currently doescheck the maximum payload size before base64 decoding.
-* The plugin always expect MQTT-based authentication.
+* The plugin currently checks the maximum payload size before base64 decoding.
+* The plugin always expect MQTT-based authentication. No authentication is not supported.
 * The verbs "put" and "post" are supported. There is no difference in functionality.
