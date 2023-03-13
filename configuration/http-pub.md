@@ -140,7 +140,11 @@ curl --request POST \
 ### MQTT information encoded in query string
 ```text
 curl --request POST \
-```
+  --url 'https://mqtt.myhost.example:3001/restmqtt/api/v1/publish?topic=a%2Fb%2Fc&user=test-user3&password=test123&client_id=test-client3&qos=0' \
+  --header 'Authorization: Basic Og==' \
+  --header 'Content-Type: application/json' \
+  --data '{"Just a": "test"}'
+  ```
 
 
 ## Metrics
