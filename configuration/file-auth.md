@@ -58,6 +58,10 @@ vmq-passwd -U passwordfile
 
 `-c`
 
+> Creates a new password file.
+
+`-cf`
+
 > Creates a new password file. If the file already exists, it will be overwritten.
 
 `-D`
