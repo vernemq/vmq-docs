@@ -32,12 +32,12 @@ The plugin currently supports two authenticatation and authorization modes: "on-
 
 For on-behalf-of authentication use:
 ```text
-listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth = on-behalf-of
+listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.mode = on-behalf-of
 ```
 
 For predefined, please use a configuration similar to:
 ```text
-listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth = predefined
+listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.mode = predefined
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.user = restUser
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.password = restPasswd
 listener.https.http_pub.http_modules.vmq_http_pub.mqtt_auth.client_id = restClient
