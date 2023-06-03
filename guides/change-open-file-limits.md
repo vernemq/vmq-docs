@@ -40,6 +40,9 @@ This file is automatically sourced from the init script, and the VerneMQ process
 
 On CentOS/RedHat systems, make sure to set a proper limit for the user you’re usually logging in with to do any kind of work on the machine, including managing VerneMQ. On CentOS, `sudo` properly inherits the values from the executing user.
 
+## Systemd
+Systemd allows you to set the open file limit. The LimitNOFILE parameter defines the maximum number of file descriptors that a service or system unit can open. In the past, "infinite" was often chosen, which actually means an OS/systemD dependent maximum number. However, in recent versions of systemd like RHEL 9, CentOS Stream 9, and others, the default value is set to around a billion, significantly higher than necessary and the defaults used in older distributions. It is advisable to set a reasonable default value for LimitNOFILE based on the specific use case. Please consult https://access.redhat.com/solutions/1479623 for more information (RHEL9).
+
 ## Enable PAM-Based Limits for Debian & Ubuntu
 
 It can be helpful to enable PAM user limits so that non-root users, such as the `vernemq` user, may specify a higher value for maximum open files. For example, follow these steps to enable PAM user limits and set the soft and hard values **for all users of the system** to allow for up to 65536 open files.

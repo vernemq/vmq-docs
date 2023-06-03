@@ -44,3 +44,8 @@ Defaults to `1000` messages, use `-1` for no limit, use `0` if no messages shoul
 
 In contrast to the session based inflight window, max\_online\_messages and max\_offline\_messages serves as a protection of queues, on the outgoing side.
 
+```text
+override_max_online_messages = off
+```
+
+When an offline session transists to online, by default VerneMQ will adhere to the queue sizes also for moving data from the offline queue to the online queue. Therefore, if max_offline_messages > max_online_message VerneMQ will start dropping messages. It is possible to override this behaviour and allow VerneMQ to move all messages from the offline queue to the online queue. The queue will then batched (or streamed) to the subscribers, and the messages are read from disk in batches as well. The additional memory needed thus is just the amount needed to store references to those messages and not the messages themselves.
