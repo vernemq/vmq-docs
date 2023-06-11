@@ -72,3 +72,13 @@ An integer specifying how many bytes are buffered in case the remote node is not
 outgoing_clustering_buffer_size = 15000
 ```
 
+## Max Connection Lifetime
+Defines the maximum lifetime of MQTT connection in seconds. Max_connection_lifetime can be set per-listener.  This is an implementation of MQTT security proposal:
+"Servers may close the Network Connection of Clients and require them to re-authenticate with new credentials."
+
+```text
+listener.max_connection_lifetime = 25000
+```
+
+It is possible to override the value in auth_on_register(_m5) to a lower limit.
+

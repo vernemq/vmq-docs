@@ -74,7 +74,7 @@ Using TLS will of course increase the CPU load during connection setup. Latencie
 
 TLS will require considerably more RAM. Instead of 2 Erlang processes per connection, TLS will use 3. You'll have a session process, a queue process, and a TLS handler process that can encapsulate quite a big state \(&gt; 30KB\).
 
-Erlang/OTP uses it's own TLS implementation, only using OpenSSL for crypto, but not connection handling. For situations with high connection setup rate or overall high connection churn rate, the Erlang TLS implementation might be too slow. On the other hand, Erlang TLS gives you great concurrency & fault isolation for long-lived connections.
+Erlang/OTP uses its own TLS implementation, only using OpenSSL for crypto, but not connection handling. For situations with high connection setup rate or overall high connection churn rate, the Erlang TLS implementation might be too slow. On the other hand, Erlang TLS gives you great concurrency & fault isolation for long-lived connections.
 
 Some Erlang deployments terminate SSL/TLS with an external component or with a load balancer component. Do some testing & try to find out what works best for you.
 

@@ -58,6 +58,10 @@ vmq-passwd -U passwordfile
 
 `-c`
 
+> Creates a new password file. Does not overwrite existing file.
+
+`-cf`
+
 > Creates a new password file. If the file already exists, it will be overwritten.
 
 `-D`
@@ -140,10 +144,6 @@ Topic access is added with lines of the format:
 topic [read|write] <topic>
 ```
 
-{% hint style="info" %}
-Only one space should be put between the topic and the preceeding keyword. Extra spaces will be interpreted as part of the topic! Also note that the ACL parser doesn't accept empty lines between entries.
-{% endhint %}
-
 The access type is controlled using `read` or `write`. If not provided then read an write access is granted for the `topic`. The `topic` can use the MQTT subscription wildcards `+` or `#`.
 
 The first set of topics are applied to all anonymous clients \(assuming `allow_anonymous = on`\). User specific ACLs are added after a user line as follows \(this is the username not the client id\):
@@ -172,7 +172,7 @@ pattern write sensor/%u/data
 ```
 
 {% hint style="warning" %}
-VerneMQ currently doesn't cancel active subscriptions in case the ACL file revokes access for a topic.
+VerneMQ currently doesn't cancel active subscriptions in case the ACL file revokes access for a topic. It is possible to reauthenticate sessions manually (`vmq-admin`)
 {% endhint %}
 
 ### Simple ACL Example
@@ -202,9 +202,3 @@ User john is allowed to
 * publish & subscribe to topic foo.
 * subscribe to topic baz.
 * publish to topic open_to_all.
-
-Note that the ACL file parser is picky on a couple of things. If you doubt wether your ACLs are fully applied, check for the following.
-
-* Whitespaces at the end of topic names are part of the topic
-* Avoid empty lines in the ACL file.
-* But add a newline at the end of the ACL file.
