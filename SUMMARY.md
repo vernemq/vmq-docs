@@ -45,6 +45,7 @@
 * [Managing Listeners](administration/listeners.md)
 * [HTTP API](administration/http-administration.md)
 * [Tracing](administration/tracing.md)
+* [Output Format](administration/output_format.md)
 
 ## Monitoring
 
