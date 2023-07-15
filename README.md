@@ -17,5 +17,5 @@ You can contribute on all levels:
 - Providing more details and/or examples for specific topics
 - Extending the documentation where you find this useful to do
 
-Note that the documentation is versioned according to the VerneMQ releases. You can click the "Edit on Github" button in the upper right corner of every page to check what branch and document you are on. You can then create a Pull Request (PR) against that branch from your fork of the VerneMQ documentation repository. (Direct edits on Github are possible for members of the doc repository).
+Note that the documentation is versioned according to the VerneMQ releases. You can click the "Edit on Github" button in the upper right corner of every page to check what branch and document you are on. You can then create a Pull Request (PR) against that branch from your fork of the VerneMQ documentation repository. (Direct edits on Github are possible for members of the documentation repository).
 
