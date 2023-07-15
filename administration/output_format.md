@@ -1,7 +1,6 @@
-
-
+---
 description: Changing the output format of CLI commands
-
+---
 
 ## Default Output Format
 
