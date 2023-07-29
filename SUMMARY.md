@@ -29,6 +29,7 @@
 * [Advanced Options](configuration/advanced_options.md)
 * [Storage](configuration/storage.md)
 * [MQTT Bridge](configuration/bridge.md)
+* [REST Pubisher](configuration/http-pub.md)
 
 ## VerneMQ Clustering
 
