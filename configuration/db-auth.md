@@ -128,7 +128,7 @@ vmq_diversity.postgres.port = 5432
 vmq_diversity.postgres.user = vernemq
 vmq_diversity.postgres.password = vernemq
 vmq_diversity.postgres.database = vernemq_db
-vmq_diversity.cockroachdb.password_hash_method = crypt
+vmq_diversity.postgres.password_hash_method = crypt
 ```
 
 In case your Postgresql database requires SSL, you'll have to tell the plugin: 
@@ -275,7 +275,7 @@ INSERT INTO vmq_auth_acl (mountpoint, client_id, username, password, publish_acl
 
 ## CockroachDB
 
-To enable PostgreSQL authentication and authorization the following need to be configured in the `vernemq.conf` file:
+To enable CockroachDB authentication and authorization the following need to be configured in the `vernemq.conf` file:
 
 ```text
 vmq_diversity.auth_cockroachdb.enabled = on
