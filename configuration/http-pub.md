@@ -17,7 +17,7 @@ plugins.vmq_http_pub = on
 By default the plugin is not bound to any listener. It is recommended to use a dedicated HTTPS listener. For security, reasons the use of HTTPS instead of HTTP is prefered. It is possible to have more than one listener.
 
 ```text
-listener.https.http_pub = 10.241.15.174:3001
+listener.https.http_pub = 127.0.0.1:3001
 listener.https.http_pub.http_module.vmq_http_pub.auth.mode = apikey
 listener.https.http_pub.http_modules = vmq_http_pub
 ```
@@ -28,7 +28,7 @@ Additionally, this configuration sets the authentication method for the vmq_http
 It is important to note that this configuration is only a part of a larger configuration file, and that other settings such as SSL certificates, encryption, protocol versions, etc. may also be defined to improve the security and performance of the HTTPS listener.
 
 ### Authenthication and Authorization
-The plugin currently supports two authenticatation and authorization modes: "on-behalf-of" and "predefined". "On-behalf-of" means, that the client_id, user and password used for authentication and authorization is part of request (payload). Afterwards, the regular VerneMQ authentication and authorization flows are used. When using "predefined" the client, user, and password is bound to the plugin instance. It is recommended to use "on-behalf-of" and use a seperate client_id, user and password for REST-based clients.
+The plugin currently supports two authenticatation and authorization modes: "on-behalf-of" and "predefined". "On-behalf-of" means, that the client_id, user and password used for authentication and authorization is part of request (payload). Afterwards, the regular VerneMQ authentication and authorization flows are used. When using "predefined" the client, user, and password is bound to the plugin instance. It is recommended to use "on-behalf-of" and use a seperate client_id, user and password for REST-based clients. For testing purposes, the plugin also supports the global allow_anonymous flag.
 
 For on-behalf-of authentication use:
 ```text
@@ -158,5 +158,4 @@ The plugin exposes three metrics:
 * Currently, the regular (non m5) authentication and authorization flow is used.
 * The query string payload does not allow to set user parameters.
 * The plugin currently checks the maximum payload size before base64 decoding.
-* The plugin always expect MQTT-based authentication. No authentication is not supported.
 * The verbs "put" and "post" are supported. There is no difference in functionality.
