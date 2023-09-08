@@ -69,7 +69,7 @@ reg_views = "[vmq_reg_trie]"
 An integer specifying how many bytes are buffered in case the remote node is not available. Default is `10000`
 
 ```text
-outgoing_clustering_buffer_size = 15000
+outgoing_clustering_buffer_size = 10000
 ```
 
 ## Max Connection Lifetime
