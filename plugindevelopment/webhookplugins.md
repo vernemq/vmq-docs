@@ -4,9 +4,9 @@ description: How to implement VerneMQ plugins using a HTTP interface
 
 # Webhooks
 
-The VerneMQ Webhooks plugin provides an easy and flexible way to build powerful plugins for VerneMQ using web hooks. With VerneMQ Webhooks you are free to select the implementation language to match your technical requirements or the language in which you feel comfortable and productive in. You can use any modern language such as Python, Go, C\#/.Net and indeed any language in which you can build something that can handle HTTP requests.
+The VerneMQ Webhooks plugin provides an easy and flexible way to build powerful plugins for VerneMQ using web hooks. With VerneMQ Webhooks you are free to select the implementation language to match your technical requirements or the language in which you feel comfortable and productive in. You can use any modern language such as Python, Go, C\#/.Net and indeed any language in which you can build something that can handle HTTP(s) requests.
 
-The idea of VerneMQ Webhooks very simple: you can register an HTTP endpoint with a VerneMQ plugin hook and whenever the hook \(such as `auth_on_register`\) is called, the VerneMQ Webhooks plugin dispatches a HTTP post request to the registered endpoint. The HTTP post request contains a HTTP header like `vernemq-hook: auth_on_register` and a JSON encoded payload. The endpoint then responds with code 200 on success and with a JSON encoded payload informing the VerneMQ Webhooks plugin which action to take \(if any\).
+The idea of VerneMQ Webhooks very simple: you can register an HTTP(s) endpoint with a VerneMQ plugin hook and whenever the hook \(such as `auth_on_register`\) is called, the VerneMQ Webhooks plugin dispatches a HTTP post request to the registered endpoint. The HTTP post request contains a HTTP header like `vernemq-hook: auth_on_register` and a JSON encoded payload. The endpoint then responds with code 200 on success and with a JSON encoded payload informing the VerneMQ Webhooks plugin which action to take \(if any\).
 
 ## Configuring webhooks
 
@@ -89,6 +89,34 @@ For detailed information about the hooks and when they are called, see the secti
 Note, when overriding a **mountpoint** or a **client-id** both have to be returned by the webhook implementation for it to have an effect.
 {% endhint %}
 
+### Responses
+
+All hooks, unless stated otherwise, respond with a JSON-encoded payload and a success code of 200. All hooks support responding with "ok", indicated that the request was successful. 
+
+```javascript
+{
+    "result": "ok"
+}
+```
+
+Other possible responses are "next", meaning that the next callback should be tried. 
+
+```javascript
+{
+  "result": "next"
+}
+```
+
+Errors, e.g. authentication failures, are returned by a an "error" payload, either with the predefined "not_allowed" or some other error text:
+
+```javascript
+{
+  "result": {
+    "error": "not_allowed"
+  }
+}
+```
+
 ### auth\_on\_register
 
 Header: `vernemq-hook: auth_on_register`
@@ -107,15 +135,7 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the authentication was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-It is also possible to override various client specific settings by returning an array of modifiers:
+Additionaly, to the standard "ok" response. It is also possible to override various client specific settings by returning an array of modifiers:
 
 ```javascript
 {
@@ -130,21 +150,7 @@ It is also possible to override various client specific settings by returning an
 
 Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
-Other possible responses:
-
-```javascript
-{
-  "result": "next"
-}
-```
-
-```javascript
-{
-  "result": {
-    "error": "not_allowed"
-  }
-}
-```
+Other possible responses are next and error (not_allowed).
 
 ### auth\_on\_subscribe
 
@@ -165,15 +171,7 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the subscription authorization was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-Another example where where the topics to subscribe have been rewritten looks like:
+An example where where the topics to subscribe have been rewritten looks like:
 
 ```javascript
 {
@@ -186,19 +184,7 @@ Another example where where the topics to subscribe have been rewritten looks li
 
 Note, you can also pass a `qos` with value `128` which means it was either not possible or the client was not allowed to subscribe to that specific question.
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": { "error": "some error message" }
-}
-```
+Other possible responses are "next" and "error".
 
 ### auth\_on\_publish
 
@@ -220,15 +206,7 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the publish was authorized looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-A more complex example where the publish topic, qos, payload and retain flag is rewritten looks like:
+A complex example where the publish topic, qos, payload and retain flag is rewritten looks like:
 
 ```javascript
 {
@@ -242,19 +220,8 @@ A more complex example where the publish topic, qos, payload and retain flag is 
 }
 ```
 
-Other possible responses:
+Other possible responses are "next" and "error".
 
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": { "error": "some error message" }
-}
-```
 
 ### on\_register
 
@@ -343,19 +310,7 @@ Example response:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": { "error": "some error message" }
-}
-```
+Other possible responses are "next" and "error".
 
 ### on\_deliver
 
@@ -388,13 +343,7 @@ Example response:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
+An other possible response is "next".
 
 ### on\_offline\_message
 
@@ -481,14 +430,6 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the authentication was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
 It is also possible to override various client specific settings by returning an array of modifiers:
 
 ```javascript
@@ -503,21 +444,8 @@ It is also possible to override various client specific settings by returning an
 
 Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
-Other possible responses:
+Other possible responses are "next" and "error".
 
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": {
-      "error": "not_allowed"
-  }
-}
-```
 
 ### on\_auth\_m5
 
@@ -576,15 +504,7 @@ Webhook example payload:
   }
 ```
 
-A minimal response indicating the subscription authorization was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-Another example where where the topics to subscribe have been rewritten looks like:
+An example where where the topics to subscribe have been rewritten looks like:
 
 ```javascript
 {
@@ -606,21 +526,7 @@ Another example where where the topics to subscribe have been rewritten looks li
 
 Note, the `forbidden/topic` has been rejected with the `qos` value of 135 \(Not authorized\).
 
-Other responses
-
-```text
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": {
-        "error": "not_allowed"
-    }
-}
-```
+Other possible responses are "next" and "error".
 
 ### auth\_on\_publish\_m5
 
@@ -644,14 +550,6 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the publish was authorized looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
 A response where the publish topic has been rewritten:
 
 ```javascript
@@ -663,21 +561,7 @@ A response where the publish topic has been rewritten:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": {
-        "error": "not_allowed"
-    }
-}
-```
+Other possible responses are "next" and "error" (not_allowed).
 
 ### on\_register\_m5
 
@@ -785,13 +669,7 @@ Example response:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
+It supports the standard "OK" response, as well "next".
 
 ### on\_deliver\_m5
 
@@ -813,21 +691,7 @@ Webhook example payload:
 }
 ```
 
-Example response:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
+It supports the standard "OK" response, as well "next" and "error".
 
 ## Example Webhook in Python
 
