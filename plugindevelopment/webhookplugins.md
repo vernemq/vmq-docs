@@ -758,6 +758,8 @@ if __name__ == '__main__':
     app.run()
 ```
 ### Configuration
+The following configuration can be used for testing the Python example.
+
 ```
 plugins.vmq_webhooks = on
 # auth_on_register
