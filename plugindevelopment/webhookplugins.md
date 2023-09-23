@@ -107,12 +107,22 @@ Other possible responses are "next", meaning that the next callback should be tr
 }
 ```
 
-Errors, e.g. authentication failures, are returned by a an "error" payload, either with the predefined "not_allowed" or some other error text:
+Errors, e.g. authentication failures, are returned by a an "error" payload, either with the predefined "not_allowed"
 
 ```javascript
 {
   "result": {
     "error": "not_allowed"
+  }
+}
+```
+
+or some other error text:
+ 
+```javascript
+{
+  "result": {
+    "error": "some_error_message"
   }
 }
 ```
@@ -695,7 +705,7 @@ It supports the standard "OK" response, as well "next" and "error".
 
 ## Example Webhook in Python
 
-Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for six different hooks: `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register`, `auth_on_publish` and `auth_on_subscribe`.
+Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for six different hooks: `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register_m5`, `auth_on_publish_m5` and `auth_on_subscribe_m5`.
 
 The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. It also shows how to cache the result. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default 
 policy is `deny`.  
@@ -723,7 +733,7 @@ class hooks:
         # dispatch to appropriate function based on the hook.
         if hook == 'auth_on_register':
             return handle_auth_on_register(data)
-        elif hook == 'auth_on_publish_m5':
+        elif hook == 'auth_on_register_m5':
             return handle_auth_on_register(data)
         elif hook == 'auth_on_publish':
             return handle_auth_on_publish(data)
