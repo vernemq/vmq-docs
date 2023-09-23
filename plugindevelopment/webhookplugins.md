@@ -831,10 +831,12 @@ Other possible responses:
 
 ## Example Webhook in Python
 
-Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for three different hooks: `auth_on_register`, `auth_on_publish` and `auth_on_subscribe`.
+Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for six different hooks: `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register`, `auth_on_publish` and `auth_on_subscribe`.
 
-The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default policy is `deny`.
+The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. It also shows how to cache the result. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default 
+policy is `deny`.  
 
+### Python Code
 ```python
 import web
 import json
@@ -857,9 +859,15 @@ class hooks:
         # dispatch to appropriate function based on the hook.
         if hook == 'auth_on_register':
             return handle_auth_on_register(data)
+        elif hook == 'auth_on_publish_m5':
+            return handle_auth_on_register(data)
         elif hook == 'auth_on_publish':
             return handle_auth_on_publish(data)
+        elif hook == 'auth_on_publish_m5':
+            return handle_auth_on_publish(data)
         elif hook == 'auth_on_subscribe':
+            return handle_auth_on_subscribe(data)
+        elif hook == 'auth_on_subscribe_m5':
             return handle_auth_on_subscribe(data)
         else:
             web.ctx.status = 501
@@ -884,5 +892,24 @@ def handle_auth_on_subscribe(data):
 
 if __name__ == '__main__':
     app.run()
+```
+### Configuration
+```
+plugins.vmq_webhooks = on
+# auth_on_register
+vmq_webhooks.webhook1.hook = auth_on_register
+vmq_webhooks.webhook1.endpoint = http://127.0.0.1:8080
+
+# auth_on_subscribe
+vmq_webhooks.webhook2.hook = auth_on_subscribe
+vmq_webhooks.webhook2.endpoint = http://127.0.0.1:8080
+
+# auth_on_register_m5
+vmq_webhooks.webhook3.hook = auth_on_register_m5
+vmq_webhooks.webhook3.endpoint = http://127.0.0.1:8080
+
+# auth_on_subscribe_m5
+vmq_webhooks.webhook4.hook = auth_on_subscribe_m5
+vmq_webhooks.webhook4.endpoint = http://127.0.0.1:8080
 ```
 
