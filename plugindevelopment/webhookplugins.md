@@ -59,9 +59,9 @@ These options are available in VerneMQ 1.4.0.
 
 ## Caching
 
-VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish` and `auth_on_subscribe` hooks.
+VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register_m5`, `auth_on_publish_m5` and `auth_on_subscribe_m5` hooks.
 
-This can be used to speed up authentication and authorization tremendously. All data passed to these hooks is used to look if the call is in the cache, except in the case of the `auth_on_publish` where the payload is omitted.
+This can be used to speed up authentication and authorization tremendously. All data passed to these hooks is used to look if the call is in the cache, except in the case of the `auth_on_publish` and `auth_on_publish_m5` where the payload is omitted.
 
 To enable caching for an endpoint simply return the `cache-control: max-age=AgeInSeconds` in the response headers to one of the mentioned hooks. If the call was successful \(authentication granted\), the request will be cached together with any modifiers, except for the `payload` modifier in the `auth_on_publish` hook.
 
@@ -851,8 +851,8 @@ class hooks:
 
         # print the hook and request data to the console
         print
-        print 'hook:', hook
-        print '  data: ', data
+        print ('hook:', hook)
+        print ('  data: ', data)
 
         # dispatch to appropriate function based on the hook.
         if hook == 'auth_on_register':
@@ -866,11 +866,12 @@ class hooks:
             return "not implemented"
 
 def handle_auth_on_register(data):
+    # Cache example
+    web.header('cache-control', 'max-age=30')
     # only allow user 'joe' with password 'secret', reject all others.
     if "joe" == data['username']:
         if "secret" == data['password']:
-            return json.dumps({'result': 'ok'})
-
+            return json.dumps({'result': 'ok'})  
     return json.dumps({'result': {'error': 'not allowed'}})
 
 def handle_auth_on_publish(data):
