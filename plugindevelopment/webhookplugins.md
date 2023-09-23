@@ -4,9 +4,9 @@ description: How to implement VerneMQ plugins using a HTTP interface
 
 # Webhooks
 
-The VerneMQ Webhooks plugin provides an easy and flexible way to build powerful plugins for VerneMQ using web hooks. With VerneMQ Webhooks you are free to select the implementation language to match your technical requirements or the language in which you feel comfortable and productive in. You can use any modern language such as Python, Go, C\#/.Net and indeed any language in which you can build something that can handle HTTP requests.
+The VerneMQ Webhooks plugin provides an easy and flexible way to build powerful plugins for VerneMQ using web hooks. With VerneMQ Webhooks you are free to select the implementation language to match your technical requirements or the language in which you feel comfortable and productive in. You can use any modern language such as Python, Go, C\#/.Net and indeed any language in which you can build something that can handle HTTP(s) requests.
 
-The idea of VerneMQ Webhooks very simple: you can register an HTTP endpoint with a VerneMQ plugin hook and whenever the hook \(such as `auth_on_register`\) is called, the VerneMQ Webhooks plugin dispatches a HTTP post request to the registered endpoint. The HTTP post request contains a HTTP header like `vernemq-hook: auth_on_register` and a JSON encoded payload. The endpoint then responds with code 200 on success and with a JSON encoded payload informing the VerneMQ Webhooks plugin which action to take \(if any\).
+The idea of VerneMQ Webhooks very simple: you can register an HTTP(s) endpoint with a VerneMQ plugin hook and whenever the hook \(such as `auth_on_register`\) is called, the VerneMQ Webhooks plugin dispatches a HTTP post request to the registered endpoint. The HTTP post request contains a HTTP header like `vernemq-hook: auth_on_register` and a JSON encoded payload. The endpoint then responds with code 200 on success and with a JSON encoded payload informing the VerneMQ Webhooks plugin which action to take \(if any\).
 
 ## Configuring webhooks
 
@@ -59,9 +59,9 @@ These options are available in VerneMQ 1.4.0.
 
 ## Caching
 
-VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish` and `auth_on_subscribe` hooks.
+VerneMQ webhooks support caching of the `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register_m5`, `auth_on_publish_m5` and `auth_on_subscribe_m5` hooks.
 
-This can be used to speed up authentication and authorization tremendously. All data passed to these hooks is used to look if the call is in the cache, except in the case of the `auth_on_publish` where the payload is omitted.
+This can be used to speed up authentication and authorization tremendously. All data passed to these hooks is used to look if the call is in the cache, except in the case of the `auth_on_publish` and `auth_on_publish_m5` where the payload is omitted.
 
 To enable caching for an endpoint simply return the `cache-control: max-age=AgeInSeconds` in the response headers to one of the mentioned hooks. If the call was successful \(authentication granted\), the request will be cached together with any modifiers, except for the `payload` modifier in the `auth_on_publish` hook.
 
@@ -89,6 +89,44 @@ For detailed information about the hooks and when they are called, see the secti
 Note, when overriding a **mountpoint** or a **client-id** both have to be returned by the webhook implementation for it to have an effect.
 {% endhint %}
 
+### Responses
+
+All hooks, unless stated otherwise, respond with a JSON-encoded payload and a success code of 200. All hooks support responding with "ok", indicated that the request was successful. 
+
+```javascript
+{
+    "result": "ok"
+}
+```
+
+Other possible responses are "next", meaning that the next callback should be tried. 
+
+```javascript
+{
+  "result": "next"
+}
+```
+
+Errors, e.g. authentication failures, are returned by a an "error" payload, either with the predefined "not_allowed"
+
+```javascript
+{
+  "result": {
+    "error": "not_allowed"
+  }
+}
+```
+
+or some other error text:
+ 
+```javascript
+{
+  "result": {
+    "error": "some_error_message"
+  }
+}
+```
+
 ### auth\_on\_register
 
 Header: `vernemq-hook: auth_on_register`
@@ -107,15 +145,7 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the authentication was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-It is also possible to override various client specific settings by returning an array of modifiers:
+Additionaly, to the standard "ok" response. It is also possible to override various client specific settings by returning an array of modifiers:
 
 ```javascript
 {
@@ -130,21 +160,7 @@ It is also possible to override various client specific settings by returning an
 
 Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
-Other possible responses:
-
-```javascript
-{
-  "result": "next"
-}
-```
-
-```javascript
-{
-  "result": {
-    "error": "not_allowed"
-  }
-}
-```
+Other possible responses are next and error (not_allowed).
 
 ### auth\_on\_subscribe
 
@@ -165,15 +181,7 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the subscription authorization was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-Another example where where the topics to subscribe have been rewritten looks like:
+An example where where the topics to subscribe have been rewritten looks like:
 
 ```javascript
 {
@@ -186,19 +194,7 @@ Another example where where the topics to subscribe have been rewritten looks li
 
 Note, you can also pass a `qos` with value `128` which means it was either not possible or the client was not allowed to subscribe to that specific question.
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": { "error": "some error message" }
-}
-```
+Other possible responses are "next" and "error".
 
 ### auth\_on\_publish
 
@@ -220,15 +216,7 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the publish was authorized looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-A more complex example where the publish topic, qos, payload and retain flag is rewritten looks like:
+A complex example where the publish topic, qos, payload and retain flag is rewritten looks like:
 
 ```javascript
 {
@@ -242,19 +230,8 @@ A more complex example where the publish topic, qos, payload and retain flag is 
 }
 ```
 
-Other possible responses:
+Other possible responses are "next" and "error".
 
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": { "error": "some error message" }
-}
-```
 
 ### on\_register
 
@@ -343,19 +320,7 @@ Example response:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": { "error": "some error message" }
-}
-```
+Other possible responses are "next" and "error".
 
 ### on\_deliver
 
@@ -388,13 +353,7 @@ Example response:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
+An other possible response is "next".
 
 ### on\_offline\_message
 
@@ -481,14 +440,6 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the authentication was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
 It is also possible to override various client specific settings by returning an array of modifiers:
 
 ```javascript
@@ -503,21 +454,8 @@ It is also possible to override various client specific settings by returning an
 
 Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
-Other possible responses:
+Other possible responses are "next" and "error".
 
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": {
-      "error": "not_allowed"
-  }
-}
-```
 
 ### on\_auth\_m5
 
@@ -576,15 +514,7 @@ Webhook example payload:
   }
 ```
 
-A minimal response indicating the subscription authorization was successful looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-Another example where where the topics to subscribe have been rewritten looks like:
+An example where where the topics to subscribe have been rewritten looks like:
 
 ```javascript
 {
@@ -606,21 +536,7 @@ Another example where where the topics to subscribe have been rewritten looks li
 
 Note, the `forbidden/topic` has been rejected with the `qos` value of 135 \(Not authorized\).
 
-Other responses
-
-```text
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": {
-        "error": "not_allowed"
-    }
-}
-```
+Other possible responses are "next" and "error".
 
 ### auth\_on\_publish\_m5
 
@@ -644,14 +560,6 @@ Webhook example payload:
 }
 ```
 
-A minimal response indicating the publish was authorized looks like:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
 A response where the publish topic has been rewritten:
 
 ```javascript
@@ -663,21 +571,7 @@ A response where the publish topic has been rewritten:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
-
-```javascript
-{
-    "result": {
-        "error": "not_allowed"
-    }
-}
-```
+Other possible responses are "next" and "error" (not_allowed).
 
 ### on\_register\_m5
 
@@ -785,13 +679,7 @@ Example response:
 }
 ```
 
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
+It supports the standard "OK" response, as well "next".
 
 ### on\_deliver\_m5
 
@@ -813,28 +701,16 @@ Webhook example payload:
 }
 ```
 
-Example response:
-
-```javascript
-{
-    "result": "ok"
-}
-```
-
-Other possible responses:
-
-```javascript
-{
-    "result": "next"
-}
-```
+It supports the standard "OK" response, as well "next" and "error".
 
 ## Example Webhook in Python
 
-Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for three different hooks: `auth_on_register`, `auth_on_publish` and `auth_on_subscribe`.
+Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for six different hooks: `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register_m5`, `auth_on_publish_m5` and `auth_on_subscribe_m5`.
 
-The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default policy is `deny`.
+The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. It also shows how to cache the result. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default 
+policy is `deny`.  
 
+### Python Code
 ```python
 import web
 import json
@@ -851,26 +727,33 @@ class hooks:
 
         # print the hook and request data to the console
         print
-        print 'hook:', hook
-        print '  data: ', data
+        print ('hook:', hook)
+        print ('  data: ', data)
 
         # dispatch to appropriate function based on the hook.
         if hook == 'auth_on_register':
             return handle_auth_on_register(data)
+        elif hook == 'auth_on_register_m5':
+            return handle_auth_on_register(data)
         elif hook == 'auth_on_publish':
             return handle_auth_on_publish(data)
+        elif hook == 'auth_on_publish_m5':
+            return handle_auth_on_publish(data)
         elif hook == 'auth_on_subscribe':
+            return handle_auth_on_subscribe(data)
+        elif hook == 'auth_on_subscribe_m5':
             return handle_auth_on_subscribe(data)
         else:
             web.ctx.status = 501
             return "not implemented"
 
 def handle_auth_on_register(data):
+    # Cache example
+    web.header('cache-control', 'max-age=30')
     # only allow user 'joe' with password 'secret', reject all others.
     if "joe" == data['username']:
         if "secret" == data['password']:
-            return json.dumps({'result': 'ok'})
-
+            return json.dumps({'result': 'ok'})  
     return json.dumps({'result': {'error': 'not allowed'}})
 
 def handle_auth_on_publish(data):
@@ -883,5 +766,26 @@ def handle_auth_on_subscribe(data):
 
 if __name__ == '__main__':
     app.run()
+```
+### Configuration
+The following configuration can be used for testing the Python example.
+
+```
+plugins.vmq_webhooks = on
+# auth_on_register
+vmq_webhooks.webhook1.hook = auth_on_register
+vmq_webhooks.webhook1.endpoint = http://127.0.0.1:8080
+
+# auth_on_subscribe
+vmq_webhooks.webhook2.hook = auth_on_subscribe
+vmq_webhooks.webhook2.endpoint = http://127.0.0.1:8080
+
+# auth_on_register_m5
+vmq_webhooks.webhook3.hook = auth_on_register_m5
+vmq_webhooks.webhook3.endpoint = http://127.0.0.1:8080
+
+# auth_on_subscribe_m5
+vmq_webhooks.webhook4.hook = auth_on_subscribe_m5
+vmq_webhooks.webhook4.endpoint = http://127.0.0.1:8080
 ```
 
