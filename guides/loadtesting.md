@@ -4,13 +4,15 @@ description: Loadtesting VerneMQ with vmq_mzbench
 
 # Loadtesting VerneMQ
 
-You can loadtest VerneMQ with our [vmq\_mzbench tool](https://github.com/erlio/vmq_mzbench). It is based on Machinezone's very powerful [MZBench system](https://github.com/satori-com/mzbench) and lets you narrow down what hardware specs are needed to meet your performance goals. You can state your requirements for latency percentiles \(and much more\) in a formal way, and let vmq\_mzbench automatically fail, if it can't meet the requirements.
+You can loadtest VerneMQ with any MQTT-capable loadtesting framework. Our recommendation is to use a framework you are familiar with, with MQTT plugins or scenarios that suit your needs.
+
+While MZBench is currently not actively developed, it is still one of the options you can use [vmq\_mzbench tool](https://github.com/vernemq/vmq_mzbench). It is based on Machinezone's very powerful original MZBench system, currently available in a community repository here: [MZBench system](https://github.com/mzbench/mzbench). MZBench lets you narrow down what hardware specs are needed to meet your performance goals. You can state your requirements for latency percentiles \(and much more\) in a formal way, and let vmq\_mzbench automatically fail, if it can't meet the requirements.
 
 If you have an AWS account, vmq\_mzbench can automagically provision worker nodes for you. You can also run it locally, of course.
 
 ## 1. Install MZBench
 
-Please follow the [MZBench installation guide](http://satori-com.github.io/mzbench/#installation)
+Please follow the [MZBench installation guide](https://mzbench.github.com/mzbench/#installation)
 
 ## 2. Install vmq\_mzbench
 
@@ -19,7 +21,7 @@ Actually, you don't even have to install vmq\_mzbench, if you don't want to. You
 To install vmq\_mzbench on your computer, go through the following steps:
 
 ```text
-git clone git://github.com/erlio/vmq_mzbench.git
+git clone git://github.com/vernemq/vmq_mzbench.git
 cd vmq_mzbench
 ./rebar get-deps
 ./rebar compile
@@ -37,16 +39,16 @@ If you'd just like the script itself fetch vmq\_mzbench, then you can direct it 
 
 ```erlang
 {make_install, [
-{git, "git://github.com/erlio/vmq_mzbench.git"}]},
+{git, "git://github.com/vernemq/vmq_mzbench.git"}]},
 ```
 
 ## 3. Write vmq\_mzbench scenario files
 
 {% hint style="info" %}
-MZBench recently switched from an Erlang-styled Scenario DSL to a more python-like DSL dubbed BDL \(Benchmark Definition Language\). Have a look at the [BDL examples](https://github.com/machinezone/mzbench/tree/master/examples.bdl) on Github.
+MZBench recently switched from an Erlang-styled Scenario DSL to a more python-like DSL dubbed BDL \(Benchmark Definition Language\). Have a look at the [BDL examples](https://github.com/mzbench/mzbench/tree/master/examples.bdl) on Github.
 {% endhint %}
 
-You can familiarize yourself quickly with [MZBench's guide](http://satori-com.github.io/mzbench/scenarios/spec/) on writing loadtest scenarios.
+You can familiarize yourself quickly with [MZBench's guide](https://mzbench.github.io/mzbench/scenarios/spec/) on writing loadtest scenarios.
 
 There's not much to learn, just make sure you understand how pools and loops work. Then you can add the vmq\_mzbench statement functions to the mix and define actual loadtest scenarios.
 
