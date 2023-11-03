@@ -131,7 +131,11 @@ If you use client certificates and want to use the certificates CN value as a us
 listener.ssl.use_identity_as_username = on
 ```
 
-Both options `require_certificate` and `use_identity_as_username` default to `off`.
+Both options `require_certificate` and `use_identity_as_username` default to `off`. mTLS can work with additional MQTT-based authentication (username and password) or without. In case you want to use only mTLS-based authentication you need to enable allow_anonymous (global) or allow_anonymous_override (listener).
+
+```text
+listener.ssl.allow_anonymous_override = on
+```
 
 ### WebSocket
 The same configuration options can be used for securing WebSocket connections, just use `wss` as the protocol identifier e.g. `listener.wss.require_certificate`.
