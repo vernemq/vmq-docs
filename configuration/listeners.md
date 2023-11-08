@@ -122,19 +122,19 @@ The PSK file contains a list of matching identifiers and psk keys.
 If you want to use client certificates to authenticate your clients you have to set the following option:
 
 ```text
-listener.ssl.require_certificate = on
+listener.ssl.my_listener.require_certificate = on
 ```
 
 If you use client certificates and want to use the certificates CN value as a username you can set:
 
 ```text
-listener.ssl.use_identity_as_username = on
+listener.ssl.my_listener.use_identity_as_username = on
 ```
 
 Both options `require_certificate` and `use_identity_as_username` default to `off`. mTLS can work with additional MQTT-based authentication (username and password) or without. In case you want to use only mTLS-based authentication you need to enable allow_anonymous (global) or allow_anonymous_override (listener).
 
 ```text
-listener.ssl.allow_anonymous_override = on
+listener.ssl.my_listener.allow_anonymous_override = on
 ```
 
 ### WebSocket
