@@ -44,6 +44,7 @@
 * [Retained messages](administration/retained-store.md)
 * [Live reconfiguration](administration/config_values.md)
 * [Managing Listeners](administration/listeners.md)
+* [Certificate Management](administration/certificates.md)
 * [HTTP API](administration/http-administration.md)
 * [Tracing](administration/tracing.md)
 * [Output Format](administration/output_format.md)
