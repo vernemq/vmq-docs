@@ -43,16 +43,39 @@ Listing the clients and the subscriptions one can do the following:
 
 ```text
 $ vmq-admin session show --topic --client_id
-+---------+----------------+
-|client_id|     topic      |
-+---------+----------------+
-| client2 |some/other/topic|
-| client1 |some/other/topic|
-| client1 |   some/topic   |
-+---------+----------------+
++---------+-----------------+
+|client_id|     topic       |
++---------+-----------------+
+| client2 |some/other/topic1|
+| client1 |some/other/topic2|
+| client1 |   some/topic    |
++---------+-----------------+
 ```
 
 And to list only the clients subscribed to the topic `some/topic`:
+
+```text
+$ vmq-admin session show --topic --client_id --topic=some/topic
++---------+----------+
+|client_id|  topic   |
++---------+----------+
+| client1 |some/topic|
++---------+----------+
+```
+
+you can also do a regex search to query a subset of topics:
+
+```text
+$ vmq-admin session show --topic --client_id --topic=~some/other/.*
++---------+-----------------+
+|client_id|      topic      |
++---------+-----------------+
+| client2 |some/other/topic1|
+| client1 |some/other/topic |
++---------+-----------------+
+```
+
+A regex search uses the =~ syntax and is currently limited to alpha-numeric searches. Please note that the regex search consumes more load an a node than a regular search.
 
 ```text
 $ vmq-admin session show --topic --client_id --topic=some/topic
