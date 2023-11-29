@@ -23,7 +23,10 @@ listener.https.http_pub.http_modules = vmq_http_pub
 ```
 This configuration defines an HTTPS listener for an application running on the server at IP address 127.0.0.1 and using port 3001. The listener is used to forward HTTP requests to vmq_http_pub.
 
-Additionally, this configuration sets the authentication method for the vmq_http_pub instance to API key. This means that a valid API key is required to access this instance.
+Additionally, this configuration sets the authentication method for the vmq_http_pub instance to API key (which is the default). This means that a valid API key is required to access this instance. The API key needs to have the scope httppub. You can create a new API key as follows:
+```text
+vmq-admin api-key create scope=httppub
+```
 
 It is important to note that this configuration is only a part of a larger configuration file, and that other settings such as SSL certificates, encryption, protocol versions, etc. may also be defined to improve the security and performance of the HTTPS listener.
 
