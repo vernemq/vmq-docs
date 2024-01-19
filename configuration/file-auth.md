@@ -64,6 +64,10 @@ vmq-passwd -U passwordfile
 
 > Creates a new password file. If the file already exists, it will be overwritten.
 
+`<no option>`
+
+> When run with no option, It will create a new user and password and append it to the password file if exists. Does not overwrite the existing file
+
 `-D`
 
 > Deletes the specified user from the password file.
@@ -93,6 +97,14 @@ Delete a user from a password file
 ```text
 vmq-passwd -D /etc/vernemq/vmq.passwd henry
 ```
+
+Add multiple user to the existing password file :
+
+```text
+vmq-passwd /etc/vernemq/vmq.passwd bob
+vmq-passwd /etc/vernemq/vmq.passwd john
+```
+
 
 **Acknowledgements**
 
