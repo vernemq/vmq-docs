@@ -102,6 +102,7 @@ Add multiple user to the existing password file :
 
 ```text
 vmq-passwd /etc/vernemq/vmq.passwd bob
+vmq-passwd /etc/vernemq/vmq.passwd john
 ```
 
 
