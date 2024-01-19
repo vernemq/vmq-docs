@@ -64,9 +64,9 @@ vmq-passwd -U passwordfile
 
 > Creates a new password file. If the file already exists, it will be overwritten.
 
-` `
+`<no option>`
 
-> When run with no option, It will create a new password and append it to the password file if exists. Does not overwrite the existing file
+> When run with no option, It will create a new user and password and append it to the password file if exists. Does not overwrite the existing file
 
 `-D`
 
