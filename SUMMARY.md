@@ -29,6 +29,7 @@
 * [Advanced Options](configuration/advanced_options.md)
 * [Storage](configuration/storage.md)
 * [MQTT Bridge](configuration/bridge.md)
+* [REST Publisher](configuration/http-pub.md)
 
 ## VerneMQ Clustering
 
@@ -43,8 +44,10 @@
 * [Retained messages](administration/retained-store.md)
 * [Live reconfiguration](administration/config_values.md)
 * [Managing Listeners](administration/listeners.md)
+* [Certificate Management](administration/certificates.md)
 * [HTTP API](administration/http-administration.md)
 * [Tracing](administration/tracing.md)
+* [Output Format](administration/output_format.md)
 
 ## Monitoring
 
@@ -80,4 +83,4 @@
 * [Clustering during development](guides/clustering-during-development.md)
 * [Not a tuning guide](guides/not-a-tuning-guide.md)
 * [Change Open File Limits](guides/change-open-file-limits.md)
-
+* [Migrating to 2.0](guides/migration-to-2-0.md)

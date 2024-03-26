@@ -74,9 +74,27 @@ To enable the PROXY protocol for tcp listeners use `listener.tcp.proxy_protocol 
 
 If client certificates are used you can set `listener.tcp.proxy_protocol_use_cn_as_username = on` which will overwrite the MQTT username set by the client with the common name from the client certificate before authentication and authorization is performed. 
 
+## SSL/TLS Support
+VerneMQ supports different Transport Layer Security (TLS) options, which allow for secure communication between MQTT clients and VerneMQ. 
 
-## Sample SSL Config
+TLS provides secure communication between devices by encrypting the data in transit, preventing unauthorized access and ensuring the integrity of the data. VerneMQ supports various TLS options, including the use of certificates, mutual authentication, Pre-Shared Keys and the ability to specify specific ciphersuites and TLS versions.
 
+VerneMQ supports the following the TLS-flavours:
+
+- Server Side TLS
+- TLS-PSK
+- Mutal TLS (mTLS)
+
+In server-side TLS, the client initiates a TLS handshake with the broker, and the broker responds by sending its certificate. The client verifies the certificate and generates a symmetric key, which is used to encrypt and decrypt data exchanged between the client and broker. Server-side TLS does no further authentication or authorization of the client. The broker later on authenticates and authorizes clients through MQTT.    
+
+TLS-PSK (Pre-Shared Key) secures communication between MQTT client and broker using pre-shared keys for authentication. Unlike Service-Side or mutal TLS, which use certificates to authenticate the server and client, TLS-PSK uses a pre-shared secret (a key) to authenticate the endpoints. Clients that support TLS-PSK can use the specified pre-shared keys to authenticate themselves to the broker, providing a lightweight alternative to certificate-based authentication. The key has to be securly stored on the MQTT device.
+
+Mutal TLS (mTLS)  provides mutual authentication and encryption of data in transit between MQTT client and Broker. Unlike Server-Side TLS, where only the server is authenticated to the client, mTLS requires both the client and server to authenticate each other before establishing a secure connection.
+
+The decision to use TLS, TLS-PSK, or mTLS depends on your specific use case and security requirements. 
+
+### Sample SSL Config
+#### Service-Side TLS
 Accepting SSL connections on port 8883:
 
 ```text
@@ -87,20 +105,39 @@ listener.ssl.keyfile = /etc/ssl/key.pem
 listener.ssl.default = 127.0.0.1:8883
 ```
 
+#### TLS-PSK (Pre-Shared Keys)
+The following configuration snippet enables TLS-PSK authentication on VerneMQ's SSL listener, specifies the location of the pre-shared key file, and sets the list of ciphers to be used for encryption. Clients that support TLS-PSK can use the specified pre-shared keys to authenticate themselves to the broker, providing a lightweight alternative to certificate-based authentication.
+
+```text
+listener.ssl.psk_support = on
+listener.ssl.pskfile = /srv/vernemq/etc/vernemq.psk
+listener.ssl.ciphers  = PSK-AES256-GCM-SHA384:PSK-AES256-CBC-SHA:PSK-AES128-GCM-SHA256
+```
+This configuration snippet enables TLS-PSK authentication on the VerneMQs SSL listener, specifies the location of the pre-shared key file, and sets the list of ciphers to be used for encryption. Clients that support TLS-PSK can use the specified pre-shared keys to authenticate themselves to the broker, providing a lightweight alternative to certificate-based authentication.
+
+The PSK file contains a list of matching identifiers and psk keys.
+
+
+#### Mutal TLS (mTLS)
 If you want to use client certificates to authenticate your clients you have to set the following option:
 
 ```text
-listener.ssl.require_certificate = on
+listener.ssl.my_listener.require_certificate = on
 ```
 
 If you use client certificates and want to use the certificates CN value as a username you can set:
 
 ```text
-listener.ssl.use_identity_as_username = on
+listener.ssl.my_listener.use_identity_as_username = on
 ```
 
-Both options `require_certificate` and `use_identity_as_username` default to `off`.
+Both options `require_certificate` and `use_identity_as_username` default to `off`. mTLS can work with additional MQTT-based authentication (username and password) or without. In case you want to use only mTLS-based authentication you need to enable allow_anonymous (global) or allow_anonymous_override (listener).
 
+```text
+listener.ssl.my_listener.allow_anonymous_override = on
+```
+
+### WebSocket
 The same configuration options can be used for securing WebSocket connections, just use `wss` as the protocol identifier e.g. `listener.wss.require_certificate`.
 
 {% hint style="info" %}

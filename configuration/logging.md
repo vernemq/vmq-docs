@@ -64,7 +64,7 @@ The maximum sizes in bytes of inidividual messages in the crash log defaults to 
 log.crash.maximum_message_size = 64KB
 ```
 
-VerneMQ rotate crash logs. By default, the crash log file is rotated at midnight or when the size exceeds `10MGB`. This behaviour can be changed by setting:
+VerneMQ rotate crash logs. By default, the crash log file is rotated at midnight or when the size exceeds `10MB`. This behaviour can be changed by setting:
 
 ```text
 ## Acceptable values:

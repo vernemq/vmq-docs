@@ -74,3 +74,16 @@ A convenient tool is the `ts` \(timestamp\) tool which is available on many syst
 It is currently not possible to start multiple traces from multiple shells, or trace multiple ClientIDs.
 {% endhint %}
 
+## Stopping a Trace from another shell
+
+If you loose access to your shell from where you started a trace, you might need to stop that trace before you can spawn a new one. Your attempt to spawn a second trace will result in the following output:
+
+```text
+Cannot start trace as another trace is already running.
+```
+
+You can stop a running trace using the `stop_all` command from a second shell. This will log a message to the other shell telling that session it's being externally terminated. The calling shell will silently return and be available for a new trace.
+
+```text
+$ sudo vmq-admin trace stop_all
+```

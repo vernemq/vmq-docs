@@ -454,6 +454,7 @@ For Redis authentication and authorization configure the following in `vernemq.c
 vmq_diversity.auth_redis.enabled = on
 vmq_diversity.redis.host = 127.0.0.1
 vmq_diversity.redis.port = 6379
+# vmq_diversity.redis.user = "default"
 # vmq_diversity.redis.password =
 # vmq_divserity.redis.database = 0
 ```

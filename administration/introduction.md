@@ -29,6 +29,10 @@ Usage: vmq-admin <sub-command>
 To check for the global cluster state in case the local VerneMQ node is down, you'll have to go to another node though.
 {% endhint %}
 
+{% hint style="info" %}
+`vmq-admin` uses RPC to connect to some node. By default, it has a timeout of 60secs before vmq-admin terminates with a RPC timeout. Sometimes a call (for example cluster leave) might need more time. In that case, you can set a different timeout with vmq-admin -rpctimeout timeoutsecs or even -rpctimeout infinity.  
+{% endhint %}
+
 {% hint style="danger" %}
 `vmq-admin` is a live re-configuration utility. Please note that all dynamically configured values will be reset by vernemq.conf upon broker restart.   
  As a consequence, it's good practice to keep track of the applied changes when re-configuring a broker with `vmq-admin`. If needed, you can then persist changes by adding them to the vernemq.conf file.

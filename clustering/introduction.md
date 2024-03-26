@@ -33,6 +33,7 @@ Makes sense? Go ahead and create your first VerneMQ cluster!
 ```text
 vmq-admin cluster join discovery-node=<OtherClusterNode>
 ```
+The discovery-node can be any other node. It is not necessary to always choose the same node as discovery node. It is important that only a node with an empty history joins a cluster. One should not try to add a node, that had already traffic on it, to a cluster.   
 
 ## Leaving a Cluster
 

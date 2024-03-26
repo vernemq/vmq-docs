@@ -30,6 +30,14 @@ vmq-admin listener show
 `
 ```
 
+You can retrieve additional information by adding the --tls or --mqtt switch. See 
+
+```text
+vmq-admin listener show --help 
+```
+
+for more information.
+
 ## Starting a new listener
 
 ```text
@@ -48,7 +56,7 @@ To start an MQTT listener using defaults, just set the port and IP address as a 
 vmq-admin listener stop address=192.168.1.50 port=1884
 ```
 
-You can add the `-k` or `--kill_sessions` switch to that command. This will disconnect all client connections setup by that listener. In combination with a mountpoint, this can be useful for terminating clients for a specific application, or to force re-connects to another cluster node \(to prepare for a cluster leave for your node\).
+A stopped listener will not accept new connections, but continue existing sessions. You can add the `-k` or `--kill_sessions` switch to that command. This will disconnect all client connections setup by that listener. In combination with a mountpoint, this can be useful for terminating clients for a specific application, or to force re-connects to another cluster node \(to prepare for a cluster leave for your node\).
 
 ## Restarting a stopped listener
 
