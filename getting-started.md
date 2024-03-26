@@ -57,3 +57,17 @@ The command will respond with `pong` if the broker is running or `Node <NodeName
 As you may have noticed, VerneMQ will warn you at startup when your system’s open files limit \(`ulimit -n`\) is too low. You’re advised to increase the OS default open files limit when running VerneMQ. Read more about why and how in the [Open Files Limit documentation](guides/change-open-file-limits.md).
 {% endhint %}
 
+### Starting using systemd/systemctl
+
+If you use a `systemd` service file (as in the binary packages), you can start VerneMQ using the `systemctl` interface to `systemd`:
+
+```text
+$ sudo systemctl start vernemq
+```
+
+Other `systemctl` commands work as well:
+
+```text
+$ sudo systemctl stop vernemq
+$ sudo systemctl status vernemq
+```

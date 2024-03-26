@@ -31,7 +31,7 @@ To solve this problem VerneMQ supports the [PROXY Protocol](http://www.haproxy.o
 
 ### Client certificates and authentication
 
-Often if client certificates are used to verify and authenticate the clients. VerneMQ makes it possible to make the client certificate common name \(CN\) available for the authentication plugin system by overriding the MQTT username with the CN, before authentication is performed. If TLS is terminated at the load balancer then the PROXY Protocol would be used This works for both if TLS is terminated in a load balancer or if TLS is terminated directly in VerneMQ. In case TLS is terminated at the load balancer then the listener can be configured as follows to achieve this effect:
+Often if client certificates are used to verify and authenticate the clients. VerneMQ makes it possible to make the client certificate common name \(CN\) available for the authentication plugin system by overriding the MQTT username with the CN, before authentication is performed. If TLS is terminated at the load balancer then the PROXY Protocol would be used. This works for both if TLS is terminated in a load balancer or if TLS is terminated directly in VerneMQ. In case TLS is terminated at the load balancer then the listener can be configured as follows to achieve this effect:
 
 ```text
 listener.tcp.proxy_protocol = on
