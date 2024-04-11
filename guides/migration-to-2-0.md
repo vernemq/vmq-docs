@@ -27,5 +27,12 @@ on_deliver(UserName, SubscriberId, QoS, Topic, Payload, IsRetain, _Properties) -
  ...
 ```
 
+### Credentials obfuscation
+
+VerneMQ now uses internal credentials obfuscation, using the following library: https://github.com/rabbitmq/credentials-obfuscation/.
+This avoids passwords in stacktraces and/or logs. Your own authentication plugins might need adaptation since you want to de-encrypt the password "at the last moment".
+You can check examples of how the internal VerneMQ auth plugins were adapted to make a 
+`credentials_obfuscation:decrypt(Password)` call to check for a potentially encrypted password before given it to the database to check.
+
 ### General note
 Some settings related to logging were adapted a bit, and there are additional settings exposed in the vernemq.conf file. The Linux package installer gives you the choice to use an existing `vernemq.conf` file, or start with a new template. Depending on the number of settings you have changed, it might be easiest to to move and safe your old `vernemq.conf`, and then use the new template to re-add your settings.
