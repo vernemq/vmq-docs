@@ -8,7 +8,7 @@ Accepting the EULA for OS packages can be done by either changing the `accept_eu
 
 1. If you install the package with tools like `dpkg` \(example: `sudo dpkg -i vernemq-1.10.0.xenial.x86_64.deb`\), VerneMQ will install but will fail to start due to the missing EULA acceptance.
 2. Accept the EULA by running `sudo vernemq chkconfig` or by adding the following line to your `vernemq.conf file`: `accept_eula = yes`.
-3. Start/restart VerneMQ with: `sudo systemctl restart vernemq.`
+3. Start/restart VerneMQ with: `sudo systemctl restart vernemq`.
 
 
 
