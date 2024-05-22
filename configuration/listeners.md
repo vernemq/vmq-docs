@@ -74,6 +74,13 @@ To enable the PROXY protocol for tcp listeners use `listener.tcp.proxy_protocol 
 
 If client certificates are used you can set `listener.tcp.proxy_protocol_use_cn_as_username = on` which will overwrite the MQTT username set by the client with the common name from the client certificate before authentication and authorization is performed. 
 
+## Timeout Settings
+VerneMQ listeners timeouts can be configured to suit all connection speeds. This enables VerneMQ to adapt to constrained devices with limited computing power.   
+```text
+listener.ssl.my_listener.tls_handshake_timeout = 8000
+mqtt.connect.timeout = 30000
+```
+
 ## SSL/TLS Support
 VerneMQ supports different Transport Layer Security (TLS) options, which allow for secure communication between MQTT clients and VerneMQ. 
 
