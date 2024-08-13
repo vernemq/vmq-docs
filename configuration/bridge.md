@@ -105,9 +105,15 @@ vmq_bridge.tcp.br0.topic.2 = $SYS/* in remote
 
 ## Sample MQTT Bridge that uses SSL/TLS
 
-SSL bridges support the same configuration parameters as TCP bridges, but need further instructions for handling the SSL specifics:
+SSL bridges support the same configuration parameters as TCP bridges (change `.tcp` to `.ssl`), but need further instructions for handling the SSL specifics:
 
 ```text
+vmq_bridge.ssl.br0 = 192.168.1.12:1883
+
+# set the username and password for the bridge connection
+vmq_bridge.ssl.br0.username = my_bridge_user
+vmq_bridge.ssl.br0.password = my_bridge_pwd
+
 # define the CA certificate file or the path to the
 # installed CA certificates
 vmq_bridge.ssl.br0.cafile = cafile.crt
