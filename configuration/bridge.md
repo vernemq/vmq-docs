@@ -115,7 +115,8 @@ vmq_bridge.ssl.br0.username = my_bridge_user
 vmq_bridge.ssl.br0.password = my_bridge_pwd
 
 # define the CA certificate file or the path to the
-# installed CA certificatesvmq_bridge.ssl.br0.cafile = cafile.crt
+# installed CA certificates
+vmq_bridge.ssl.br0.cafile = cafile.crt
 #or
 vmq_bridge.ssl.br0.capath = /path/to/cacerts
 
