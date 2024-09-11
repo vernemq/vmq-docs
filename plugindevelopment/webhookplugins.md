@@ -48,8 +48,26 @@ $ vmq-admin webhooks deregister hook=auth_on_register endpoint="http://localhost
 ```
 
 {% hint style="info" %}
-We recommend placing the endpoint implementation locally on each VerneMQ node such that each request can go over localhost without being subject to network issues. Also note that currently VerneMQ Webhooks does not encrypt requests in any way or use HTTPS, so care should be taken if the endpoints are made reachable over the network.
+We recommend placing the endpoint implementation locally on each VerneMQ node such that each request can go over localhost without being subject to network issues.
 {% endhint %}
+
+## HTTPS
+
+In case your WebHooks backend requires HTTPS, you can configure the VerneMQ internal HTTP client to do so as well. There are various option you can set in the vernemq.conf file:
+
+```
+vmq_webhooks.cafile
+vmq_webhooks.tls_version
+vmq_webhooks.verify_peer
+vmq_webhooks.depth
+vmq_webhooks.certfile
+vmq_webhooks.use_crls
+vmq_webhooks.keyfile
+vmq_webhooks.keyfile_password
+```
+
+Check the [WebHooks Schema](https://github.com/vernemq/vernemq/blob/eb1a262035af47e90d9edf07f36c1b1503557c1f/apps/vmq_webhooks/priv/vmq_webhooks.schema) file for quick documentation on those options or to look up their configured defaults.
+
 
 ## Connection pool configuration
 
