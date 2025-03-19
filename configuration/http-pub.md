@@ -14,7 +14,7 @@ plugins.vmq_http_pub = on
 
 ## Configuration
 ### Bind plugin to HTTP(s) listener
-By default the plugin is not bound to any listener. It is recommended to use a dedicated HTTPS listener. For security, reasons the use of HTTPS instead of HTTP is prefered. It is possible to have more than one listener.
+By default the plugin is not bound to any listener. It is recommended to use a dedicated HTTPS listener. For security, reasons the use of HTTPS instead of HTTP is preferred. It is possible to have more than one listener.
 
 ```text
 listener.https.http_pub = 127.0.0.1:3001
@@ -30,8 +30,8 @@ vmq-admin api-key create scope=httppub
 
 It is important to note that this configuration is only a part of a larger configuration file, and that other settings such as SSL certificates, encryption, protocol versions, etc. may also be defined to improve the security and performance of the HTTPS listener.
 
-### Authenthication and Authorization
-The plugin currently supports two authenticatation and authorization modes: "on-behalf-of" and "predefined". "On-behalf-of" means, that the client_id, user and password used for authentication and authorization is part of request (payload). Afterwards, the regular VerneMQ authentication and authorization flows are used. When using "predefined" the client, user, and password is bound to the plugin instance. It is recommended to use "on-behalf-of" and use a seperate client_id, user and password for REST-based clients. For testing purposes, the plugin also supports the global allow_anonymous flag.
+### Authentication and Authorization
+The plugin currently supports two authentication and authorization modes: "on-behalf-of" and "predefined". "On-behalf-of" means, that the client_id, user and password used for authentication and authorization is part of request (payload). Afterwards, the regular VerneMQ authentication and authorization flows are used. When using "predefined" the client, user, and password is bound to the plugin instance. It is recommended to use "on-behalf-of" and use a separate client_id, user and password for REST-based clients. For testing purposes, the plugin also supports the global allow_anonymous flag.
 
 For on-behalf-of authentication use:
 ```text
@@ -68,7 +68,7 @@ Which one to choose is depends on your application.
 	"user_properties": [{"a":"b"}]
 }
 ```
-In order to allow more complex payload to be encoded as part of the json, the payload itself can be also be base64 encoded. The query string "encoding=base64" has to be used to indicate that the payload is base64 encoded. The encoding query string paramater can either be "base64" or "plain". Plain is the default.
+In order to allow more complex payload to be encoded as part of the json, the payload itself can be also be base64 encoded. The query string "encoding=base64" has to be used to indicate that the payload is base64 encoded. The encoding query string parameter can either be "base64" or "plain". Plain is the default.
 
 ### Header parameters
 Topic, user, password, qos, retain and user_properties can also be part of the HTTP header. The HTTP body is used for the actual message payload. The payload then does not need to be base64 encoded.
