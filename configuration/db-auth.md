@@ -84,7 +84,7 @@ Moreover, the publish ACL makes it possible to modify the properties of a publis
 
 **Subscribe ACL**
 
-The subscribe ACL makes it possible to control the maxium QoS a client is allowed to subscribe to.
+The subscribe ACL makes it possible to control the maximum QoS a client is allowed to subscribe to.
 
 ```javascript
 {
@@ -110,7 +110,7 @@ Like the publish ACL, the subscribe ACL makes it possible to change the current 
 
 When deciding on which database to use one has to consider which kind of password hashing and key derivation functions are available and required. Different databases provide different mechanisms, for example PostgreSQL provides the `pgcrypto` module which supports verifying hashed and salted passwords, while Redis has no such features. VerneMQ therefore also provides client-side password verification mechanisms such as `bcrypt`.
 
-There is a trade-off between verifying passwords on the client-side versus on the server-side. Verifying passwords client-side of course means doing the computations on the VerneMQ broker and this takes away resources from other tasks such as routing messages. With hashing functions such as `bcrypt` which are designed specifically to be slow \(proportional to the number of rounds\) in order to make brute-force attacks infeasible, this can become a problem. For example, if verifying a password with `bcrypt` takes 0.5 seconds then on a single threaded core 2 verifications/second are possible and using 4 single threaded cores 8 verifications/second. So, the number of rounds/security paramenters have a direct impact on the max number of verifications/second and hence also the maximum arrival rate of new clients per second.
+There is a trade-off between verifying passwords on the client-side versus on the server-side. Verifying passwords client-side of course means doing the computations on the VerneMQ broker and this takes away resources from other tasks such as routing messages. With hashing functions such as `bcrypt` which are designed specifically to be slow \(proportional to the number of rounds\) in order to make brute-force attacks infeasible, this can become a problem. For example, if verifying a password with `bcrypt` takes 0.5 seconds then on a single threaded core 2 verifications/second are possible and using 4 single threaded cores 8 verifications/second. So, the number of rounds/security parameters have a direct impact on the max number of verifications/second and hence also the maximum arrival rate of new clients per second.
 
 For each database it is specified which password verification mechanisms are available and if they are client-side or server-side.
 

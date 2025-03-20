@@ -95,7 +95,7 @@ Cache entries are currently not actively disposed after expiry and will remain i
 
 ## Webhook specs
 
-All webhooks are called with method `POST`. All hooks need to be answered with the HTTP code `200` to be considered successful. Any hook called that does not return the `200` code will be logged as an error as will any hook with an unparseable payload.
+All webhooks are called with method `POST`. All hooks need to be answered with the HTTP code `200` to be considered successful. Any hook called that does not return the `200` code will be logged as an error as will any hook with an unparsable payload.
 
 All hooks are called with the header `vernemq-hook` which contains the name of the hook in question.
 
@@ -161,7 +161,7 @@ Webhook example payload:
 }
 ```
 
-Additionaly, to the standard "ok" response. It is also possible to override various client specific settings by returning an array of modifiers:
+Additionally, to the standard "ok" response. It is also possible to override various client specific settings by returning an array of modifiers:
 
 ```javascript
 {
@@ -174,7 +174,7 @@ Additionaly, to the standard "ok" response. It is also possible to override vari
 }
 ```
 
-Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
+Note, the `retry_interval` is in milliseconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
 Other possible responses are next and error (not_allowed).
 
@@ -468,7 +468,7 @@ It is also possible to override various client specific settings by returning an
 }
 ```
 
-Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
+Note, the `retry_interval` is in milliseconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
 Other possible responses are "next" and "error".
 

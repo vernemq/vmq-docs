@@ -29,7 +29,7 @@ These global defaults can be overridden for a specific transport protocol `liste
 
 Normally, an MQTT broker hosts one single topic tree. This means that all topics are accessible to all publishers and subscribers \(limited by the ACLs you configured, of course\). Mountpoints are a way to host multiple topic trees in a single broker. They are completely separated and clients with different topic trees cannot publish messages to each other. This could be useful if you provide MQTT services to multiple separated use cases/verticals or clients, with a single broker. Note that mountpoints are configured via different listeners. As a consequence, the MQTT clients will have to connect to a specific port to connect to a specific topic space \(mountpoint\).
 
-The mountpoints can be configured on the protocol level or configurred or overridden on the specific listener level.
+The mountpoints can be configured on the protocol level or configured or overridden on the specific listener level.
 
 ```text
 listener.ssl.mountpoint = ssl-mountpoint
@@ -94,7 +94,7 @@ VerneMQ supports the following the TLS-flavours:
 
 In server-side TLS, the client initiates a TLS handshake with the broker, and the broker responds by sending its certificate. The client verifies the certificate and generates a symmetric key, which is used to encrypt and decrypt data exchanged between the client and broker. Server-side TLS does no further authentication or authorization of the client. The broker later on authenticates and authorizes clients through MQTT.    
 
-TLS-PSK (Pre-Shared Key) secures communication between MQTT client and broker using pre-shared keys for authentication. Unlike Service-Side or mutal TLS, which use certificates to authenticate the server and client, TLS-PSK uses a pre-shared secret (a key) to authenticate the endpoints. Clients that support TLS-PSK can use the specified pre-shared keys to authenticate themselves to the broker, providing a lightweight alternative to certificate-based authentication. The key has to be securly stored on the MQTT device.
+TLS-PSK (Pre-Shared Key) secures communication between MQTT client and broker using pre-shared keys for authentication. Unlike Service-Side or mutal TLS, which use certificates to authenticate the server and client, TLS-PSK uses a pre-shared secret (a key) to authenticate the endpoints. Clients that support TLS-PSK can use the specified pre-shared keys to authenticate themselves to the broker, providing a lightweight alternative to certificate-based authentication. The key has to be securely stored on the MQTT device.
 
 Mutal TLS (mTLS)  provides mutual authentication and encryption of data in transit between MQTT client and Broker. Unlike Server-Side TLS, where only the server is authenticated to the client, mTLS requires both the client and server to authenticate each other before establishing a secure connection.
 

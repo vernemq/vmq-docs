@@ -61,7 +61,7 @@ Currently vmq\_mzbench exposes the following statement functions for use in MQTT
 * `connect(State, Meta, ConnectOpts)`: Connect to the broker with the options given in ConnectOpts
 * `disconnect(State, Meta)`: Disconnect normally
 * `subscribe(State, Meta, Topic, QoS)`: Subscribe to Topic with Quality of Service QoS
-* `unsubscribe(State, Meta, Topic)`: Unubscribe from Topic
+* `unsubscribe(State, Meta, Topic)`: Unsubscribe from Topic
 * `publish(State, Meta, Topic, Payload, QoS)`: Publish a message with binary Payload to Topic with QoS
 * `publish(State, Meta, Topic, Payload, QoS, RetainFlag)`: Publish a message with binary Payload to Topic with QoS and RetainFlag
 

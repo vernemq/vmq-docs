@@ -8,7 +8,7 @@ There are a couple of hidden options you can set in the `vernemq.conf` file. Hid
 
 ## Queue Deliver mode
 
-Specify how the queue should deliver messages when multiple sessions are allowed. In case of `fanout` all the attached sessions will receive the message, in case of `balance` an attached session is choosen randomly.
+Specify how the queue should deliver messages when multiple sessions are allowed. In case of `fanout` all the attached sessions will receive the message, in case of `balance` an attached session is chosen randomly.
 
 {% hint style="info" %} The feature to enable multiple sessions will be deprecated in VerneMQ 2.0.{% endhint %}
 
