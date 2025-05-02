@@ -10,8 +10,6 @@ A bridge will be a point-to-point connection between 2 brokers, but can still fo
 
 {% hint style="info" %} The VerneMQ bridge plugin currently forwards messages using MQTT protocol version 3.1.1. MQTT v5 messages will still be forwarded but be aware that metadata like user-defined properties will be dropped.{% endhint %}
 
-
-
 ## Enabling the bridge functionality
 
 The MQTT bridge plugin (`vmq_bridge`) is distributed with VerneMQ as an integrated plugin but is not enabled by default. After configuring the bridge as described below, make sure to enable the plugin by setting (`vernemq.conf`):
@@ -32,6 +30,7 @@ $ vmq-admin bridge show
 |192.168.1.10:1883|     0     |    0     |         0         |
 +-----------------+-----------+----------+-------------------+
 ```
+
 {% hint style="info" %}
 The `vmq-admin bridge` command is only available when the bridge plugin is running.
 {% endhint %}
@@ -39,7 +38,7 @@ The `vmq-admin bridge` command is only available when the bridge plugin is runni
 ## Sample MQTT Bridge
 
 To configure `vmq_bridge` you need to edit the bridge section of the `vernemq.conf` file to set endpoints and
-mapping topics. A brigde can push or pull messages, as defined in the topic pattern list.
+mapping topics. A bridge can push or pull messages, as defined in the topic pattern list.
 
 Setup a bridge to a remote broker:
 

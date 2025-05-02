@@ -1,5 +1,5 @@
 ---
-description: How to implement VerneMQ plugins using a HTTP interface
+description: How to implement VerneMQ plugins using a HTTP/HTTPS interface
 ---
 
 # Webhooks
@@ -49,13 +49,14 @@ $ vmq-admin webhooks deregister hook=auth_on_register endpoint="http://localhost
 
 {% hint style="info" %}
 We recommend placing the endpoint implementation locally on each VerneMQ node such that each request can go over localhost without being subject to network issues.
+
 {% endhint %}
 
 ## HTTPS
 
-In case your WebHooks backend requires HTTPS, you can configure the VerneMQ internal HTTP client to do so as well. There are various option you can set in the vernemq.conf file:
+In case your WebHooks backend requires HTTPS, you can configure the VerneMQ internal HTTP client to do so as well. There are various options you can set in the `vernemq.conf` file:
 
-```
+```text
 vmq_webhooks.cafile
 vmq_webhooks.tls_version
 vmq_webhooks.verify_peer
@@ -69,11 +70,10 @@ vmq_webhooks.keyfile_password
 Check the [WebHooks Schema](https://github.com/vernemq/vernemq/blob/eb1a262035af47e90d9edf07f36c1b1503557c1f/apps/vmq_webhooks/priv/vmq_webhooks.schema) file for quick documentation on those options or to look up their configured defaults.
 
 
+
 ## Connection pool configuration
 
 Each registered hook uses by default a connection pool containing maximally 100 connections. This can be changed by setting `vmq_webhooks.pool_max_connections` to a different value. Similarly the `vmq_webhooks.pool_timeout` configuration \(value is in milliseconds\) can be set to control how long an unused connection should stay in the connection pool before being closed and removed. The default value is 60000 \(60 seconds\).
-
-These options are available in VerneMQ 1.4.0.
 
 ## Caching
 
@@ -97,7 +97,7 @@ Cache entries are currently not actively disposed after expiry and will remain i
 
 ## Webhook specs
 
-All webhooks are called with method `POST`. All hooks need to be answered with the HTTP code `200` to be considered successful. Any hook called that does not return the `200` code will be logged as an error as will any hook with an unparseable payload.
+All webhooks are called with method `POST`. All hooks need to be answered with the HTTP code `200` to be considered successful. Any hook called that does not return the `200` code will be logged as an error as will any hook with an unparsable payload.
 
 All hooks are called with the header `vernemq-hook` which contains the name of the hook in question.
 
@@ -163,7 +163,7 @@ Webhook example payload:
 }
 ```
 
-Additionaly, to the standard "ok" response. It is also possible to override various client specific settings by returning an array of modifiers:
+Additionally, to the standard "ok" response. It is also possible to override various client specific settings by returning an array of modifiers:
 
 ```javascript
 {
@@ -176,7 +176,7 @@ Additionaly, to the standard "ok" response. It is also possible to override vari
 }
 ```
 
-Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
+Note, the `retry_interval` is in milliseconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
 Other possible responses are next and error (not_allowed).
 
@@ -470,7 +470,7 @@ It is also possible to override various client specific settings by returning an
 }
 ```
 
-Note, the `retry_interval` is in milli-seconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
+Note, the `retry_interval` is in milliseconds. It is possible to override many more settings, see the [Session Lifecycle](sessionlifecycle.md) for more information.
 
 Other possible responses are "next" and "error".
 
@@ -726,9 +726,10 @@ It supports the standard "OK" response, as well "next" and "error".
 Below is a very simple example of an endpoint implemented in Python. It uses the `web` and `json` modules and implements handlers for six different hooks: `auth_on_register`, `auth_on_publish`, `auth_on_subscribe`, `auth_on_register_m5`, `auth_on_publish_m5` and `auth_on_subscribe_m5`.
 
 The `auth_on_register` hook only restricts access only to the user with username `joe` and password `secret`. It also shows how to cache the result. The `auth_on_subscribe` and `auth_on_publish` hooks allow any subscription or publish to continue as is. These last two hooks are needed as the default 
-policy is `deny`.  
+policy is `deny`.
 
 ### Python Code
+
 ```python
 import web
 import json

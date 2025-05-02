@@ -31,7 +31,7 @@ To solve this problem VerneMQ supports the [PROXY Protocol](http://www.haproxy.o
 
 ### Client certificates and authentication
 
-Often if client certificates are used to verify and authenticate the clients. VerneMQ makes it possible to make the client certificate common name \(CN\) available for the authentication plugin system by overriding the MQTT username with the CN, before authentication is performed. If TLS is terminated at the load balancer then the PROXY Protocol would be used This works for both if TLS is terminated in a load balancer or if TLS is terminated directly in VerneMQ. In case TLS is terminated at the load balancer then the listener can be configured as follows to achieve this effect:
+Often if client certificates are used to verify and authenticate the clients. VerneMQ makes it possible to make the client certificate common name \(CN\) available for the authentication plugin system by overriding the MQTT username with the CN, before authentication is performed. If TLS is terminated at the load balancer then the PROXY Protocol would be used. This works for both if TLS is terminated in a load balancer or if TLS is terminated directly in VerneMQ. In case TLS is terminated at the load balancer then the listener can be configured as follows to achieve this effect:
 
 ```text
 listener.tcp.proxy_protocol = on
@@ -69,11 +69,11 @@ To avoid expensive intra-node communication, VerneMQ shared subscriptions suppor
 
 #### Tuning buffer sizes
 
-Controlling TCP buffer sizes is important in ensuring optimal memory usage. The rule is that the more bandwith or the lower latency required, the larger the TCP buffer sizes should be. Many IoT communicate with a very low bandwith and as such the server side TCP buffer sizes for these does not need to be very large. On the other hand, in this scenario the consumers handling the fan-ins in the Bacend-Services will have many \(thousands or tens of thousands of messages per second\) and they can benefit from larger TCP buffer sizes. Read more about tuning TCP buffer sizes [here](not-a-tuning-guide.md#tcp-buffer-sizes).
+Controlling TCP buffer sizes is important in ensuring optimal memory usage. The rule is that the more bandwidth or the lower latency required, the larger the TCP buffer sizes should be. Many IoT communicate with a very low bandwidth and as such the server side TCP buffer sizes for these does not need to be very large. On the other hand, in this scenario the consumers handling the fan-ins in the Balanced-Services will have many \(thousands or tens of thousands of messages per second\) and they can benefit from larger TCP buffer sizes. Read more about tuning TCP buffer sizes [here](not-a-tuning-guide.md#tcp-buffer-sizes).
 
 ### Protecting from overload
 
-An important guideline in protecting a VerneMQ cluster from overload is to allow only what is necessary. This means having and enforcing sensible authentication and authorization rules as well as configuring conservatively so resources cannot be exhausted due to human error or MQTT clients that have turned mailicious. For example in VerneMQ it is possible to specify how many offline messages a persistent session can maximally hold via the `max_offline_messages` setting - and it should then be set to the lowest acceptable value which works for all clients and/or use a plugin which is able to override such settings on a per-client basis. The load balancer can also play an important role in protecting the system in that it can control the connect rates as well as imposing bandwith restrictions on clients.
+An important guideline in protecting a VerneMQ cluster from overload is to allow only what is necessary. This means having and enforcing sensible authentication and authorization rules as well as configuring conservatively so resources cannot be exhausted due to human error or MQTT clients that have turned malicious. For example in VerneMQ it is possible to specify how many offline messages a persistent session can maximally hold via the `max_offline_messages` setting - and it should then be set to the lowest acceptable value which works for all clients and/or use a plugin which is able to override such settings on a per-client basis. The load balancer can also play an important role in protecting the system in that it can control the connect rates as well as imposing bandwidth restrictions on clients.
 
 ### Deploying a VerneMQ cluster
 

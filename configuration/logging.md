@@ -58,7 +58,7 @@ log.crash.file = /path/to/log/file
 
 This option defaults to `/var/log/vernemq/crash.log` for Ubuntu, Debian, RHEL and Docker installs.
 
-The maximum sizes in bytes of inidividual messages in the crash log defaults to `64KB` but can be specified by:
+The maximum sizes in bytes of individual messages in the crash log defaults to `64KB` but can be specified by:
 
 ```text
 log.crash.maximum_message_size = 64KB

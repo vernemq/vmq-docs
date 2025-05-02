@@ -2,7 +2,7 @@
 
 Welcome to the VerneMQ documentation! This is a reference guide for most of the available features and options of VerneMQ. The [Getting Started guide](getting-started.md) might be a good entry point.
 
-
+The VerneMQ documentation is based on the [VerneMQ Documentation project](https://github.com/vernemq/vmq-docs). Any changes on Github are automatically deployed to the [VerneMQ online Documentation](https://docs.vernemq.com/).
 
 For a more general overview on VerneMQ and MQTT, you might want to start with the [introduction](https://vernemq.com/intro/index.html).
 
