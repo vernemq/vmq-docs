@@ -80,12 +80,13 @@ vmq_bridge.tcp.br0.max_outgoing_buffered_messages = 100
 Define the topics the bridge should incorporate in its local topic tree \(by subscribing to the remote\), or the topics it should export to the remote broker \(by publishing to the remote\). We share a similar configuration syntax to that used by the Mosquitto broker:
 
 ```text
-topic [[[ out | in | both ] qos-level] local-prefix remote-prefix]
+topic [[[ out | in | both ] qos-level [retain]] local-prefix remote-prefix]
 ```
 
 > `topic` defines a topic pattern that is shared between the two brokers. Any topics matching the pattern \(which may include wildcards\) are shared. The second parameter defines the direction that the messages will be shared in, so it is possible to import messages from a remote broker using `in`, export messages to a remote broker using `out` or share messages in `both` directions. If this parameter is not defined, VerneMQ defaults to `out`. The QoS level defines the publish/subscribe QoS level used for this topic and defaults to `0`. _\(Source: mosquitto.conf\)_
 
 The `local-prefix` and `remote-prefix` can be used to prefix incoming or outgoing publish messages.
+The optional `retain` keyword ensures that the retain flag on incoming bridge messages is preserved and stored locally as retained messages. Without it, messages received over the bridge are republished without the retain flag.
 
 {% hint style="warning" %}
 Currently the `#` wildcard is treated as a comment from the configuration parser, please use `*` instead.
@@ -100,6 +101,9 @@ vmq_bridge.tcp.br0.topic.1 = /demo/+ both 1
 # import the $SYS tree of the remote broker and
 # prefix it with the string 'remote'
 vmq_bridge.tcp.br0.topic.2 = $SYS/* in remote
+
+# import sensors topics with QoS 1 and preserve retain
+vmq_bridge.tcp.br0.topic.3 = sensors/* in 1 retain
 ```
 
 ## Sample MQTT Bridge that uses SSL/TLS
