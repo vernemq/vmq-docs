@@ -134,7 +134,7 @@ vmq_diversity.postgres.password_hash_method = crypt
 In case your Postgresql database requires SSL, you'll have to tell the plugin: 
 
 ```text 
-vmq_diversity.ssl.enabled = on
+vmq_diversity.postgres.ssl = on
 ```
 
 Consult the `vernemq.conf` file for more info about additional options: 
