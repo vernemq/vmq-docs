@@ -56,3 +56,7 @@ counter.mqtt_connack_sent = 0
 
 All available labels can be show using `vmq-admin metrics show --help`.
 
+{% hint style="warning" %}
+VerneMQ is a implemented in Erlang, which is a highly concurrent system, and follows a fail fast machanism. It might happen that in some scenarios the metrics do not seem to "match". One typcial example is sockets_open and sockets_close. In case of failure, the sockets_close metric might not be increased and thus there is a difference between opened sockets and closed sockets. The metric is nonetheless useful when inspecting the the running system.
+{% endhint %}
+
