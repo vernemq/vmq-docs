@@ -81,6 +81,91 @@ listener.ssl.my_listener.tls_handshake_timeout = 8000
 mqtt.connect.timeout = 30000
 ```
 
+## Active Socket Packets
+
+For TCP and SSL listeners, `active_n` controls how many incoming TCP packets may be delivered before the socket switches back to passive mode. The default value is `1`, which preserves the previous `{active, once}` behavior. Valid values are integers from `1` to `32767`.
+
+The value can be configured on the protocol level or overridden for a named listener:
+
+```text
+listener.tcp.active_n = 10
+listener.ssl.active_n = 10
+
+listener.tcp.my_listener.active_n = 100
+listener.ssl.my_listener.active_n = 100
+```
+
+## Per-Listener Authentication and Authorization
+
+Listeners can define their own authentication and authorization plugin chains. If no per-listener chain is configured, the globally enabled plugin chain is used. The configured order is preserved.
+
+Configure authentication plugins with `auth_plugins` and authorization plugins with `authz_plugins`:
+
+```text
+listener.tcp.internal = 127.0.0.1:1883
+listener.tcp.internal.auth_plugins = [vmq_passwd]
+listener.tcp.internal.authz_plugins = [vmq_acl]
+
+listener.wss.external = 0.0.0.0:8884
+listener.wss.external.auth_plugins = [vmq_webhooks, vmq_passwd]
+listener.wss.external.authz_plugins = [vmq_webhooks]
+```
+
+This setting is available for TCP, SSL, WebSocket, and secure WebSocket listeners:
+
+```text
+listener.tcp.my_listener.auth_plugins = [vmq_passwd]
+listener.ssl.my_listener.auth_plugins = [vmq_passwd]
+listener.ws.my_listener.auth_plugins = [vmq_webhooks]
+listener.wss.my_listener.auth_plugins = [vmq_webhooks]
+
+listener.tcp.my_listener.authz_plugins = [vmq_acl]
+listener.ssl.my_listener.authz_plugins = [vmq_acl]
+listener.ws.my_listener.authz_plugins = [vmq_webhooks]
+listener.wss.my_listener.authz_plugins = [vmq_webhooks]
+```
+
+## Anonymous Access Override
+
+`allow_anonymous_override` allows a named listener to override a global `allow_anonymous = off` setting. Its main use case is a listener that authenticates clients outside the normal MQTT authentication plugin chain, for example with client certificates.
+
+The global and listener-specific values are OR'ed together. This means a listener can allow anonymous access when the global setting is `off`, but a listener cannot disable anonymous access when the global setting is `on`.
+
+```text
+allow_anonymous = off
+
+listener.ssl.mtls = 0.0.0.0:8883
+listener.ssl.mtls.require_certificate = on
+listener.ssl.mtls.allow_anonymous_override = on
+```
+
+The setting is available for TCP, SSL, WebSocket, and secure WebSocket listeners:
+
+```text
+listener.tcp.my_listener.allow_anonymous_override = on
+listener.ssl.my_listener.allow_anonymous_override = on
+listener.ws.my_listener.allow_anonymous_override = on
+listener.wss.my_listener.allow_anonymous_override = on
+```
+
+## Forward Connection Options
+
+`forward_connection_opts` passes listener metadata to the extended `auth_on_register` and `auth_on_register_m5` hooks. Enable it if an authentication plugin needs to make decisions based on listener information such as the transport or listener name.
+
+The setting can be configured on the protocol level or for a named listener:
+
+```text
+listener.tcp.forward_connection_opts = on
+listener.ssl.forward_connection_opts = on
+listener.ws.forward_connection_opts = on
+listener.wss.forward_connection_opts = on
+
+listener.tcp.my_listener.forward_connection_opts = on
+listener.ssl.my_listener.forward_connection_opts = on
+listener.ws.my_listener.forward_connection_opts = on
+listener.wss.my_listener.forward_connection_opts = on
+```
+
 ## SSL/TLS Support
 VerneMQ supports different Transport Layer Security (TLS) options, which allow for secure communication between MQTT clients and VerneMQ. 
 
@@ -152,4 +237,3 @@ With SSL, you still need to configure authentication and authorization! That is,
 
 The default listener `listener.vmq.clustering` is used for distributing MQTT messages among the cluster nodes.
 {% endhint %}
-

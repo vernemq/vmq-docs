@@ -16,3 +16,13 @@ In addition to the simple `/health` path, the following options are available as
 With the `ping` or `listeners` option, you can configure a health check for a single node, even if it is part of a cluster.
 
 If you want to configure any automated actions based on the health check results, you need to chose an appropriate health check path. For example, you should not use the `/health` check (checking for full cluster consistency) to automatically restart a single node. This is of special importance for Kubernetes deployments.
+
+## Cluster readiness timeout
+
+Cluster readiness checks use parallel RPC calls to check cluster nodes. The total timeout for this check is controlled by `cluster_ready_rpc_timeout` and defaults to `5000` milliseconds.
+
+```text
+cluster_ready_rpc_timeout = 5000
+```
+
+The timeout applies to the whole readiness check, not once per cluster node. In most deployments, the default should be left unchanged.

@@ -50,6 +50,22 @@ You can isolate client connections accepted by a certain listener from other cli
 
 To start an MQTT listener using defaults, just set the port and IP address as a minimum.
 
+### Authentication and authorization plugin chains
+
+Listeners started with `vmq-admin listener start` can define their own authentication and authorization plugin chains. Use `--auth_plugins` for authentication hooks and `--authz_plugins` for authorization hooks. The configured order is preserved.
+
+```text
+vmq-admin listener start address=192.168.1.50 port=1884 --auth_plugins=[vmq_passwd] --authz_plugins=[vmq_acl]
+```
+
+The same flags can be used when starting WebSocket listeners:
+
+```text
+vmq-admin listener start address=192.168.1.50 port=8888 --websocket --auth_plugins=[vmq_webhooks,vmq_passwd] --authz_plugins=[vmq_webhooks]
+```
+
+If no listener-specific chain is configured, VerneMQ uses the globally enabled plugin chain.
+
 ## Stopping a listener
 
 ```text
@@ -69,4 +85,3 @@ vmq-admin listener restart address=192.168.1.50 port=1884
 ```text
 vmq-admin listener delete address=192.168.1.50 port=1884
 ```
-

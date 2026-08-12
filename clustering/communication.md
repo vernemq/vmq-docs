@@ -25,7 +25,36 @@ listener.vmq.clustering = 0.0.0.0:44053
 It isn't necessary to configure the same port on every machine, as the nodes will probe each other for this information.
 {% endhint %}
 
+## Internode MQTT Delivery
+
+VerneMQ uses MQTT connections between cluster nodes to deliver MQTT messages to subscribers on remote nodes. In most deployments, the defaults should be left unchanged. The following settings are advanced options for deployments that need to tune behavior around slow peers, short disconnects, reconnect handshakes, or unusually large bursts of internode traffic.
+
+`outgoing_cluster_handshake_ack_timeout` configures how long a node waits for the receiving side to acknowledge an outgoing cluster delivery connection before assuming legacy behavior. The value is in milliseconds and defaults to `250`.
+
+```text
+outgoing_cluster_handshake_ack_timeout = 250
+```
+
+`incoming_clustering_buffer_size` limits how many bytes are buffered while parsing incoming internode MQTT traffic. Malformed or oversized cluster frames are rejected instead of being buffered indefinitely. The value is in bytes and defaults to `67108864`.
+
+```text
+incoming_clustering_buffer_size = 67108864
+```
+
+`outgoing_clustering_buffer_size` configures how many bytes are buffered when a remote node is temporarily unavailable. The value is in bytes and defaults to `67108864`.
+
+```text
+outgoing_clustering_buffer_size = 67108864
+```
+
+`outgoing_clustering_flush_threshold` configures how many pending outgoing bytes are batched before VerneMQ eagerly flushes internode traffic. The value is in bytes and defaults to `65536`.
+
+```text
+outgoing_clustering_flush_threshold = 65536
+```
+
+Change these values only after testing with realistic cluster traffic. Setting buffers too low can increase dropped internode traffic during transient disconnects, while setting them too high can increase memory usage under sustained peer or network problems.
+
 **Attributions:**
 
 This section, "VerneMQ Inter-node Communication", is a derivative of Security and Firewalls by Riak, used under Creative Commons Attribution 3.0 Unported License.
-
