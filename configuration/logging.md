@@ -91,3 +91,57 @@ log.syslog = on
 
 Logging to SysLog is disabled by default.
 
+The minimal SysLog logging level could be set to one of the following (defaults to `all`):
+
+```text
+log.syslog.level = all | debug | info | warning | error
+```
+
+The SysLog message format defaults to `rfc3164`. Sending messages via TLS requires `rfc5424`:
+
+```text
+log.syslog.format = rfc3164 | rfc5424
+```
+
+The SysLog facility used for local and remote messages defaults to `daemon`:
+
+```text
+log.syslog.facility = daemon
+```
+
+Other acceptable facilities are `kern`, `kernel`, `user`, `mail`, `auth`, `syslog`, `lpr`, `news`, `uucp`, `cron`, `authpriv`, `ftp`, `ntp`, `logaudit`, `logalert`, `clock` and `local0` to `local7`.
+
+The application name included in SysLog messages can be set with:
+
+```text
+log.syslog.app_name = vernemq
+```
+
+If unset, the node name is used.
+
+### Remote SysLog
+
+Setting the remote SysLog server hostname or IP address enables delivery of SysLog messages to a remote host:
+
+```text
+log.syslog.remote.host = syslog.example.com
+```
+
+The remote SysLog server port defaults to `514`:
+
+```text
+log.syslog.remote.port = 514
+```
+
+The transport used for remote SysLog delivery defaults to `udp`:
+
+```text
+log.syslog.remote.protocol = udp | tcp | tls
+```
+
+When `log.syslog.remote.protocol` is set to `tls`, `log.syslog.format` must be `rfc5424` and a CA certificate file must be provided to verify the remote server:
+
+```text
+log.syslog.remote.tls.cafile = /path/to/cafile
+```
+
