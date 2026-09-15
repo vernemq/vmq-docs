@@ -107,6 +107,12 @@ For detailed information about the hooks and when they are called, see the secti
 Note, when overriding a **mountpoint** or a **client-id** both have to be returned by the webhook implementation for it to have an effect.
 {% endhint %}
 
+### Cancellable authentication requests
+
+For the `auth_on_register` and `auth_on_register_m5` hooks, VerneMQ cancels the in-flight HTTP request if the client connection closes while the webhook call is still waiting for a response. This prevents disconnected clients from leaving authentication webhook calls running until the normal response timeout is reached.
+
+The endpoint may still receive the HTTP request before cancellation reaches it. Authentication endpoints should therefore treat requests as idempotent and avoid relying on every request producing a completed VerneMQ authentication decision.
+
 ### Responses
 
 All hooks, unless stated otherwise, respond with a JSON-encoded payload and a success code of 200. All hooks support responding with "ok", indicated that the request was successful. 
@@ -807,4 +813,3 @@ vmq_webhooks.webhook3.endpoint = http://127.0.0.1:8080
 vmq_webhooks.webhook4.hook = auth_on_subscribe_m5
 vmq_webhooks.webhook4.endpoint = http://127.0.0.1:8080
 ```
-

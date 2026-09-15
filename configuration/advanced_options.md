@@ -24,6 +24,24 @@ Specify how queues should process messages, either the `fifo` or `lifo` way, wit
 queue_type = fifo
 ```
 
+## Fanout Sharding
+
+Fanout sharding can increase throughput and lower backpressure in high-frequency publish scenarios where a topic fanout has to deliver to many subscribers. It splits local fanout work over multiple fanout shards.
+
+`fanout.shard_count` configures the number of local fanout shards. The default is `1`, which preserves the previous behavior.
+
+```text
+fanout.shard_count = 8
+```
+
+`fanout.async_handoff` decouples the publisher from local shard delivery work. This can further reduce publisher backpressure, but local match counts are not exact when async handoff is enabled. The default is `off`.
+
+```text
+fanout.async_handoff = on
+```
+
+These settings are experimental and should be changed only after load testing with traffic patterns close to production.
+
 ## Max Message Rate
 
 Specifies the maximum incoming publish rate per session per second. Depending on the underlying network buffers this rate isn't enforced. Defaults to `0`, which means no rate limits apply. Setting to a value of `2` limits any publisher to 2 messages per second, for instance.
@@ -81,4 +99,3 @@ listener.max_connection_lifetime = 25000
 ```
 
 It is possible to override the value in auth_on_register(_m5) to a lower limit.
-

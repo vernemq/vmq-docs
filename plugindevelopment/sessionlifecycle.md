@@ -10,6 +10,43 @@ The `auth_on_register` and `auth_on_register_m5` hooks allow your plugin to gran
 
 Every plugin that implements the `auth_on_register` or `auth_on_register_m5` hooks are part of a conditional plugin chain. For this reason we allow the hook to return different values depending on how the plugin grants or rejects this client. In case the plugin doesn't know the client it is best to return `next` as this would allow subsequent plugins in the chain to validate this client. If no plugin is able to validate the client it gets automatically rejected.
 
+### Listener metadata
+
+If `forward_connection_opts` is enabled for a TCP, SSL, WebSocket, or secure WebSocket listener, VerneMQ calls the extended auth hook variant with listener metadata as the last argument.
+
+```text
+listener.tcp.my_listener.forward_connection_opts = on
+listener.ssl.my_listener.forward_connection_opts = on
+listener.ws.my_listener.forward_connection_opts = on
+listener.wss.my_listener.forward_connection_opts = on
+```
+
+For MQTT 3.x clients, implement `auth_on_register/6` instead of `auth_on_register/5`:
+
+```erlang
+auth_on_register(Peer, SubscriberId, User, Password, CleanSession, Opts) ->
+    ...
+```
+
+For MQTT 5 clients, implement `auth_on_register_m5/7` instead of `auth_on_register_m5/6`:
+
+```erlang
+auth_on_register_m5(Peer, SubscriberId, User, Password, CleanStart, Properties, Opts) ->
+    ...
+```
+
+`Opts` is a map containing listener information:
+
+```erlang
+#{listener_addr := {127, 0, 0, 1},
+  listener_port := 1883,
+  listener_type := mqtt}
+```
+
+The `listener_type` value is one of `mqtt`, `mqtts`, `mqttws`, or `mqttwss`. This allows an authentication plugin to choose different authentication behavior depending on the listener that accepted the connection.
+
+For TLS listeners with client certificates, `Opts` also includes `client_cert`, containing the peer certificate binary returned by `ssl:peercert/1`. The common name is not extracted for this option.
+
 ## on\_auth\_m5
 
 The `on_auth_m5` hook allows your plugin to implement MQTT enhanced authentication, see [Enhanced Authentication Flow](enhancedauthflow.md).
@@ -29,4 +66,3 @@ This hook is called if an MQTT 3.1/3.1.1 client using `clean_session=false` or a
 ## on\_client\_gone
 
 This hook is called if an MQTT 3.1/3.1.1 client using `clean_session=true` or an MQTT 5.0 client with the `session_expiry_interval` set to zero closes the connection or gets disconnected by a duplicate client. The hook is specified in the Erlang behaviour [on\_client\_gone\_hook](https://github.com/vernemq/vernemq_dev/blob/master/src/on_client_gone_hook.erl) available in the [vernemq\_dev](https://github.com/vernemq/vernemq_dev) repo.
-

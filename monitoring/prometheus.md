@@ -25,3 +25,29 @@ This tells Prometheus to scrape the VerneMQ metrics endpoint every 5 seconds.
 
 Please follow the documentation on the [Prometheus](http://prometheus.io) website to properly configure the metrics scraping as well as how to access those metrics and configure alarms and graphs.
 
+## Example Alert Rules
+
+VerneMQ ships with a minimal Prometheus alert rules template in `metrics_scripts/prometheus/vernemq-alert-rules.yml`. The template contains baseline alerts for broker availability, scheduler utilization, memory usage, queue drops, socket errors, keepalive expirations, and cluster-related signals.
+
+The template is intended as a starting point. Extend and adapt thresholds, severities, labels, job matchers, and runbook hints for your own deployment and use cases.
+
+To install the template, copy it to your Prometheus rules directory and reference it from `prometheus.yml`:
+
+```yaml
+rule_files:
+  - /etc/prometheus/vernemq-alert-rules.yml
+```
+
+Validate the rules before reloading Prometheus:
+
+```text
+promtool check rules /etc/prometheus/vernemq-alert-rules.yml
+```
+
+The example rules assume the default VerneMQ Prometheus namespace:
+
+```text
+prometheus_namespace = vernemq_
+```
+
+If you changed `prometheus_namespace`, update the metric name prefixes in the alert rules accordingly.

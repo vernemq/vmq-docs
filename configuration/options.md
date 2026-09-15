@@ -24,6 +24,16 @@ max_inflight_messages = 20
 
 Defaults to `20` messages, use `0` for no limit. The inflight window serves as a protection for sessions, on the incoming side.
 
+## Subscriptions per Client
+
+This option defines the maximum number of subscriptions a client can have. Existing subscriptions can be replaced even after the limit is reached.
+
+```text
+max_subscriptions_per_client = 0
+```
+
+Defaults to `0`, which means no limit applies. This setting can be used as a guardrail against clients creating too many subscriptions.
+
 ## Load Shedding
 
 The maximum number of messages to hold in the queue above those messages that are currently in flight. Defaults to `1000`. Set to `-1` for no limit. This option protects a client session from overload by dropping messages \(of any QoS\).

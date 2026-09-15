@@ -85,3 +85,4 @@
 * [Not a tuning guide](guides/not-a-tuning-guide.md)
 * [Change Open File Limits](guides/change-open-file-limits.md)
 * [Migrating to 2.0](guides/migration-to-2-0.md)
+* [VerneMQ 2.2.0](guides/vernemq-2.2.0.md)
